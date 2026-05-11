@@ -356,6 +356,15 @@ document.querySelector('.cr').addEventListener('click',e=>{
 document.getElementById('zbg').addEventListener('click',e=>{if(e.target===document.getElementById('zbg'))cz();});
 document.getElementById('mbg').addEventListener('click',e=>{if(e.target===document.getElementById('mbg'))cm();});
 document.getElementById('ei').addEventListener('keydown',e=>{if(e.key==='Enter')se();});
+document.addEventListener('keydown',e=>{
+  const zOpen=document.getElementById('zbg').classList.contains('open');
+  const mOpen=document.getElementById('mbg').classList.contains('open');
+  if(zOpen&&!mOpen){
+    if(e.key==='ArrowLeft'||e.key==='ArrowUp'){e.preventDefault();sz(-1);}
+    if(e.key==='ArrowRight'||e.key==='ArrowDown'){e.preventDefault();sz(1);}
+    if(e.key==='Escape')cz();
+  }
+});
 ra();
 </script>
 </body>
