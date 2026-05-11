@@ -16,7 +16,7 @@ jobs:
 
       - name: Download file from Google Drive
         run: |
-          FILE_ID="YOUR_GOOGLE_DRIVE_FILE_ID"
+          FILE_ID="1FL77VAjZY3wPrOL2a9NnNG7zAAUZ1HFd"
           curl -L "https://drive.google.com/uc?export=download&id=${FILE_ID}" -o index.html
 
       - name: Commit and push if changed
