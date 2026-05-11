@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Year Planner Apr 2026 – Mar 2027</title>
+<title>Calendar</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:system-ui,sans-serif;background:#f5f5f3;color:#1a1a1a;padding:1rem}
@@ -102,6 +102,7 @@ body{font-family:system-ui,sans-serif;background:#f5f5f3;color:#1a1a1a;padding:1
     <div class="li"><div style="width:22px;height:9px;border-radius:2px;background:#E6F1FB;border:0.5px solid #185FA5;flex-shrink:0"></div>DCTC Work (AM)</div>
     <div class="li"><div style="width:22px;height:9px;border-radius:2px;background:#EAF3DE;border:0.5px solid #3B6D11;flex-shrink:0"></div>DCTC Work (PM)</div>
     <div class="li"><div style="width:22px;height:9px;border-radius:2px;background:#FAEEDA;border:0.5px solid #BA7517;flex-shrink:0"></div>Event</div>
+    <div class="li"><div style="width:22px;height:9px;border-radius:2px;background:#FEFCE8;border:0.5px solid #C9A800;flex-shrink:0"></div>OTG</div>
     <div class="li"><div style="width:22px;height:9px;border-radius:2px;background:#EEEDFE;border:0.5px solid #7F77DD;flex-shrink:0"></div>Personal</div>
     <div class="li"><div style="width:6px;height:6px;border-radius:50%;background:#378ADD;flex-shrink:0"></div>Note</div>
   </div>
@@ -170,7 +171,7 @@ const FE={
   '2026-04-11':[{t:'Tomb-sweeping',d:[],c:'#7F77DD',b:'#EEEDFE',cat:'personal'}],
   '2026-04-12':[{t:'Furniture moving',d:[],c:'#7F77DD',b:'#EEEDFE',cat:'personal'}],
   '2026-04-27':[
-    {t:'OTG Meeting (AdminLess)',d:[{l:'Time',v:'1600–1700'}],c:'#BA7517',b:'#FAEEDA',cat:'event'}
+    {t:'OTG Meeting (AdminLess)',d:[{l:'Time',v:'1600–1700'}],c:'#7C5A00',b:'#FEFCE8',cat:'otg'}
   ],
   '2026-04-28':[
     {t:'TCM',d:[{l:'Time',v:'1345'},{l:'Venue',v:'The TCM Folks'}],c:'#7F77DD',b:'#EEEDFE',cat:'personal'}
@@ -180,6 +181,9 @@ const FE={
   ],
   '2026-05-07':[
     {t:'TCM',d:[{l:'Time',v:'1400'},{l:'Venue',v:'The TCM Folks'}],c:'#7F77DD',b:'#EEEDFE',cat:'personal'}
+  ],
+  '2026-05-11':[
+    {t:'OTG Team Meeting',d:[{l:'Time',v:'1100'}],c:'#7C5A00',b:'#FEFCE8',cat:'otg'}
   ],
   '2026-05-15':[
     {t:'ICT Preparation Seminar',d:[{l:'Time',v:'1300–1700'},{l:'Venue',v:'Changi Naval Base'},{l:'Attire',v:'No.4 Dress with Head Dress'}],c:'#BA7517',b:'#FAEEDA',cat:'event'}
@@ -303,6 +307,7 @@ function om(s,y,m,d){
   const evs=FE[s]||[];
   const personal=evs.filter(e=>e.cat==='personal');
   const events=evs.filter(e=>e.cat==='event');
+  const otg=evs.filter(e=>e.cat==='otg');
   if(personal.length){
     const lbl=document.createElement('div');lbl.className='cat-lbl';lbl.textContent='Personal';fel.appendChild(lbl);
     personal.forEach(ev=>fel.appendChild(makeCard(ev)));
@@ -310,6 +315,10 @@ function om(s,y,m,d){
   if(events.length){
     const lbl=document.createElement('div');lbl.className='cat-lbl';lbl.textContent='Events';fel.appendChild(lbl);
     events.forEach(ev=>fel.appendChild(makeCard(ev)));
+  }
+  if(otg.length){
+    const lbl=document.createElement('div');lbl.className='cat-lbl';lbl.textContent='OTG';fel.appendChild(lbl);
+    otg.forEach(ev=>fel.appendChild(makeCard(ev)));
   }
   document.getElementById('ei').value='';rn();
   document.getElementById('mbg').classList.add('open');
