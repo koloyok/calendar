@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Year Planner Apr 2026 – Mar 2027</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,sans-serif;background:#f5f5f3;color:#1a1a1a;padding:1rem}
+.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;flex-wrap:wrap;gap:8px}
+.top h2{font-size:18px;font-weight:500}
+.leg{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.li{display:flex;align-items:center;gap:5px;font-size:11px;color:#555}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+.mc{background:#fff;border:0.5px solid #ddd;border-radius:12px;overflow:hidden;cursor:pointer;transition:border-color .15s}
+.mc:hover{border-color:#aaa}
+.mh{font-size:13px;font-weight:500;padding:8px 12px;background:#f9f9f7;display:flex;justify-content:space-between;align-items:center}
+.zh{font-size:10px;color:#aaa;font-weight:400}
+.cg{display:grid;grid-template-columns:repeat(8,1fr);padding:6px 8px 8px}
+.dl{font-size:10px;color:#aaa;text-align:center;padding:2px 0 4px}
+.wl{font-size:9px;color:#aaa;text-align:center;padding:2px 0 4px}
+.dc{font-size:11px;text-align:center;padding:2px 1px;cursor:pointer;border-radius:4px;line-height:1.5;color:#1a1a1a;transition:background .1s}
+.dc:hover{background:#f0f0ee}
+.dc.today{font-weight:500;background:#E6F1FB;color:#0C447C}
+.dc.sun{color:#E24B4A}
+.dc.hol{color:#E24B4A;font-weight:500}
+.wn{font-size:9px;color:#aaa;text-align:center;padding:2px 0;line-height:1.5}
+.hb{font-size:9px;padding:1px 4px;border-radius:3px;background:#FCEBEB;color:#A32D2D;margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;line-height:1.4}
+.wbs{display:flex;flex-direction:column;gap:1px;margin-top:1px}
+.wb{font-size:8px;padding:1px 3px;border-radius:2px;line-height:1.4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wb.x{background:#E6F1FB;color:#0C447C}
+.wb.y{background:#EAF3DE;color:#3B6D11}
+.eb{font-size:8px;padding:1px 4px;border-radius:2px;line-height:1.4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;margin-top:1px}
+.dr{display:flex;justify-content:center;gap:2px;margin-top:1px}
+.dt{width:4px;height:4px;border-radius:50%}
+.zbg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;align-items:flex-start;justify-content:center;padding:20px;overflow-y:auto}
+.zbg.open{display:flex}
+.zp{background:#fff;border:0.5px solid #ccc;border-radius:12px;width:100%;max-width:600px;margin:auto}
+.zhd{padding:14px 18px;background:#f9f9f7;display:flex;align-items:center;justify-content:space-between;border-radius:12px 12px 0 0}
+.zhd h3{font-size:17px;font-weight:500}
+.znav{display:flex;align-items:center;gap:8px}
+.znav button{background:none;border:0.5px solid #ccc;border-radius:8px;padding:4px 10px;font-size:13px;cursor:pointer}
+.znav button:hover{background:#f0f0ee}
+.zx{background:none;border:none;font-size:20px;cursor:pointer;color:#aaa;padding:0 0 0 8px}
+.zx:hover{color:#333}
+.zg{display:grid;grid-template-columns:repeat(8,1fr);padding:14px 16px 18px;gap:3px}
+.zdl{font-size:11px;color:#aaa;text-align:center;padding:4px 0 10px;font-weight:500}
+.zwl{font-size:10px;color:#aaa;text-align:center;padding:4px 0 10px;font-weight:500}
+.zwn{font-size:10px;color:#aaa;text-align:center;padding:8px 2px 4px}
+.zc{border-radius:6px;padding:6px 4px 7px;cursor:pointer;text-align:center;transition:background .1s;border:0.5px solid transparent}
+.zc:hover{background:#f0f0ee;border-color:#ddd}
+.zc.today{background:#E6F1FB;border-color:#185FA5}
+.zc.sun{color:#E24B4A}
+.zc.hol{color:#E24B4A}
+.zn{font-size:14px;font-weight:500;color:inherit;line-height:1.4}
+.zc.today .zn{color:#0C447C}
+.zhb{font-size:8px;padding:1px 4px;border-radius:3px;background:#FCEBEB;color:#A32D2D;margin-top:3px;line-height:1.4;white-space:normal;word-break:break-word}
+.zwb{font-size:8px;padding:1px 4px;border-radius:3px;margin-top:2px;line-height:1.4;white-space:normal;word-break:break-word}
+.zwb.x{background:#E6F1FB;color:#0C447C}
+.zwb.y{background:#EAF3DE;color:#3B6D11}
+.zeb{font-size:8px;padding:1px 4px;border-radius:3px;margin-top:2px;line-height:1.4;white-space:normal;word-break:break-word}
+.zdts{display:flex;justify-content:center;gap:2px;margin-top:4px}
+.zdt{width:5px;height:5px;border-radius:50%}
+.mbg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:300;align-items:center;justify-content:center}
+.mbg.open{display:flex}
+.modal{background:#fff;border:0.5px solid #ccc;border-radius:12px;padding:1.25rem;width:320px;max-width:90vw;max-height:90vh;overflow-y:auto}
+.modal h3{font-size:15px;font-weight:500;margin-bottom:4px}
+.mhol{font-size:12px;color:#A32D2D;margin-bottom:8px}
+.mw{margin-bottom:10px}
+.wc{border-radius:8px;padding:6px 10px;margin-bottom:4px}
+.wc.x{background:#E6F1FB;border:0.5px solid #185FA5}
+.wc.y{background:#EAF3DE;border:0.5px solid #3B6D11}
+.wc .wct{font-size:12px;font-weight:500;color:#0C447C;margin-bottom:1px}
+.wc.y .wct{color:#3B6D11}
+.wc .wch{font-size:11px;color:#185FA5}
+.wc.y .wch{color:#3B6D11}
+.mfe{margin-bottom:10px}
+.cat-lbl{font-size:10px;color:#aaa;text-transform:uppercase;letter-spacing:.04em;margin:6px 0 3px}
+.fc{border-radius:8px;border:0.5px solid #ddd;padding:8px 10px;margin-bottom:5px}
+.fc .ft{font-size:13px;font-weight:500;margin-bottom:3px}
+.fc .fr{font-size:11px;color:#555;line-height:1.7}
+.fc .fl{color:#aaa;font-size:10px;text-transform:uppercase;letter-spacing:.03em}
+.modal input{width:100%;margin-bottom:10px;padding:7px 10px;border-radius:8px;border:0.5px solid #ccc;font-size:13px;font-family:inherit}
+.mbtns{display:flex;gap:8px;justify-content:flex-end;margin-top:4px}
+.mbtns button{padding:6px 14px;border-radius:8px;border:0.5px solid #ccc;font-size:13px;cursor:pointer;background:#fff}
+.mbtns button.pri{background:#378ADD;color:#fff;border-color:#378ADD}
+.cr{display:flex;gap:8px;margin-bottom:10px;align-items:center}
+.sw{width:20px;height:20px;border-radius:50%;cursor:pointer;border:2px solid transparent;flex-shrink:0}
+.sw.sel{border-color:#1a1a1a}
+.nel{margin-top:6px}
+.ni{font-size:11px;padding:3px 6px;border-radius:4px;margin:2px 0;display:flex;align-items:center;gap:6px}
+.ni .nd{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.ni .nl{flex:1;color:#555;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.ni .nx{color:#aaa;font-size:14px;line-height:1;cursor:pointer}
+</style>
+</head>
+<body>
+<div class="top">
+  <h2>Year planner — Apr 2026 to Mar 2027</h2>
+  <div class="leg">
+    <div class="li"><div style="width:9px;height:9px;border-radius:50%;background:#E24B4A;flex-shrink:0"></div>Holiday/Sun</div>
+    <div class="li"><div style="width:22px;height:9px;border-radius:2px;background:#E6F1FB;border:0.5px solid #185FA5;flex-shrink:0"></div>DCTC Work (AM)</div>
+    <div class="li"><div style="width:22px;height:9px;border-radius:2px;background:#EAF3DE;border:0.5px solid #3B6D11;flex-shrink:0"></div>DCTC Work (PM)</div>
+    <div class="li"><div style="width:22px;height:9px;border-radius:2px;background:#FAEEDA;border:0.5px solid #BA7517;flex-shrink:0"></div>Event</div>
+    <div class="li"><div style="width:22px;height:9px;border-radius:2px;background:#EEEDFE;border:0.5px solid #7F77DD;flex-shrink:0"></div>Personal</div>
+    <div class="li"><div style="width:6px;height:6px;border-radius:50%;background:#378ADD;flex-shrink:0"></div>Note</div>
+  </div>
+</div>
+<div class="grid" id="grid"></div>
+
+<div class="zbg" id="zbg">
+  <div class="zp">
+    <div class="zhd">
+      <h3 id="zt"></h3>
+      <div class="znav">
+        <button onclick="sz(-1)">&#8592;</button>
+        <button onclick="sz(1)">&#8594;</button>
+        <button class="zx" onclick="cz()">&#10005;</button>
+      </div>
+    </div>
+    <div class="zg" id="zg"></div>
+  </div>
+</div>
+
+<div class="mbg" id="mbg">
+  <div class="modal">
+    <h3 id="mt"></h3>
+    <div class="mhol" id="mh" style="display:none"></div>
+    <div class="mw" id="mw"></div>
+    <div class="mfe" id="mfe"></div>
+    <input type="text" id="ei" placeholder="Add note..." />
+    <div class="cr">
+      <div class="sw sel" data-c="blue" style="background:#378ADD"></div>
+      <div class="sw" data-c="green" style="background:#639922"></div>
+      <div class="sw" data-c="amber" style="background:#BA7517"></div>
+      <div class="sw" data-c="pink" style="background:#D4537E"></div>
+      <div class="sw" data-c="purple" style="background:#7F77DD"></div>
+    </div>
+    <div id="nel" class="nel"></div>
+    <div class="mbtns">
+      <button onclick="cm()">Close</button>
+      <button class="pri" onclick="se()">Add</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const H={
+  '2026-02-17':'Lunar New Year','2026-02-18':'Lunar New Year',
+  '2026-03-21':'Hari Raya Puasa','2026-03-23':'Hari Raya Puasa (obs.)',
+  '2026-04-03':'Good Friday',
+  '2026-05-01':'Labour Day','2026-05-27':'Hari Raya Haji',
+  '2026-05-31':'Vesak Day','2026-06-01':'Vesak Day (obs.)',
+  '2026-08-09':'National Day','2026-08-10':'National Day (obs.)',
+  '2026-11-08':'Deepavali','2026-11-09':'Deepavali (obs.)',
+  '2026-12-25':'Christmas Day',
+  '2027-01-01':"New Year's Day",
+  '2027-02-06':'Lunar New Year','2027-02-07':'Lunar New Year','2027-02-08':'Lunar New Year (obs.)',
+  '2027-03-10':'Hari Raya Puasa*','2027-03-26':'Good Friday'
+};
+const W={
+  '2026-04-09':'X','2026-04-10':'X',
+  '2026-04-14':'XY','2026-04-15':'Y','2026-04-16':'XY',
+  '2026-04-21':'X','2026-04-22':'XY','2026-04-23':'X','2026-04-24':'X',
+  '2026-05-04':'Y','2026-05-08':'XY','2026-05-14':'XY',
+  '2026-05-20':'XY','2026-05-22':'XY',
+  '2026-05-28':'XY','2026-05-29':'XY'
+};
+const FE={
+  '2026-04-11':[{t:'Tomb-sweeping',d:[],c:'#7F77DD',b:'#EEEDFE',cat:'personal'}],
+  '2026-04-12':[{t:'Furniture moving',d:[],c:'#7F77DD',b:'#EEEDFE',cat:'personal'}],
+  '2026-04-27':[
+    {t:'OTG Meeting (AdminLess)',d:[{l:'Time',v:'1600–1700'}],c:'#BA7517',b:'#FAEEDA',cat:'event'}
+  ],
+  '2026-04-28':[
+    {t:'TCM',d:[{l:'Time',v:'1345'},{l:'Venue',v:'The TCM Folks'}],c:'#7F77DD',b:'#EEEDFE',cat:'personal'}
+  ],
+  '2026-04-29':[
+    {t:'Physiotherapy',d:[{l:'Time',v:'1400'},{l:'Venue',v:'Pioneer Polyclinic'}],c:'#7F77DD',b:'#EEEDFE',cat:'personal'}
+  ],
+  '2026-05-07':[
+    {t:'TCM',d:[{l:'Time',v:'1400'},{l:'Venue',v:'The TCM Folks'}],c:'#7F77DD',b:'#EEEDFE',cat:'personal'}
+  ],
+  '2026-05-15':[
+    {t:'ICT Preparation Seminar',d:[{l:'Time',v:'1300–1700'},{l:'Venue',v:'Changi Naval Base'},{l:'Attire',v:'No.4 Dress with Head Dress'}],c:'#BA7517',b:'#FAEEDA',cat:'event'}
+  ],
+  '2026-06-01':[
+    {t:'Anniversary',d:[],c:'#7F77DD',b:'#EEEDFE',cat:'personal'}
+  ],
+  '2026-09-16':[
+    {t:"Papu's Birthday",d:[],c:'#7F77DD',b:'#EEEDFE',cat:'personal'}
+  ]
+};
+
+let N={},sc='blue',ad=null,zi=0;
+const td=new Date();
+const ts=`${td.getFullYear()}-${p2(td.getMonth()+1)}-${p2(td.getDate())}`;
+const MN=['January','February','March','April','May','June','July','August','September','October','November','December'];
+const EC={blue:'#378ADD',green:'#639922',amber:'#BA7517',pink:'#D4537E',purple:'#7F77DD'};
+
+// PM end-time overrides for specific dates
+const PMTIME={'2026-04-16':'1300–1715','2026-05-20':'1300–1715'};
+function pmT(s){return PMTIME[s]||'1300–1630';}
+
+function p2(n){return String(n).padStart(2,'0')}
+function ds(y,m,d){return`${y}-${p2(m)}-${p2(d)}`}
+function wkn(d){const x=new Date(d);x.setHours(0,0,0,0);x.setDate(x.getDate()+3-(x.getDay()+6)%7);const w=new Date(x.getFullYear(),0,4);return 1+Math.round(((x-w)/86400000-3+(w.getDay()+6)%7)/7);}
+function iym(i){let m=3+i,y=2026;if(m>=12){m-=12;y=2027;}return{y,m:m+1};}
+
+function ra(){const g=document.getElementById('grid');g.innerHTML='';for(let i=0;i<12;i++){const{y,m}=iym(i);g.appendChild(mm(y,m,i));}}
+
+function mm(y,m,idx){
+  const card=document.createElement('div');card.className='mc';card.onclick=()=>oz(idx);
+  const fd=new Date(y,m-1,1).getDay(),dim=new Date(y,m,0).getDate();
+  const th=document.createElement('div');th.className='mh';
+  th.innerHTML=`<span>${MN[m-1]}</span><span style="display:flex;align-items:center;gap:8px"><span class="zh">click to expand</span><span>${y}</span></span>`;
+  card.appendChild(th);
+  const g=document.createElement('div');g.className='cg';
+  ['Wk','Mo','Tu','We','Th','Fr','Sa','Su'].forEach(l=>{const e=document.createElement('div');e.className=l==='Wk'?'wl':'dl';e.textContent=l;g.appendChild(e);});
+  const off=(fd===0)?6:fd-1;let row=[];
+  for(let i=0;i<off;i++)row.push(null);
+  for(let d=1;d<=dim;d++){row.push(d);if(row.length===7){mr(g,row,y,m);row=[];}}
+  if(row.length){while(row.length<7)row.push(null);mr(g,row,y,m);}
+  card.appendChild(g);return card;
+}
+
+function mr(g,row,y,m){
+  const fv=row.find(d=>d!==null);
+  const wn=document.createElement('div');wn.className='wn';if(fv)wn.textContent=wkn(new Date(y,m-1,fv));g.appendChild(wn);
+  row.forEach(d=>{
+    const c=document.createElement('div');
+    if(!d){c.className='dc';c.style.visibility='hidden';g.appendChild(c);return;}
+    const s=ds(y,m,d),dw=new Date(y,m-1,d).getDay();
+    const cl=['dc'];if(s===ts)cl.push('today');if(dw===0)cl.push('sun');if(H[s])cl.push('hol');
+    c.className=cl.join(' ');c.textContent=d;
+    if(H[s]){const b=document.createElement('div');b.className='hb';b.textContent=H[s];c.appendChild(b);}
+    const w=W[s];
+    if(w){const wb=document.createElement('div');wb.className='wbs';
+      if(w==='X'||w==='XY'){const bx=document.createElement('div');bx.className='wb x';bx.textContent='DCTC Work';wb.appendChild(bx);}
+      if(w==='Y'||w==='XY'){const by=document.createElement('div');by.className='wb y';by.textContent='DCTC Work';wb.appendChild(by);}
+      c.appendChild(wb);}
+    (FE[s]||[]).forEach(ev=>{const b=document.createElement('div');b.className='eb';b.style.background=ev.b;b.style.color=ev.c;b.textContent=ev.t;c.appendChild(b);});
+    const un=N[s]||[];if(un.length){const dr=document.createElement('div');dr.className='dr';un.slice(0,3).forEach(ev=>{const dot=document.createElement('div');dot.className='dt';dot.style.background=EC[ev.color]||EC.blue;dr.appendChild(dot);});c.appendChild(dr);}
+    c.onclick=(e)=>{e.stopPropagation();om(s,y,m,d);};g.appendChild(c);
+  });
+}
+
+function oz(i){zi=Math.max(0,Math.min(11,i));rz();document.getElementById('zbg').classList.add('open');document.getElementById('zbg').scrollTop=0;}
+function cz(){document.getElementById('zbg').classList.remove('open');}
+function sz(dir){zi=Math.max(0,Math.min(11,zi+dir));rz();document.getElementById('zbg').scrollTop=0;}
+
+function rz(){
+  const{y,m}=iym(zi);document.getElementById('zt').textContent=`${MN[m-1]} ${y}`;
+  const g=document.getElementById('zg');g.innerHTML='';
+  const fd=new Date(y,m-1,1).getDay(),dim=new Date(y,m,0).getDate();
+  ['Wk','Mo','Tu','We','Th','Fr','Sa','Su'].forEach(l=>{const e=document.createElement('div');e.className=l==='Wk'?'zwl':'zdl';e.textContent=l;g.appendChild(e);});
+  const off=(fd===0)?6:fd-1;let row=[];
+  for(let i=0;i<off;i++)row.push(null);
+  for(let d=1;d<=dim;d++){row.push(d);if(row.length===7){zr(g,row,y,m);row=[];}}
+  if(row.length){while(row.length<7)row.push(null);zr(g,row,y,m);}
+}
+
+function zr(g,row,y,m){
+  const fv=row.find(d=>d!==null);
+  const wn=document.createElement('div');wn.className='zwn';if(fv)wn.textContent=wkn(new Date(y,m-1,fv));g.appendChild(wn);
+  row.forEach(d=>{
+    const c=document.createElement('div');
+    if(!d){c.className='zc';c.style.visibility='hidden';g.appendChild(c);return;}
+    const s=ds(y,m,d),dw=new Date(y,m-1,d).getDay();
+    const cl=['zc'];if(s===ts)cl.push('today');if(dw===0)cl.push('sun');if(H[s])cl.push('hol');
+    c.className=cl.join(' ');
+    const n=document.createElement('div');n.className='zn';n.textContent=d;c.appendChild(n);
+    if(H[s]){const b=document.createElement('div');b.className='zhb';b.textContent=H[s];c.appendChild(b);}
+    const w=W[s];
+    if(w){
+      if(w==='X'||w==='XY'){const bx=document.createElement('div');bx.className='zwb x';bx.textContent='DCTC 0830–1200';c.appendChild(bx);}
+      if(w==='Y'||w==='XY'){const by=document.createElement('div');by.className='zwb y';by.textContent='DCTC '+pmT(s);c.appendChild(by);}
+    }
+    (FE[s]||[]).forEach(ev=>{const b=document.createElement('div');b.className='zeb';b.style.background=ev.b;b.style.color=ev.c;b.textContent=ev.t;c.appendChild(b);});
+    const un=N[s]||[];if(un.length){const dr=document.createElement('div');dr.className='zdts';un.slice(0,4).forEach(ev=>{const dot=document.createElement('div');dot.className='zdt';dot.style.background=EC[ev.color]||EC.blue;dr.appendChild(dot);});c.appendChild(dr);}
+    c.onclick=(e)=>{e.stopPropagation();om(s,y,m,d);};g.appendChild(c);
+  });
+}
+
+function makeCard(ev){
+  const card=document.createElement('div');card.className='fc';card.style.borderLeft=`3px solid ${ev.c}`;
+  let h=`<div class="ft">${ev.t}</div>`;
+  ev.d.forEach(x=>{h+=`<div class="fr"><span class="fl">${x.l} </span>${x.v}</div>`;});
+  card.innerHTML=h;return card;
+}
+
+function om(s,y,m,d){
+  ad=s;document.getElementById('mt').textContent=`${d} ${MN[m-1]} ${y}`;
+  const hel=document.getElementById('mh');
+  if(H[s]){hel.textContent=H[s];hel.style.display='block';}else hel.style.display='none';
+  const wel=document.getElementById('mw');wel.innerHTML='';
+  const w=W[s];
+  if(w){
+    if(w==='X'||w==='XY'){const c=document.createElement('div');c.className='wc x';c.innerHTML='<div class="wct">DCTC Work</div><div class="wch">0830–1200</div>';wel.appendChild(c);}
+    if(w==='Y'||w==='XY'){const c=document.createElement('div');c.className='wc y';c.innerHTML=`<div class="wct">DCTC Work</div><div class="wch">${pmT(s)}</div>`;wel.appendChild(c);}
+  }
+  const fel=document.getElementById('mfe');fel.innerHTML='';
+  const evs=FE[s]||[];
+  const personal=evs.filter(e=>e.cat==='personal');
+  const events=evs.filter(e=>e.cat==='event');
+  if(personal.length){
+    const lbl=document.createElement('div');lbl.className='cat-lbl';lbl.textContent='Personal';fel.appendChild(lbl);
+    personal.forEach(ev=>fel.appendChild(makeCard(ev)));
+  }
+  if(events.length){
+    const lbl=document.createElement('div');lbl.className='cat-lbl';lbl.textContent='Events';fel.appendChild(lbl);
+    events.forEach(ev=>fel.appendChild(makeCard(ev)));
+  }
+  document.getElementById('ei').value='';rn();
+  document.getElementById('mbg').classList.add('open');
+  setTimeout(()=>document.getElementById('ei').focus(),100);
+}
+
+function rn(){
+  const el=document.getElementById('nel');const evs=N[ad]||[];
+  if(!evs.length){el.innerHTML='';return;}el.innerHTML='';
+  evs.forEach((ev,i)=>{const item=document.createElement('div');item.className='ni';item.innerHTML=`<div class="nd" style="background:${EC[ev.color]||EC.blue}"></div><div class="nl">${ev.name}</div><span class="nx" onclick="dn(${i})">×</span>`;el.appendChild(item);});
+}
+function dn(i){
+  if(N[ad]){N[ad].splice(i,1);if(!N[ad].length)delete N[ad];}
+  rn();ra();if(document.getElementById('zbg').classList.contains('open'))rz();
+}
+function cm(){document.getElementById('mbg').classList.remove('open');ad=null;}
+function se(){
+  const name=document.getElementById('ei').value.trim();if(!name)return;
+  if(!N[ad])N[ad]=[];N[ad].push({name,color:sc});
+  document.getElementById('ei').value='';rn();ra();
+  if(document.getElementById('zbg').classList.contains('open'))rz();
+  document.getElementById('ei').focus();
+}
+document.querySelector('.cr').addEventListener('click',e=>{
+  const sw=e.target.closest('.sw');if(!sw)return;
+  document.querySelectorAll('.sw').forEach(s=>s.classList.remove('sel'));sw.classList.add('sel');sc=sw.dataset.c;
+});
+document.getElementById('zbg').addEventListener('click',e=>{if(e.target===document.getElementById('zbg'))cz();});
+document.getElementById('mbg').addEventListener('click',e=>{if(e.target===document.getElementById('mbg'))cm();});
+document.getElementById('ei').addEventListener('keydown',e=>{if(e.key==='Enter')se();});
+ra();
+</script>
+</body>
+</html>
