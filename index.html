@@ -92,7 +92,29 @@ body{font-family:system-ui,sans-serif;background:#f5f5f3;color:#1a1a1a;padding:1
 .yr-2027 .yr-line{background:#3B6D11}
 .chat-btn{position:fixed;bottom:24px;right:24px;width:52px;height:52px;border-radius:50%;background:#378ADD;color:#fff;border:none;font-size:22px;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.2);z-index:400;display:flex;align-items:center;justify-content:center;transition:background .15s}
 .chat-btn:hover{background:#185FA5}
-.chat-panel{display:none;position:fixed;bottom:88px;right:24px;width:340px;max-height:520px;background:#fff;border:0.5px solid #ddd;border-radius:16px;box-shadow:0 8px 24px rgba(0,0,0,.15);z-index:400;flex-direction:column;overflow:hidden}
+.srch-btn{position:fixed;bottom:90px;right:24px;width:52px;height:52px;border-radius:50%;background:#fff;color:#378ADD;border:0.5px solid #ddd;font-size:20px;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.15);z-index:400;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.srch-btn:hover{background:#f5f5f3}
+.srch-bar{display:none;position:fixed;bottom:90px;right:24px;z-index:400;background:#fff;border:0.5px solid #ddd;border-radius:28px;box-shadow:0 4px 16px rgba(0,0,0,.15);padding:8px 14px;align-items:center;gap:8px;width:280px}
+.srch-bar.open{display:flex}
+.srch-bar input{flex:1;border:none;outline:none;font-size:13px;font-family:inherit;background:transparent;color:#1a1a1a}
+.srch-bar button{background:none;border:none;cursor:pointer;font-size:16px;color:#aaa;padding:0}
+.srch-bar button:hover{color:#333}
+.srch-count{font-size:11px;color:#aaa;white-space:nowrap}
+.dc.srch-match{background:#DBEAFE!important;color:#1e40af!important;font-weight:600;border-radius:4px}
+.zc.srch-match{background:#DBEAFE!important;border-color:#378ADD!important}
+.zc.srch-match .zn{color:#1e40af!important}
+.mc.srch-match{box-shadow:0 0 0 2.5px #378ADD,0 0 10px rgba(55,138,221,.3)!important;border-color:#378ADD!important}
+@keyframes glow{from{box-shadow:0 0 0 2.5px #378ADD,0 0 6px rgba(55,138,221,.2)}to{box-shadow:0 0 0 2.5px #378ADD,0 0 14px rgba(55,138,221,.5)}}
+body.dark .dc.srch-match{background:#0D2A45!important;color:#5BA3E0!important}
+body.dark .zc.srch-match{background:#0D2A45!important;border-color:#378ADD!important}
+body.dark .zc.srch-match .zn{color:#5BA3E0!important}
+body.dark .srch-btn{background:#252525;border-color:#444;color:#5BA3E0}
+body.dark .srch-btn:hover{background:#2a2a2a}
+body.dark .srch-bar{background:#252525;border-color:#444}
+body.dark .srch-bar input{color:#e8e8e8}
+body.dark .srch-bar button{color:#666}
+body.dark .srch-bar button:hover{color:#ccc}
+@media(max-width:600px){.chat-btn,.chat-panel{display:none!important}}.chat-panel{display:none;position:fixed;bottom:88px;right:24px;width:340px;max-height:520px;background:#fff;border:0.5px solid #ddd;border-radius:16px;box-shadow:0 8px 24px rgba(0,0,0,.15);z-index:400;flex-direction:column;overflow:hidden}
 .chat-panel.open{display:flex}
 .chat-hd{padding:12px 16px;background:#f9f9f7;border-bottom:0.5px solid #eee;display:flex;align-items:center;justify-content:space-between}
 .chat-hd span{font-size:14px;font-weight:500}
@@ -387,7 +409,7 @@ function mr(g,row,y,m){
     if(!d){c.className='dc';c.style.visibility='hidden';g.appendChild(c);return;}
     const s=ds(y,m,d),dw=new Date(y,m-1,d).getDay();
     const cl=['dc'];if(s===ts)cl.push('today');if(dw===0)cl.push('sun');if(H[s])cl.push('hol');
-    c.className=cl.join(' ');c.textContent=d;
+    c.className=cl.join(' ');c.dataset.date=s;c.textContent=d;
     if(H[s]){const b=document.createElement('div');b.className='hb';b.textContent=H[s];c.appendChild(b);}
     const w=W[s];
     if(w){const wb=document.createElement('div');wb.className='wbs';
@@ -422,7 +444,7 @@ function zr(g,row,y,m){
     if(!d){c.className='zc';c.style.visibility='hidden';g.appendChild(c);return;}
     const s=ds(y,m,d),dw=new Date(y,m-1,d).getDay();
     const cl=['zc'];if(s===ts)cl.push('today');if(dw===0)cl.push('sun');if(H[s])cl.push('hol');
-    c.className=cl.join(' ');
+    c.className=cl.join(' ');c.dataset.date=s;
     const n=document.createElement('div');n.className='zn';n.textContent=d;c.appendChild(n);
     if(H[s]){const b=document.createElement('div');b.className='zhb';b.textContent=H[s];c.appendChild(b);}
     const w=W[s];
@@ -486,6 +508,65 @@ document.addEventListener('keydown',e=>{
   }
 });
 ra();
+
+// Search
+function toggleSearch(){
+  const bar=document.getElementById('srchBar');
+  const btn=document.getElementById('srchBtn');
+  if(bar.classList.contains('open')){closeSearch();}
+  else{bar.classList.add('open');btn.style.display='none';setTimeout(()=>document.getElementById('srchInput').focus(),50);}
+}
+function closeSearch(){
+  document.getElementById('srchBar').classList.remove('open');
+  document.getElementById('srchBtn').style.display='flex';
+  document.getElementById('srchInput').value='';
+  document.getElementById('srchCount').textContent='';
+  clearSearch();
+}
+function clearSearch(){
+  document.querySelectorAll('.mc.srch-match').forEach(el=>el.classList.remove('srch-match'));
+  document.querySelectorAll('.dc.srch-match').forEach(el=>el.classList.remove('srch-match'));
+}
+function doSearch(q){
+  clearSearch();
+  if(!q.trim()){document.getElementById('srchCount').textContent='';return;}
+  const term=q.toLowerCase().trim();
+  let matchCount=0;
+  // Find all matching dates
+  const matchDates=new Set();
+  Object.entries(FE).forEach(([date,evs])=>{
+    evs.forEach(ev=>{
+      const inTitle=ev.t.toLowerCase().includes(term);
+      const inDetails=(ev.d||[]).some(d=>d.l.toLowerCase().includes(term)||d.v.toLowerCase().includes(term));
+      if(inTitle||inDetails)matchDates.add(date);
+    });
+  });
+  // Also search holidays
+  Object.entries(H).forEach(([date,name])=>{
+    if(name.toLowerCase().includes(term))matchDates.add(date);
+  });
+  // Also search work schedule
+  const dctcTerms=['dctc','dctc work','dctc am','dctc pm','0830','1200'];
+  if(dctcTerms.some(t=>t.includes(term)||term.includes('dctc'))){
+    Object.entries(W).forEach(([date,val])=>{
+      if(term.includes('am')||term==='x'){if(val==='X'||val==='XY')matchDates.add(date);}
+      else if(term.includes('pm')||term==='y'){if(val==='Y'||val==='XY')matchDates.add(date);}
+      else{matchDates.add(date);}
+    });
+  }
+  // Highlight matching month cards and day cells
+  matchDates.forEach(date=>{
+    // Highlight the day cell
+    document.querySelectorAll('.dc[data-date="'+date+'"], .zc[data-date="'+date+'"]').forEach(el=>el.classList.add('srch-match'));
+    // Highlight the month card
+    const[y,m]=date.split('-').map(Number);
+    const idx=(y-2026)*12+(m-1);
+    const cards=document.querySelectorAll('.mc');
+    if(cards[idx])cards[idx].classList.add('srch-match');
+    matchCount++;
+  });
+  document.getElementById('srchCount').textContent=matchCount?`${matchCount} match${matchCount>1?'es':''}`:'no matches';
+}
 
 // Filter
 function toggleFilter(){
@@ -604,6 +685,14 @@ function toggleMic(){
   recognition.start();
 }
 </script>
+<!-- Search -->
+<button class="srch-btn" id="srchBtn" onclick="toggleSearch()" title="Search calendar">🔍</button>
+<div class="srch-bar" id="srchBar">
+  <span>🔍</span>
+  <input type="text" id="srchInput" placeholder="Search events…" oninput="doSearch(this.value)" />
+  <span class="srch-count" id="srchCount"></span>
+  <button onclick="closeSearch()">✕</button>
+</div>
 <!-- Chat Panel -->
 <button class="chat-btn" onclick="toggleChat()" title="Update calendar with AI">💬</button>
 <div class="chat-panel" id="chatPanel">
