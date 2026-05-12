@@ -6,7 +6,7 @@
 <title>Calendar</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:system-ui,sans-serif;background:#f5f5f3;color:#1a1a1a;padding:1rem}
+body{font-family:system-ui,sans-serif;background:#f5f5f3;color:#1a1a1a;padding:1rem;overscroll-behavior-y:none}
 .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;flex-wrap:wrap;gap:8px}
 .top h2{font-size:18px;font-weight:500}
 .leg{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
@@ -510,9 +510,12 @@ document.getElementById('zbg').addEventListener('click',e=>{if(e.target===docume
   document.addEventListener('touchmove',e=>{
     if(!active)return;
     const dy=e.touches[0].clientY-startY;
-    if(dy>60&&getScrollTop()===0){pulling=true;ptr.classList.add('visible');ptr.textContent='↓ Release to refresh';}
-    else if(dy<=60){pulling=false;ptr.classList.remove('visible');}
-  },{passive:true});
+    if(dy>0&&getScrollTop()===0){
+      e.preventDefault();
+      if(dy>80){pulling=true;ptr.classList.add('visible');ptr.textContent='↓ Release to refresh';}
+      else{pulling=false;ptr.classList.remove('visible');}
+    }else{pulling=false;ptr.classList.remove('visible');}
+  },{passive:false});
   document.addEventListener('touchend',()=>{
     if(pulling){ptr.textContent='🔄 Refreshing...';setTimeout(()=>location.reload(),400);}
     else{ptr.classList.remove('visible');}
