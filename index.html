@@ -413,8 +413,8 @@ function mr(g,row,y,m){
     if(H[s]){const b=document.createElement('div');b.className='hb';b.textContent=H[s];c.appendChild(b);}
     const w=W[s];
     if(w){const wb=document.createElement('div');wb.className='wbs';
-      if(w==='X'||w==='XY'){const bx=document.createElement('div');bx.className='wb x';bx.textContent='DCTC Work';wb.appendChild(bx);}
-      if(w==='Y'||w==='XY'){const by=document.createElement('div');by.className='wb y';by.textContent='DCTC Work';wb.appendChild(by);}
+      if(w==='X'||w==='XY'){const bx=document.createElement('div');bx.className='wb x';bx.textContent='DCTC Work (AM)';wb.appendChild(bx);}
+      if(w==='Y'||w==='XY'){const by=document.createElement('div');by.className='wb y';by.textContent='DCTC Work (PM)';wb.appendChild(by);}
       c.appendChild(wb);}
     (FE[s]||[]).forEach(ev=>{const b=document.createElement('div');b.className='eb';b.dataset.cat=ev.cat;b.style.background=ev.b;b.style.color=ev.c;b.textContent=ev.t;c.appendChild(b);});
     c.onclick=(e)=>{e.stopPropagation();om(s,y,m,d);};g.appendChild(c);
@@ -449,8 +449,8 @@ function zr(g,row,y,m){
     if(H[s]){const b=document.createElement('div');b.className='zhb';b.textContent=H[s];c.appendChild(b);}
     const w=W[s];
     if(w){
-      if(w==='X'||w==='XY'){const bx=document.createElement('div');bx.className='zwb x';bx.textContent='DCTC 0830–1200';c.appendChild(bx);}
-      if(w==='Y'||w==='XY'){const by=document.createElement('div');by.className='zwb y';by.textContent='DCTC '+pmT(s);c.appendChild(by);}
+      if(w==='X'||w==='XY'){const bx=document.createElement('div');bx.className='zwb x';bx.textContent='DCTC Work (AM)';c.appendChild(bx);}
+      if(w==='Y'||w==='XY'){const by=document.createElement('div');by.className='zwb y';by.textContent='DCTC Work (PM)';c.appendChild(by);}
     }
     (FE[s]||[]).forEach(ev=>{const b=document.createElement('div');b.className='zeb';b.dataset.cat=ev.cat;b.style.background=ev.b;b.style.color=ev.c;b.textContent=ev.t;c.appendChild(b);});
     c.onclick=(e)=>{e.stopPropagation();om(s,y,m,d);};g.appendChild(c);
@@ -471,8 +471,8 @@ function om(s,y,m,d){
   const wel=document.getElementById('mw');wel.innerHTML='';
   const w=W[s];
   if(w){
-    if(w==='X'||w==='XY'){const c=document.createElement('div');c.className='wc x';c.innerHTML='<div class="wct">DCTC Work</div><div class="wch">0830–1200</div>';wel.appendChild(c);}
-    if(w==='Y'||w==='XY'){const c=document.createElement('div');c.className='wc y';c.innerHTML=`<div class="wct">DCTC Work</div><div class="wch">${pmT(s)}</div>`;wel.appendChild(c);}
+    if(w==='X'||w==='XY'){const c=document.createElement('div');c.className='wc x';c.innerHTML='<div class="wct">DCTC Work (AM)</div><div class="wch">0830–1200</div>';wel.appendChild(c);}
+    if(w==='Y'||w==='XY'){const c=document.createElement('div');c.className='wc y';c.innerHTML=`<div class="wct">DCTC Work (PM)</div><div class="wch">${pmT(s)}</div>`;wel.appendChild(c);}
   }
   const fel=document.getElementById('mfe');fel.innerHTML='';
   const evs=FE[s]||[];
