@@ -118,6 +118,29 @@ body{font-family:system-ui,sans-serif;background:#f5f5f3;color:#1a1a1a;padding:1
 .chat-dl.show{display:block}
 .dm-btn{background:none;border:0.5px solid #ccc;border-radius:20px;padding:4px 12px;font-size:12px;cursor:pointer;color:#555;display:flex;align-items:center;gap:5px;transition:all .2s}
 .dm-btn:hover{background:#f0f0ee}
+.top-btns{display:flex;gap:8px;align-items:center}
+.filter-wrap{position:relative}
+.filter-btn{background:none;border:0.5px solid #ccc;border-radius:20px;padding:4px 12px;font-size:12px;cursor:pointer;color:#555;transition:all .2s}
+.filter-btn:hover{background:#f0f0ee}
+.filter-btn.active{background:#E6F1FB;border-color:#185FA5;color:#0C447C}
+.filter-drop{display:none;position:absolute;top:34px;right:0;background:#fff;border:0.5px solid #ddd;border-radius:12px;box-shadow:0 4px 16px rgba(0,0,0,.1);padding:10px;z-index:500;min-width:180px}
+.filter-drop.open{display:block}
+.filter-item{display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:8px;cursor:pointer;font-size:12px;color:#555;user-select:none}
+.filter-item:hover{background:#f5f5f3}
+.filter-item input{cursor:pointer;accent-color:#378ADD}
+.filter-dot{width:10px;height:10px;border-radius:2px;flex-shrink:0}
+body.dark .filter-btn{border-color:#444;color:#aaa}
+body.dark .filter-btn:hover{background:#2a2a2a}
+body.dark .filter-btn.active{background:#0D2A45;border-color:#185FA5;color:#5BA3E0}
+body.dark .filter-drop{background:#252525;border-color:#333}
+body.dark .filter-item{color:#aaa}
+body.dark .filter-item:hover{background:#2a2a2a}
+body.hide-holiday .hb,.hide-holiday .zhb,.hide-holiday .dc.hol,.hide-holiday .zc.hol{display:none!important}
+body.hide-dctcam .wb.x,.hide-dctcam .zwb.x{display:none!important}
+body.hide-dctcpm .wb.y,.hide-dctcpm .zwb.y{display:none!important}
+body.hide-event .eb[data-cat="event"],.hide-event .zeb[data-cat="event"]{display:none!important}
+body.hide-otg .eb[data-cat="otg"],.hide-otg .zeb[data-cat="otg"]{display:none!important}
+body.hide-personal .eb[data-cat="personal"],.hide-personal .zeb[data-cat="personal"]{display:none!important}
 body.dark{background:#1a1a1a;color:#e8e8e8}
 body.dark .dm-btn{border-color:#444;color:#aaa}
 body.dark .dm-btn:hover{background:#2a2a2a}
@@ -182,7 +205,20 @@ body.dark .chat-dl{background:#1A2E10;border-color:#3B6D11;color:#7AB648}
 <body>
 <div class="top">
   <h2>Calendar — Jan 2026 to Dec 2027</h2>
-  <button class="dm-btn" onclick="toggleDark()" id="dmBtn">🌙 Dark</button>
+  <div class="top-btns">
+    <div class="filter-wrap">
+      <button class="filter-btn" id="filterBtn" onclick="toggleFilter()">⚙ Filter</button>
+      <div class="filter-drop" id="filterDrop">
+        <label class="filter-item"><input type="checkbox" checked onchange="toggleCat('holiday',this)"><span class="filter-dot" style="background:#E24B4A"></span>Holidays</label>
+        <label class="filter-item"><input type="checkbox" checked onchange="toggleCat('dctcam',this)"><span class="filter-dot" style="background:#185FA5"></span>DCTC Work (AM)</label>
+        <label class="filter-item"><input type="checkbox" checked onchange="toggleCat('dctcpm',this)"><span class="filter-dot" style="background:#3B6D11"></span>DCTC Work (PM)</label>
+        <label class="filter-item"><input type="checkbox" checked onchange="toggleCat('event',this)"><span class="filter-dot" style="background:#BA7517"></span>Events</label>
+        <label class="filter-item"><input type="checkbox" checked onchange="toggleCat('otg',this)"><span class="filter-dot" style="background:#C9A800"></span>OTG</label>
+        <label class="filter-item"><input type="checkbox" checked onchange="toggleCat('personal',this)"><span class="filter-dot" style="background:#7F77DD"></span>Personal</label>
+      </div>
+    </div>
+    <button class="dm-btn" onclick="toggleDark()" id="dmBtn">🌙 Dark</button>
+  </div>
   <div class="leg">
     <div class="li"><div style="width:9px;height:9px;border-radius:50%;background:#E24B4A;flex-shrink:0"></div>Holiday/Sun</div>
     <div class="li"><div style="width:22px;height:9px;border-radius:2px;background:#E6F1FB;border:0.5px solid #185FA5;flex-shrink:0"></div>DCTC Work (AM)</div>
@@ -358,7 +394,7 @@ function mr(g,row,y,m){
       if(w==='X'||w==='XY'){const bx=document.createElement('div');bx.className='wb x';bx.textContent='DCTC Work';wb.appendChild(bx);}
       if(w==='Y'||w==='XY'){const by=document.createElement('div');by.className='wb y';by.textContent='DCTC Work';wb.appendChild(by);}
       c.appendChild(wb);}
-    (FE[s]||[]).forEach(ev=>{const b=document.createElement('div');b.className='eb';b.style.background=ev.b;b.style.color=ev.c;b.textContent=ev.t;c.appendChild(b);});
+    (FE[s]||[]).forEach(ev=>{const b=document.createElement('div');b.className='eb';b.dataset.cat=ev.cat;b.style.background=ev.b;b.style.color=ev.c;b.textContent=ev.t;c.appendChild(b);});
     c.onclick=(e)=>{e.stopPropagation();om(s,y,m,d);};g.appendChild(c);
   });
 }
@@ -394,7 +430,7 @@ function zr(g,row,y,m){
       if(w==='X'||w==='XY'){const bx=document.createElement('div');bx.className='zwb x';bx.textContent='DCTC 0830–1200';c.appendChild(bx);}
       if(w==='Y'||w==='XY'){const by=document.createElement('div');by.className='zwb y';by.textContent='DCTC '+pmT(s);c.appendChild(by);}
     }
-    (FE[s]||[]).forEach(ev=>{const b=document.createElement('div');b.className='zeb';b.style.background=ev.b;b.style.color=ev.c;b.textContent=ev.t;c.appendChild(b);});
+    (FE[s]||[]).forEach(ev=>{const b=document.createElement('div');b.className='zeb';b.dataset.cat=ev.cat;b.style.background=ev.b;b.style.color=ev.c;b.textContent=ev.t;c.appendChild(b);});
     c.onclick=(e)=>{e.stopPropagation();om(s,y,m,d);};g.appendChild(c);
   });
 }
@@ -450,6 +486,23 @@ document.addEventListener('keydown',e=>{
   }
 });
 ra();
+
+// Filter
+function toggleFilter(){
+  const drop=document.getElementById('filterDrop');
+  const btn=document.getElementById('filterBtn');
+  drop.classList.toggle('open');
+  btn.classList.toggle('active');
+}
+function toggleCat(cat,cb){
+  document.body.classList.toggle('hide-'+cat,!cb.checked);
+}
+document.addEventListener('click',e=>{
+  if(!e.target.closest('.filter-wrap')){
+    document.getElementById('filterDrop').classList.remove('open');
+    document.getElementById('filterBtn').classList.remove('active');
+  }
+});
 
 // Dark mode
 function toggleDark(){
