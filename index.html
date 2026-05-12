@@ -440,11 +440,16 @@ function saveKey(){
   addMsg('sys','API key saved! What would you like to update?');
 }
 // Auto-load key from URL parameter e.g. ?key=sk-ant-...
-(function(){
+window.addEventListener('load',function(){
   const params=new URLSearchParams(window.location.search);
   const k=params.get('key');
-  if(k){chatKey=k;document.getElementById('keySection').style.display='none';document.getElementById('chatSend').disabled=false;}
-})();
+  if(k){
+    chatKey=k;
+    document.getElementById('keySection').style.display='none';
+    document.getElementById('chatSend').disabled=false;
+    addMsg('sys','API key loaded! What would you like to update?');
+  }
+});
 function addMsg(role,text){
   const el=document.createElement('div');el.className='chat-msg '+role;el.textContent=text;
   const msgs=document.getElementById('chatMsgs');msgs.appendChild(el);msgs.scrollTop=msgs.scrollHeight;
