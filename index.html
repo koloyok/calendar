@@ -120,6 +120,9 @@ body{font-family:system-ui,sans-serif;background:#f5f5f3;color:#1a1a1a;padding:1
 .chat-inp input:focus{outline:none;border-color:#378ADD}
 .chat-inp button{padding:7px 12px;border:none;border-radius:8px;background:#378ADD;color:#fff;font-size:12px;cursor:pointer}
 .chat-inp button:disabled{background:#ccc;cursor:not-allowed}
+#micBtn{background:#f0f0ee;color:#1a1a1a;border:0.5px solid #ddd;font-size:14px;padding:7px 10px}
+#micBtn.listening{background:#FCEBEB;border-color:#E24B4A;animation:pulse 1s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.5}}
 .chat-dl{margin:6px 12px 10px;padding:7px 12px;border:0.5px solid #3B6D11;border-radius:8px;background:#EAF3DE;color:#3B6D11;font-size:12px;cursor:pointer;text-align:center;display:none}
 .chat-dl.show{display:block}
 </style>
@@ -483,6 +486,41 @@ function dlUpdated(){
   const blob=new Blob([document.documentElement.outerHTML],{type:'text/html'});
   const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='calendar.html';a.click();
 }
+
+// Speech recognition
+let recognition=null,isListening=false;
+function toggleMic(){
+  if(!('webkitSpeechRecognition' in window||'SpeechRecognition' in window)){
+    addMsg('sys','Sorry, your browser does not support voice input. Try Chrome.');return;
+  }
+  if(isListening){recognition.stop();return;}
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  recognition=new SR();
+  recognition.lang='en-SG';
+  recognition.interimResults=false;
+  recognition.maxAlternatives=1;
+  recognition.onstart=()=>{
+    isListening=true;
+    document.getElementById('micBtn').classList.add('listening');
+    document.getElementById('micBtn').textContent='🔴';
+    document.getElementById('chatInput').placeholder='Listening...';
+  };
+  recognition.onresult=(e)=>{
+    const transcript=e.results[0][0].transcript;
+    document.getElementById('chatInput').value=transcript;
+  };
+  recognition.onend=()=>{
+    isListening=false;
+    document.getElementById('micBtn').classList.remove('listening');
+    document.getElementById('micBtn').textContent='🎤';
+    document.getElementById('chatInput').placeholder='Describe your change…';
+  };
+  recognition.onerror=(e)=>{
+    addMsg('sys','Microphone error: '+e.error+'. Please try again.');
+    recognition.stop();
+  };
+  recognition.start();
+}
 </script>
 <!-- Chat Panel -->
 <button class="chat-btn" onclick="toggleChat()" title="Update calendar with AI">💬</button>
@@ -501,6 +539,7 @@ function dlUpdated(){
   <button class="chat-dl" id="dlBtn" onclick="dlUpdated()">⬇ Download Updated Calendar</button>
   <div class="chat-inp">
     <input type="text" id="chatInput" placeholder="Describe your change…" onkeydown="if(event.key==='Enter')sendChat()" />
+    <button id="micBtn" onclick="toggleMic()" title="Speak your change">🎤</button>
     <button id="chatSend" onclick="sendChat()" disabled>Send</button>
   </div>
 </div>
