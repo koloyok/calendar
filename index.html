@@ -110,21 +110,6 @@ body{font-family:system-ui,sans-serif;background:#f5f5f3;color:#1a1a1a;padding:1
 .ag-hol{font-size:11px;color:#A32D2D;background:#FCEBEB;border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:2px}
 .ag-empty{text-align:center;color:#aaa;font-size:13px;padding:40px 0}
 .top-btns{display:flex;gap:8px;align-items:center}
-.filter-wrap{position:relative}
-.filter-btn{background:none;border:0.5px solid #ccc;border-radius:20px;padding:4px 12px;font-size:12px;cursor:pointer;color:#555;transition:all .2s}
-.filter-btn:hover{background:#f0f0ee}
-.filter-btn.active{background:#E6F1FB;border-color:#185FA5;color:#0C447C}
-.filter-drop{display:none;position:absolute;top:34px;right:0;background:#fff;border:0.5px solid #ddd;border-radius:12px;box-shadow:0 4px 16px rgba(0,0,0,.1);padding:10px;z-index:500;min-width:180px}
-.filter-drop.open{display:block}
-@media(max-width:600px){.filter-drop{right:auto;left:0}}
-.filter-item{display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:8px;cursor:pointer;font-size:12px;color:#555;user-select:none}
-.filter-item:hover{background:#f5f5f3}
-.filter-item input{cursor:pointer;accent-color:#378ADD}
-.filter-dot{width:10px;height:10px;border-radius:2px;flex-shrink:0}
-body.hide-holiday .hb,.hide-holiday .zhb,.hide-holiday .dc.hol,.hide-holiday .zc.hol{display:none!important}
-body.hide-event .eb[data-cat="event"],.hide-event .zeb[data-cat="event"]{display:none!important}
-body.hide-otg .eb[data-cat="otg"],.hide-otg .zeb[data-cat="otg"]{display:none!important}
-body.hide-personal .eb[data-cat="personal"],.hide-personal .zeb[data-cat="personal"]{display:none!important}
 </style>
 </head>
 <body>
@@ -132,15 +117,6 @@ body.hide-personal .eb[data-cat="personal"],.hide-personal .zeb[data-cat="person
   <h2>Calendar — Jan 2026 to Dec 2027</h2>
   <div class="top-btns">
     <button class="agenda-btn" id="agendaBtn" onclick="toggleAgenda()">☰ Agenda</button>
-    <div class="filter-wrap">
-      <button class="filter-btn" id="filterBtn" onclick="toggleFilter()">⚙ Filter</button>
-      <div class="filter-drop" id="filterDrop">
-        <label class="filter-item"><input type="checkbox" checked onchange="toggleCat('holiday',this)"><span class="filter-dot" style="background:#E24B4A"></span>Holidays</label>
-        <label class="filter-item"><input type="checkbox" checked onchange="toggleCat('event',this)"><span class="filter-dot" style="background:#BA7517"></span>Events</label>
-        <label class="filter-item"><input type="checkbox" checked onchange="toggleCat('otg',this)"><span class="filter-dot" style="background:#C9A800"></span>OTG</label>
-        <label class="filter-item"><input type="checkbox" checked onchange="toggleCat('personal',this)"><span class="filter-dot" style="background:#7F77DD"></span>Personal</label>
-      </div>
-    </div>
   </div>
   <div class="leg">
     <div class="li"><div style="width:9px;height:9px;border-radius:50%;background:#E24B4A;flex-shrink:0"></div>Holiday/Sun</div>
@@ -565,23 +541,6 @@ function buildAgenda(){
     ag.appendChild(sec);
   });
 }
-
-// Filter
-function toggleFilter(){
-  const drop=document.getElementById('filterDrop');
-  const btn=document.getElementById('filterBtn');
-  drop.classList.toggle('open');
-  btn.classList.toggle('active');
-}
-function toggleCat(cat,cb){
-  document.body.classList.toggle('hide-'+cat,!cb.checked);
-}
-document.addEventListener('click',e=>{
-  if(!e.target.closest('.filter-wrap')){
-    document.getElementById('filterDrop').classList.remove('open');
-    document.getElementById('filterBtn').classList.remove('active');
-  }
-});
 
 </script>
 <!-- Search -->
