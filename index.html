@@ -142,6 +142,34 @@ body.dark .srch-bar button:hover{color:#ccc}
 .chat-dl.show{display:block}
 .dm-btn{background:none;border:0.5px solid #ccc;border-radius:20px;padding:4px 12px;font-size:12px;cursor:pointer;color:#555;display:flex;align-items:center;gap:5px;transition:all .2s}
 .dm-btn:hover{background:#f0f0ee}
+.agenda-btn{background:none;border:0.5px solid #ccc;border-radius:20px;padding:4px 12px;font-size:12px;cursor:pointer;color:#555;transition:all .2s}
+.agenda-btn:hover{background:#f0f0ee}
+.agenda-btn.active{background:#E6F1FB;border-color:#185FA5;color:#0C447C}
+.agenda{display:none;max-width:700px;margin:0 auto}
+.agenda.open{display:block}
+.ag-month{margin-bottom:24px}
+.ag-month-hd{font-size:13px;font-weight:600;color:#aaa;text-transform:uppercase;letter-spacing:.06em;padding:4px 0 8px;border-bottom:0.5px solid #eee;margin-bottom:8px}
+.ag-item{display:flex;gap:12px;padding:8px 0;border-bottom:0.5px solid #f0f0ee;align-items:flex-start}
+.ag-date{min-width:48px;text-align:center}
+.ag-day{font-size:18px;font-weight:600;color:#1a1a1a;line-height:1.2}
+.ag-dow{font-size:10px;color:#aaa;text-transform:uppercase;letter-spacing:.04em}
+.ag-date.today-date .ag-day{color:#0C447C}
+.ag-date.today-date .ag-dow{color:#378ADD}
+.ag-events{flex:1;display:flex;flex-direction:column;gap:4px}
+.ag-ev{border-radius:8px;padding:6px 10px}
+.ag-ev .ag-et{font-size:13px;font-weight:500}
+.ag-ev .ag-ed{font-size:11px;color:#666;margin-top:2px;line-height:1.6}
+.ag-hol{font-size:11px;color:#A32D2D;background:#FCEBEB;border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:2px}
+.ag-empty{text-align:center;color:#aaa;font-size:13px;padding:40px 0}
+body.dark .agenda-btn{border-color:#444;color:#aaa}
+body.dark .agenda-btn:hover{background:#2a2a2a}
+body.dark .agenda-btn.active{background:#0D2A45;border-color:#185FA5;color:#5BA3E0}
+body.dark .ag-month-hd{color:#555;border-color:#333}
+body.dark .ag-item{border-color:#2a2a2a}
+body.dark .ag-day{color:#e8e8e8}
+body.dark .ag-date.today-date .ag-day{color:#5BA3E0}
+body.dark .ag-ev .ag-ed{color:#999}
+body.dark .ag-hol{background:#3D1515;color:#F47575}
 .top-btns{display:flex;gap:8px;align-items:center}
 .filter-wrap{position:relative}
 .filter-btn{background:none;border:0.5px solid #ccc;border-radius:20px;padding:4px 12px;font-size:12px;cursor:pointer;color:#555;transition:all .2s}
@@ -231,6 +259,7 @@ body.dark .chat-dl{background:#1A2E10;border-color:#3B6D11;color:#7AB648}
 <div class="top">
   <h2>Calendar — Jan 2026 to Dec 2027</h2>
   <div class="top-btns">
+    <button class="agenda-btn" id="agendaBtn" onclick="toggleAgenda()">☰ Agenda</button>
     <div class="filter-wrap">
       <button class="filter-btn" id="filterBtn" onclick="toggleFilter()">⚙ Filter</button>
       <div class="filter-drop" id="filterDrop">
@@ -254,6 +283,7 @@ body.dark .chat-dl{background:#1A2E10;border-color:#3B6D11;color:#7AB648}
   </div>
 </div>
 <div class="grid" id="grid"></div>
+<div class="agenda" id="agenda"></div>
 
 <div class="zbg" id="zbg">
   <div class="zp">
@@ -608,6 +638,80 @@ function doSearch(q){
     matchCount++;
   });
   document.getElementById('srchCount').textContent=matchCount?`${matchCount} match${matchCount>1?'es':''}`:'no matches';
+}
+
+// Agenda View
+let agendaOpen=false;
+function toggleAgenda(){
+  agendaOpen=!agendaOpen;
+  document.getElementById('agendaBtn').classList.toggle('active',agendaOpen);
+  document.getElementById('agendaBtn').textContent=agendaOpen?'⊞ Grid':'☰ Agenda';
+  document.getElementById('grid').style.display=agendaOpen?'none':'';
+  const ag=document.getElementById('agenda');
+  if(agendaOpen){ag.classList.add('open');buildAgenda();}
+  else{ag.classList.remove('open');}
+}
+
+function buildAgenda(){
+  const ag=document.getElementById('agenda');
+  ag.innerHTML='';
+  const DOW=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  // Collect all dates with events
+  const allDates=new Set();
+  Object.keys(FE).forEach(d=>allDates.add(d));
+  Object.keys(H).forEach(d=>allDates.add(d));
+  Object.keys(W).forEach(d=>allDates.add(d));
+  // Sort dates — only today and future
+  const sorted=[...allDates].filter(d=>d>=ts).sort();
+  // Group by month
+  const byMonth={};
+  sorted.forEach(date=>{
+    const key=date.slice(0,7);
+    if(!byMonth[key])byMonth[key]=[];
+    byMonth[key].push(date);
+  });
+  if(!sorted.length){ag.innerHTML='<div class="ag-empty">No events found.</div>';return;}
+  Object.entries(byMonth).forEach(([key,dates])=>{
+    const[y,m]=key.split('-').map(Number);
+    const sec=document.createElement('div');sec.className='ag-month';
+    const hd=document.createElement('div');hd.className='ag-month-hd';
+    hd.textContent=`${MN[m-1]} ${y}`;sec.appendChild(hd);
+    dates.forEach(date=>{
+      const[dy,dm,dd]=date.split('-').map(Number);
+      const dateObj=new Date(dy,dm-1,dd);
+      const isToday=date===ts;
+      const item=document.createElement('div');item.className='ag-item';
+      // Date column
+      const dc=document.createElement('div');
+      dc.className='ag-date'+(isToday?' today-date':'');
+      dc.innerHTML=`<div class="ag-day">${dd}</div><div class="ag-dow">${DOW[dateObj.getDay()]}</div>`;
+      item.appendChild(dc);
+      // Events column
+      const ec=document.createElement('div');ec.className='ag-events';
+      // Holiday
+      if(H[date]){const h=document.createElement('div');h.className='ag-hol';h.textContent='🏖 '+H[date];ec.appendChild(h);}
+      // Work
+      const w=W[date];
+      if(w){
+        if(w==='X'||w==='XY'){const e=document.createElement('div');e.className='ag-ev';e.style.background='#E6F1FB';e.innerHTML=`<div class="ag-et" style="color:#0C447C">DCTC Work (AM)</div><div class="ag-ed" style="color:#185FA5">0830–1200</div>`;ec.appendChild(e);}
+        if(w==='Y'||w==='XY'){const e=document.createElement('div');e.className='ag-ev';e.style.background='#EAF3DE';e.innerHTML=`<div class="ag-et" style="color:#3B6D11">DCTC Work (PM)</div><div class="ag-ed" style="color:#3B6D11">${pmT(date)}</div>`;ec.appendChild(e);}
+      }
+      // FE events
+      (FE[date]||[]).forEach(ev=>{
+        const e=document.createElement('div');e.className='ag-ev';
+        e.style.background=ev.b;
+        let details='';
+        (ev.d||[]).forEach(d=>{details+=`${d.l}: ${d.v}<br>`;});
+        e.innerHTML=`<div class="ag-et" style="color:${ev.c}">${ev.t}</div>${details?`<div class="ag-ed">${details}</div>`:''}`;
+        ec.appendChild(e);
+      });
+      item.appendChild(ec);
+      item.style.cursor='pointer';
+      item.onclick=()=>om(date,dy,dm,dd);
+      sec.appendChild(item);
+    });
+    ag.appendChild(sec);
+  });
 }
 
 // Filter
