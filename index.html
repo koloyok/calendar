@@ -6,7 +6,7 @@
 <title>Calendar</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:system-ui,sans-serif;background:#f5f5f3;color:#1a1a1a;padding:1rem;overscroll-behavior-y:none}
+body{font-family:system-ui,sans-serif;background:#f5f5f3;color:#1a1a1a;padding:1rem}
 .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;flex-wrap:wrap;gap:8px}
 .top h2{font-size:18px;font-weight:500}
 .leg{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
@@ -116,8 +116,7 @@ body.dark .srch-bar button:hover{color:#ccc}
 #micBtn{background:#f0f0ee;color:#1a1a1a;border:0.5px solid #ddd;font-size:14px;padding:7px 10px}
 #micBtn.listening{background:#FCEBEB;border-color:#E24B4A;animation:pulse 1s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.5}}
-.ptr{position:fixed;top:-50px;left:50%;transform:translateX(-50%);background:#378ADD;color:#fff;border-radius:20px;padding:6px 16px;font-size:12px;z-index:600;transition:top .2s;white-space:nowrap}
-.ptr.visible{top:12px}
+
 .chat-dl{margin:6px 12px 10px;padding:7px 12px;border:0.5px solid #3B6D11;border-radius:8px;background:#EAF3DE;color:#3B6D11;font-size:12px;cursor:pointer;text-align:center;display:none}
 .chat-dl.show{display:block}
 .dm-btn{background:none;border:0.5px solid #ccc;border-radius:20px;padding:4px 12px;font-size:12px;cursor:pointer;color:#555;display:flex;align-items:center;gap:5px;transition:all .2s}
@@ -498,45 +497,28 @@ function om(s,y,m,d){
 function cm(){document.getElementById('mbg').classList.remove('open');ad=null;}
 document.getElementById('zbg').addEventListener('click',e=>{if(e.target===document.getElementById('zbg'))cz();});
 
-// Pull to refresh
-(function(){
-  let startY=0,pulling=false,active=false;
-  const ptr=document.getElementById('ptr');
-  function getScrollTop(){return window.pageYOffset||document.documentElement.scrollTop||document.body.scrollTop||0;}
-  document.addEventListener('touchstart',e=>{
-    if(getScrollTop()===0){startY=e.touches[0].clientY;active=true;}
-    else{active=false;}
-  },{passive:true});
-  document.addEventListener('touchmove',e=>{
-    if(!active)return;
-    const dy=e.touches[0].clientY-startY;
-    if(dy>0&&getScrollTop()===0){
-      e.preventDefault();
-      if(dy>80){pulling=true;ptr.classList.add('visible');ptr.textContent='↓ Release to refresh';}
-      else{pulling=false;ptr.classList.remove('visible');}
-    }else{pulling=false;ptr.classList.remove('visible');}
-  },{passive:false});
-  document.addEventListener('touchend',()=>{
-    if(pulling){ptr.textContent='🔄 Refreshing...';setTimeout(()=>location.reload(),400);}
-    else{ptr.classList.remove('visible');}
-    startY=0;pulling=false;active=false;
-  },{passive:true});
-})();
-
 // Swipe gestures for expanded month view
 (function(){
-  let tx=0,ty=0;
+  let tx=0,ty=0,swiping=false;
   const zp=document.querySelector('.zp');
   zp.addEventListener('touchstart',e=>{
     tx=e.touches[0].clientX;
     ty=e.touches[0].clientY;
+    swiping=false;
   },{passive:true});
+  zp.addEventListener('touchmove',e=>{
+    const dx=e.touches[0].clientX-tx;
+    const dy=e.touches[0].clientY-ty;
+    if(Math.abs(dx)>Math.abs(dy)&&Math.abs(dx)>10){
+      swiping=true;
+      e.preventDefault();
+    }
+  },{passive:false});
   zp.addEventListener('touchend',e=>{
     const dx=e.changedTouches[0].clientX-tx;
     const dy=e.changedTouches[0].clientY-ty;
-    if(Math.abs(dx)>Math.abs(dy)&&Math.abs(dx)>50){
-      sz(dx<0?1:-1);
-    }
+    if(swiping&&Math.abs(dx)>50){sz(dx<0?1:-1);}
+    swiping=false;
   },{passive:true});
 })();
 document.getElementById('mbg').addEventListener('click',e=>{if(e.target===document.getElementById('mbg'))cm();});
@@ -793,7 +775,6 @@ function toggleMic(){
   recognition.start();
 }
 </script>
-<div class="ptr" id="ptr">↓ Release to refresh</div>
 <!-- Search -->
 <button class="srch-btn" id="srchBtn" onclick="toggleSearch()" title="Search calendar">🔍</button>
 <div class="srch-bar" id="srchBar">
