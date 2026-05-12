@@ -475,8 +475,10 @@ function toggleAgenda(){
   document.getElementById('agendaBtn').textContent=agendaOpen?'⊞ Grid':'☰ Agenda';
   document.getElementById('grid').style.display=agendaOpen?'none':'';
   const ag=document.getElementById('agenda');
-  if(agendaOpen){ag.classList.add('open');buildAgenda();}
-  else{
+  if(agendaOpen){
+    ag.classList.add('open');buildAgenda();
+    setTimeout(()=>window.scrollTo({top:0,behavior:'smooth'}),50);
+  }else{
     ag.classList.remove('open');
     const cm=document.getElementById('current-month');
     if(cm)setTimeout(()=>cm.scrollIntoView({behavior:'smooth',block:'start'}),50);
