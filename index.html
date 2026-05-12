@@ -26,10 +26,6 @@ body{font-family:system-ui,sans-serif;background:#f5f5f3;color:#1a1a1a;padding:1
 .dc.hol{color:#E24B4A;font-weight:500}
 .wn{font-size:9px;color:#aaa;text-align:center;padding:2px 0;line-height:1.5}
 .hb{font-size:9px;padding:1px 4px;border-radius:3px;background:#FCEBEB;color:#A32D2D;margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;line-height:1.4}
-.wbs{display:flex;flex-direction:column;gap:1px;margin-top:1px}
-.wb{font-size:8px;padding:1px 3px;border-radius:2px;line-height:1.4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.wb.x{background:#E6F1FB;color:#0C447C}
-.wb.y{background:#EAF3DE;color:#3B6D11}
 .eb{font-size:8px;padding:1px 4px;border-radius:2px;line-height:1.4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;margin-top:1px}
 .zbg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;align-items:flex-start;justify-content:center;padding:20px;overflow-y:auto}
 .zbg.open{display:flex}
@@ -53,23 +49,12 @@ body{font-family:system-ui,sans-serif;background:#f5f5f3;color:#1a1a1a;padding:1
 .zn{font-size:14px;font-weight:500;color:inherit;line-height:1.4}
 .zc.today .zn{color:#0C447C}
 .zhb{font-size:8px;padding:1px 4px;border-radius:3px;background:#FCEBEB;color:#A32D2D;margin-top:3px;line-height:1.4;white-space:normal;word-break:break-word}
-.zwb{font-size:8px;padding:1px 4px;border-radius:3px;margin-top:2px;line-height:1.4;white-space:normal;word-break:break-word}
-.zwb.x{background:#E6F1FB;color:#0C447C}
-.zwb.y{background:#EAF3DE;color:#3B6D11}
 .zeb{font-size:8px;padding:1px 4px;border-radius:3px;margin-top:2px;line-height:1.4;white-space:normal;word-break:break-word}
 .mbg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:300;align-items:center;justify-content:center}
 .mbg.open{display:flex}
 .modal{background:#fff;border:0.5px solid #ccc;border-radius:12px;padding:1.25rem;width:320px;max-width:90vw;max-height:90vh;overflow-y:auto}
 .modal h3{font-size:15px;font-weight:500;margin-bottom:4px}
 .mhol{font-size:12px;color:#A32D2D;margin-bottom:8px}
-.mw{margin-bottom:10px}
-.wc{border-radius:8px;padding:6px 10px;margin-bottom:4px}
-.wc.x{background:#E6F1FB;border:0.5px solid #185FA5}
-.wc.y{background:#EAF3DE;border:0.5px solid #3B6D11}
-.wc .wct{font-size:12px;font-weight:500;color:#0C447C;margin-bottom:1px}
-.wc.y .wct{color:#3B6D11}
-.wc .wch{font-size:11px;color:#185FA5}
-.wc.y .wch{color:#3B6D11}
 .mfe{margin-bottom:10px}
 .cat-lbl{font-size:10px;color:#aaa;text-transform:uppercase;letter-spacing:.04em;margin:6px 0 3px}
 .fc{border-radius:8px;border:0.5px solid #ddd;padding:8px 10px;margin-bottom:5px}
@@ -184,8 +169,6 @@ body.dark .filter-drop{background:#252525;border-color:#333}
 body.dark .filter-item{color:#aaa}
 body.dark .filter-item:hover{background:#2a2a2a}
 body.hide-holiday .hb,.hide-holiday .zhb,.hide-holiday .dc.hol,.hide-holiday .zc.hol{display:none!important}
-body.hide-dctcam .wb.x,.hide-dctcam .zwb.x{display:none!important}
-body.hide-dctcpm .wb.y,.hide-dctcpm .zwb.y{display:none!important}
 body.hide-event .eb[data-cat="event"],.hide-event .zeb[data-cat="event"]{display:none!important}
 body.hide-otg .eb[data-cat="otg"],.hide-otg .zeb[data-cat="otg"]{display:none!important}
 body.hide-personal .eb[data-cat="personal"],.hide-personal .zeb[data-cat="personal"]{display:none!important}
@@ -197,14 +180,12 @@ body.dark .mc{background:#252525;border-color:#333}
 body.dark .mc:hover{border-color:#555}
 body.dark .mh{background:#2a2a2a;color:#e8e8e8}
 body.dark .zh{color:#666}
-body.dark .dl,.dark .wl,.dark .wn,.dark .zwl,.dark .zdl,.dark .zwn{color:#555}
+body.dark .dl,body.dark .wl,body.dark .wn,body.dark .zwl,body.dark .zdl,body.dark .zwn{color:#555}
 body.dark .dc{color:#ccc}
 body.dark .dc:hover{background:#2a2a2a}
 body.dark .dc.today{background:#0D2A45;color:#5BA3E0}
-body.dark .dc.sun,.dark .dc.hol{color:#F47575}
+body.dark .dc.sun,body.dark .dc.hol{color:#F47575}
 body.dark .hb{background:#3D1515;color:#F47575}
-body.dark .wb.x{background:#0D2A45;color:#5BA3E0}
-body.dark .wb.y{background:#1A2E10;color:#7AB648}
 body.dark .zbg .zp{background:#252525;border-color:#333}
 body.dark .zhd{background:#2a2a2a;color:#e8e8e8}
 body.dark .znav button{border-color:#444;color:#ccc}
@@ -214,18 +195,10 @@ body.dark .zx:hover{color:#ccc}
 body.dark .zc:hover{background:#2a2a2a;border-color:#444}
 body.dark .zc.today{background:#0D2A45;border-color:#185FA5}
 body.dark .zc.today .zn{color:#5BA3E0}
-body.dark .zc.sun,.dark .zc.hol{color:#F47575}
+body.dark .zc.sun,body.dark .zc.hol{color:#F47575}
 body.dark .zhb{background:#3D1515;color:#F47575}
-body.dark .zwb.x{background:#0D2A45;color:#5BA3E0}
-body.dark .zwb.y{background:#1A2E10;color:#7AB648}
 body.dark .mbg .modal{background:#252525;border-color:#333;color:#e8e8e8}
 body.dark .mhol{color:#F47575}
-body.dark .wc.x{background:#0D2A45;border-color:#185FA5}
-body.dark .wc.y{background:#1A2E10;border-color:#3B6D11}
-body.dark .wc .wct{color:#5BA3E0}
-body.dark .wc.y .wct{color:#7AB648}
-body.dark .wc .wch{color:#5BA3E0}
-body.dark .wc.y .wch{color:#7AB648}
 body.dark .cat-lbl{color:#666}
 body.dark .fc{border-color:#333;background:#2a2a2a}
 body.dark .fc .fr{color:#aaa}
@@ -259,8 +232,6 @@ body.dark .chat-dl{background:#1A2E10;border-color:#3B6D11;color:#7AB648}
       <button class="filter-btn" id="filterBtn" onclick="toggleFilter()">⚙ Filter</button>
       <div class="filter-drop" id="filterDrop">
         <label class="filter-item"><input type="checkbox" checked onchange="toggleCat('holiday',this)"><span class="filter-dot" style="background:#E24B4A"></span>Holidays</label>
-        <label class="filter-item"><input type="checkbox" checked onchange="toggleCat('dctcam',this)"><span class="filter-dot" style="background:#185FA5"></span>DCTC Work (AM)</label>
-        <label class="filter-item"><input type="checkbox" checked onchange="toggleCat('dctcpm',this)"><span class="filter-dot" style="background:#3B6D11"></span>DCTC Work (PM)</label>
         <label class="filter-item"><input type="checkbox" checked onchange="toggleCat('event',this)"><span class="filter-dot" style="background:#BA7517"></span>Events</label>
         <label class="filter-item"><input type="checkbox" checked onchange="toggleCat('otg',this)"><span class="filter-dot" style="background:#C9A800"></span>OTG</label>
         <label class="filter-item"><input type="checkbox" checked onchange="toggleCat('personal',this)"><span class="filter-dot" style="background:#7F77DD"></span>Personal</label>
@@ -270,8 +241,8 @@ body.dark .chat-dl{background:#1A2E10;border-color:#3B6D11;color:#7AB648}
   </div>
   <div class="leg">
     <div class="li"><div style="width:9px;height:9px;border-radius:50%;background:#E24B4A;flex-shrink:0"></div>Holiday/Sun</div>
-    <div class="li"><div style="width:22px;height:9px;border-radius:2px;background:#E6F1FB;border:0.5px solid #185FA5;flex-shrink:0"></div>DCTC Work (AM)</div>
-    <div class="li"><div style="width:22px;height:9px;border-radius:2px;background:#EAF3DE;border:0.5px solid #3B6D11;flex-shrink:0"></div>DCTC Work (PM)</div>
+    <div class="li"><div style="width:22px;height:9px;border-radius:2px;background:#E6F1FB;border:0.5px solid #185FA5;flex-shrink:0"></div>DCTC (AM)</div>
+    <div class="li"><div style="width:22px;height:9px;border-radius:2px;background:#EAF3DE;border:0.5px solid #3B6D11;flex-shrink:0"></div>DCTC (PM)</div>
     <div class="li"><div style="width:22px;height:9px;border-radius:2px;background:#FAEEDA;border:0.5px solid #BA7517;flex-shrink:0"></div>Event</div>
     <div class="li"><div style="width:22px;height:9px;border-radius:2px;background:#FEFCE8;border:0.5px solid #C9A800;flex-shrink:0"></div>OTG</div>
     <div class="li"><div style="width:22px;height:9px;border-radius:2px;background:#EEEDFE;border:0.5px solid #7F77DD;flex-shrink:0"></div>Personal</div>
@@ -298,7 +269,6 @@ body.dark .chat-dl{background:#1A2E10;border-color:#3B6D11;color:#7AB648}
   <div class="modal">
     <h3 id="mt"></h3>
     <div class="mhol" id="mh" style="display:none"></div>
-    <div class="mw" id="mw"></div>
     <div class="mfe" id="mfe"></div>
     <div class="mbtns">
       <button onclick="cm()">Close</button>
@@ -327,15 +297,50 @@ const H={
   '2027-10-29':'Deepavali*',
   '2027-12-25':'Christmas Day'
 };
-const W={
-  '2026-04-09':'X','2026-04-10':'X',
-  '2026-04-14':'XY','2026-04-15':'Y','2026-04-16':'XY',
-  '2026-04-21':'X','2026-04-22':'XY','2026-04-23':'X','2026-04-24':'X',
-  '2026-05-04':'Y','2026-05-08':'XY','2026-05-14':'XY',
-  '2026-05-20':'XY','2026-05-22':'XY',
-  '2026-05-28':'XY','2026-05-29':'XY'
-};
 const FE={
+  '2026-04-09':[{t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],c:'#0C447C',b:'#E6F1FB',cat:'event'}],
+  '2026-04-10':[{t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],c:'#0C447C',b:'#E6F1FB',cat:'event'}],
+  '2026-04-14':[
+    {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],c:'#0C447C',b:'#E6F1FB',cat:'event'},
+    {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1630'}],c:'#3B6D11',b:'#EAF3DE',cat:'event'}
+  ],
+  '2026-04-15':[{t:'DCTC (PM)',d:[{l:'Time',v:'1300–1630'}],c:'#3B6D11',b:'#EAF3DE',cat:'event'}],
+  '2026-04-16':[
+    {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],c:'#0C447C',b:'#E6F1FB',cat:'event'},
+    {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1715'}],c:'#3B6D11',b:'#EAF3DE',cat:'event'}
+  ],
+  '2026-04-21':[{t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],c:'#0C447C',b:'#E6F1FB',cat:'event'}],
+  '2026-04-22':[
+    {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],c:'#0C447C',b:'#E6F1FB',cat:'event'},
+    {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1630'}],c:'#3B6D11',b:'#EAF3DE',cat:'event'}
+  ],
+  '2026-04-23':[{t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],c:'#0C447C',b:'#E6F1FB',cat:'event'}],
+  '2026-04-24':[{t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],c:'#0C447C',b:'#E6F1FB',cat:'event'}],
+  '2026-05-04':[{t:'DCTC (PM)',d:[{l:'Time',v:'1300–1630'}],c:'#3B6D11',b:'#EAF3DE',cat:'event'}],
+  '2026-05-08':[
+    {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],c:'#0C447C',b:'#E6F1FB',cat:'event'},
+    {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1630'}],c:'#3B6D11',b:'#EAF3DE',cat:'event'}
+  ],
+  '2026-05-14':[
+    {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],c:'#0C447C',b:'#E6F1FB',cat:'event'},
+    {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1630'}],c:'#3B6D11',b:'#EAF3DE',cat:'event'}
+  ],
+  '2026-05-20':[
+    {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],c:'#0C447C',b:'#E6F1FB',cat:'event'},
+    {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1715'}],c:'#3B6D11',b:'#EAF3DE',cat:'event'}
+  ],
+  '2026-05-22':[
+    {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],c:'#0C447C',b:'#E6F1FB',cat:'event'},
+    {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1630'}],c:'#3B6D11',b:'#EAF3DE',cat:'event'}
+  ],
+  '2026-05-28':[
+    {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],c:'#0C447C',b:'#E6F1FB',cat:'event'},
+    {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1630'}],c:'#3B6D11',b:'#EAF3DE',cat:'event'}
+  ],
+  '2026-05-29':[
+    {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],c:'#0C447C',b:'#E6F1FB',cat:'event'},
+    {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1630'}],c:'#3B6D11',b:'#EAF3DE',cat:'event'}
+  ],
   '2026-04-11':[{t:'Tomb-sweeping',d:[],c:'#7F77DD',b:'#EEEDFE',cat:'personal'}],
   '2026-04-12':[{t:'Furniture moving',d:[],c:'#7F77DD',b:'#EEEDFE',cat:'personal'}],
   '2026-04-27':[
@@ -390,10 +395,6 @@ const td=new Date();
 const ts=`${td.getFullYear()}-${p2(td.getMonth()+1)}-${p2(td.getDate())}`;
 const MN=['January','February','March','April','May','June','July','August','September','October','November','December'];
 
-// PM end-time overrides for specific dates
-const PMTIME={'2026-04-16':'1300–1715','2026-05-20':'1300–1715'};
-function pmT(s){return PMTIME[s]||'1300–1630';}
-
 function p2(n){return String(n).padStart(2,'0')}
 function ds(y,m,d){return`${y}-${p2(m)}-${p2(d)}`}
 function wkn(d){const x=new Date(d);x.setHours(0,0,0,0);x.setDate(x.getDate()+3-(x.getDay()+6)%7);const w=new Date(x.getFullYear(),0,4);return 1+Math.round(((x-w)/86400000-3+(w.getDay()+6)%7)/7);}
@@ -426,11 +427,6 @@ function mr(g,row,y,m){
     const cl=['dc'];if(s===ts)cl.push('today');if(dw===0)cl.push('sun');if(H[s])cl.push('hol');
     c.className=cl.join(' ');c.dataset.date=s;c.textContent=d;
     if(H[s]){const b=document.createElement('div');b.className='hb';b.textContent=H[s];c.appendChild(b);}
-    const w=W[s];
-    if(w){const wb=document.createElement('div');wb.className='wbs';
-      if(w==='X'||w==='XY'){const bx=document.createElement('div');bx.className='wb x';bx.textContent='DCTC Work (AM)';wb.appendChild(bx);}
-      if(w==='Y'||w==='XY'){const by=document.createElement('div');by.className='wb y';by.textContent='DCTC Work (PM)';wb.appendChild(by);}
-      c.appendChild(wb);}
     getEvs(s).forEach(ev=>{const b=document.createElement('div');b.className='eb';b.dataset.cat=ev.cat;b.style.background=ev.b;b.style.color=ev.c;b.textContent=ev.t;c.appendChild(b);});
     c.onclick=(e)=>{e.stopPropagation();om(s,y,m,d);};g.appendChild(c);
   });
@@ -462,11 +458,6 @@ function zr(g,row,y,m){
     c.className=cl.join(' ');c.dataset.date=s;
     const n=document.createElement('div');n.className='zn';n.textContent=d;c.appendChild(n);
     if(H[s]){const b=document.createElement('div');b.className='zhb';b.textContent=H[s];c.appendChild(b);}
-    const w=W[s];
-    if(w){
-      if(w==='X'||w==='XY'){const bx=document.createElement('div');bx.className='zwb x';bx.textContent='DCTC Work (AM)';c.appendChild(bx);}
-      if(w==='Y'||w==='XY'){const by=document.createElement('div');by.className='zwb y';by.textContent='DCTC Work (PM)';c.appendChild(by);}
-    }
     getEvs(s).forEach(ev=>{const b=document.createElement('div');b.className='zeb';b.dataset.cat=ev.cat;b.style.background=ev.b;b.style.color=ev.c;b.textContent=ev.t;c.appendChild(b);});
     c.onclick=(e)=>{e.stopPropagation();om(s,y,m,d);};g.appendChild(c);
   });
@@ -483,12 +474,6 @@ function om(s,y,m,d){
   ad=s;document.getElementById('mt').textContent=`${d} ${MN[m-1]} ${y}`;
   const hel=document.getElementById('mh');
   if(H[s]){hel.textContent=H[s];hel.style.display='block';}else hel.style.display='none';
-  const wel=document.getElementById('mw');wel.innerHTML='';
-  const w=W[s];
-  if(w){
-    if(w==='X'||w==='XY'){const c=document.createElement('div');c.className='wc x';c.innerHTML='<div class="wct">DCTC Work (AM)</div><div class="wch">0830–1200</div>';wel.appendChild(c);}
-    if(w==='Y'||w==='XY'){const c=document.createElement('div');c.className='wc y';c.innerHTML=`<div class="wct">DCTC Work (PM)</div><div class="wch">${pmT(s)}</div>`;wel.appendChild(c);}
-  }
   const fel=document.getElementById('mfe');fel.innerHTML='';
   const evs=getEvs(s);
   const personal=evs.filter(e=>e.cat==='personal');
@@ -603,15 +588,6 @@ function doSearch(q){
   Object.entries(H).forEach(([date,name])=>{
     if(name.toLowerCase().includes(term))matchDates.add(date);
   });
-  // Also search work schedule
-  const dctcTerms=['dctc','dctc work','dctc am','dctc pm','0830','1200'];
-  if(dctcTerms.some(t=>t.includes(term)||term.includes('dctc'))){
-    Object.entries(W).forEach(([date,val])=>{
-      if(term.includes('am')||term==='x'){if(val==='X'||val==='XY')matchDates.add(date);}
-      else if(term.includes('pm')||term==='y'){if(val==='Y'||val==='XY')matchDates.add(date);}
-      else{matchDates.add(date);}
-    });
-  }
   // Highlight matching month cards and day cells
   matchDates.forEach(date=>{
     // Highlight the day cell
@@ -646,7 +622,6 @@ function buildAgenda(){
   const allDates=new Set();
   Object.keys(FE).forEach(d=>allDates.add(d));
   Object.keys(H).forEach(d=>allDates.add(d));
-  Object.keys(W).forEach(d=>allDates.add(d));
   // Add recurring event dates for all years in range
   Object.keys(recurByMMDD).forEach(mmdd=>{
     for(let y=2026;y<=2027;y++){allDates.add(`${y}-${mmdd}`);}
@@ -680,12 +655,6 @@ function buildAgenda(){
       const ec=document.createElement('div');ec.className='ag-events';
       // Holiday
       if(H[date]){const h=document.createElement('div');h.className='ag-hol';h.textContent='🏖 '+H[date];ec.appendChild(h);}
-      // Work
-      const w=W[date];
-      if(w){
-        if(w==='X'||w==='XY'){const e=document.createElement('div');e.className='ag-ev';e.style.background='#E6F1FB';e.innerHTML=`<div class="ag-et" style="color:#0C447C">DCTC Work (AM)</div><div class="ag-ed" style="color:#185FA5">0830–1200</div>`;ec.appendChild(e);}
-        if(w==='Y'||w==='XY'){const e=document.createElement('div');e.className='ag-ev';e.style.background='#EAF3DE';e.innerHTML=`<div class="ag-et" style="color:#3B6D11">DCTC Work (PM)</div><div class="ag-ed" style="color:#3B6D11">${pmT(date)}</div>`;ec.appendChild(e);}
-      }
       // FE events
       getEvs(date).forEach(ev=>{
         const e=document.createElement('div');e.className='ag-ev';
