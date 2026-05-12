@@ -116,11 +116,73 @@ body{font-family:system-ui,sans-serif;background:#f5f5f3;color:#1a1a1a;padding:1
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.5}}
 .chat-dl{margin:6px 12px 10px;padding:7px 12px;border:0.5px solid #3B6D11;border-radius:8px;background:#EAF3DE;color:#3B6D11;font-size:12px;cursor:pointer;text-align:center;display:none}
 .chat-dl.show{display:block}
+.dm-btn{background:none;border:0.5px solid #ccc;border-radius:20px;padding:4px 12px;font-size:12px;cursor:pointer;color:#555;display:flex;align-items:center;gap:5px;transition:all .2s}
+.dm-btn:hover{background:#f0f0ee}
+body.dark{background:#1a1a1a;color:#e8e8e8}
+body.dark .dm-btn{border-color:#444;color:#aaa}
+body.dark .dm-btn:hover{background:#2a2a2a}
+body.dark .li{color:#aaa}
+body.dark .mc{background:#252525;border-color:#333}
+body.dark .mc:hover{border-color:#555}
+body.dark .mh{background:#2a2a2a;color:#e8e8e8}
+body.dark .zh{color:#666}
+body.dark .dl,.dark .wl,.dark .wn,.dark .zwl,.dark .zdl,.dark .zwn{color:#555}
+body.dark .dc{color:#ccc}
+body.dark .dc:hover{background:#2a2a2a}
+body.dark .dc.today{background:#0D2A45;color:#5BA3E0}
+body.dark .dc.sun,.dark .dc.hol{color:#F47575}
+body.dark .hb{background:#3D1515;color:#F47575}
+body.dark .wb.x{background:#0D2A45;color:#5BA3E0}
+body.dark .wb.y{background:#1A2E10;color:#7AB648}
+body.dark .zbg .zp{background:#252525;border-color:#333}
+body.dark .zhd{background:#2a2a2a;color:#e8e8e8}
+body.dark .znav button{border-color:#444;color:#ccc}
+body.dark .znav button:hover{background:#333}
+body.dark .zx{color:#666}
+body.dark .zx:hover{color:#ccc}
+body.dark .zc:hover{background:#2a2a2a;border-color:#444}
+body.dark .zc.today{background:#0D2A45;border-color:#185FA5}
+body.dark .zc.today .zn{color:#5BA3E0}
+body.dark .zc.sun,.dark .zc.hol{color:#F47575}
+body.dark .zhb{background:#3D1515;color:#F47575}
+body.dark .zwb.x{background:#0D2A45;color:#5BA3E0}
+body.dark .zwb.y{background:#1A2E10;color:#7AB648}
+body.dark .mbg .modal{background:#252525;border-color:#333;color:#e8e8e8}
+body.dark .mhol{color:#F47575}
+body.dark .wc.x{background:#0D2A45;border-color:#185FA5}
+body.dark .wc.y{background:#1A2E10;border-color:#3B6D11}
+body.dark .wc .wct{color:#5BA3E0}
+body.dark .wc.y .wct{color:#7AB648}
+body.dark .wc .wch{color:#5BA3E0}
+body.dark .wc.y .wch{color:#7AB648}
+body.dark .cat-lbl{color:#666}
+body.dark .fc{border-color:#333;background:#2a2a2a}
+body.dark .fc .fr{color:#aaa}
+body.dark .fc .fl{color:#555}
+body.dark .mbtns button{background:#2a2a2a;border-color:#444;color:#ccc}
+body.dark .yr-2026{background:#0D2A45;color:#5BA3E0}
+body.dark .yr-2026 .yr-line{background:#185FA5}
+body.dark .yr-2027{background:#1A2E10;color:#7AB648}
+body.dark .yr-2027 .yr-line{background:#3B6D11}
+body.dark .chat-panel{background:#252525;border-color:#333}
+body.dark .chat-hd{background:#2a2a2a;border-color:#333;color:#e8e8e8}
+body.dark .chat-hd button{color:#666}
+body.dark .chat-hd button:hover{color:#ccc}
+body.dark .chat-key{border-color:#333}
+body.dark .chat-key input{background:#1a1a1a;border-color:#444;color:#e8e8e8}
+body.dark .chat-msgs{}
+body.dark .chat-msg.ai{background:#2a2a2a;color:#e8e8e8}
+body.dark .chat-msg.sys{background:#2D2700;color:#D4B84A}
+body.dark .chat-inp{border-color:#333}
+body.dark .chat-inp input{background:#1a1a1a;border-color:#444;color:#e8e8e8}
+body.dark #micBtn{background:#2a2a2a;border-color:#444;color:#ccc}
+body.dark .chat-dl{background:#1A2E10;border-color:#3B6D11;color:#7AB648}
 </style>
 </head>
 <body>
 <div class="top">
   <h2>Calendar — Jan 2026 to Dec 2027</h2>
+  <button class="dm-btn" onclick="toggleDark()" id="dmBtn">🌙 Dark</button>
   <div class="leg">
     <div class="li"><div style="width:9px;height:9px;border-radius:50%;background:#E24B4A;flex-shrink:0"></div>Holiday/Sun</div>
     <div class="li"><div style="width:22px;height:9px;border-radius:2px;background:#E6F1FB;border:0.5px solid #185FA5;flex-shrink:0"></div>DCTC Work (AM)</div>
@@ -389,7 +451,18 @@ document.addEventListener('keydown',e=>{
 });
 ra();
 
-// AI Chat
+// Dark mode
+function toggleDark(){
+  const isDark=document.body.classList.toggle('dark');
+  document.getElementById('dmBtn').textContent=isDark?'☀️ Light':'🌙 Dark';
+  localStorage.setItem('darkMode',isDark?'1':'0');
+}
+(function(){
+  if(localStorage.getItem('darkMode')==='1'){
+    document.body.classList.add('dark');
+    document.getElementById('dmBtn').textContent='☀️ Light';
+  }
+})();
 let chatKey='',chatHistory=[];
 function toggleChat(){document.getElementById('chatPanel').classList.toggle('open');}
 function saveKey(){
