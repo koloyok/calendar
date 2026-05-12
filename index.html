@@ -497,6 +497,23 @@ function om(s,y,m,d){
 
 function cm(){document.getElementById('mbg').classList.remove('open');ad=null;}
 document.getElementById('zbg').addEventListener('click',e=>{if(e.target===document.getElementById('zbg'))cz();});
+
+// Swipe gestures for expanded month view
+(function(){
+  let tx=0,ty=0;
+  const zp=document.querySelector('.zp');
+  zp.addEventListener('touchstart',e=>{
+    tx=e.touches[0].clientX;
+    ty=e.touches[0].clientY;
+  },{passive:true});
+  zp.addEventListener('touchend',e=>{
+    const dx=e.changedTouches[0].clientX-tx;
+    const dy=e.changedTouches[0].clientY-ty;
+    if(Math.abs(dx)>Math.abs(dy)&&Math.abs(dx)>50){
+      sz(dx<0?1:-1);
+    }
+  },{passive:true});
+})();
 document.getElementById('mbg').addEventListener('click',e=>{if(e.target===document.getElementById('mbg'))cm();});
 document.addEventListener('keydown',e=>{
   const zOpen=document.getElementById('zbg').classList.contains('open');
