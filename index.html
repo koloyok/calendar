@@ -362,46 +362,34 @@ const FE={
   '2026-05-15':[
     {t:'ICT Preparation Seminar',d:[{l:'Time',v:'1300–1700'},{l:'Venue',v:'Changi Naval Base'},{l:'Attire',v:'No.4 Dress with Head Dress'}],c:'#BA7517',b:'#FAEEDA',cat:'event'}
   ],
-  '2026-06-01':[
-    {t:'Anniversary',d:[],c:'#7F77DD',b:'#EEEDFE',cat:'personal'}
-  ],
-  '2026-07-04':[
-    {t:"HY's Birthday",d:[],c:'#7F77DD',b:'#EEEDFE',cat:'personal'}
-  ],
-  '2026-08-22':[
-    {t:"CS's Birthday",d:[],c:'#7F77DD',b:'#EEEDFE',cat:'personal'}
-  ],
-  '2026-09-15':[
-    {t:"Fred's Birthday",d:[],c:'#7F77DD',b:'#EEEDFE',cat:'personal'}
-  ],
+  '2026-06-01':[{t:'Anniversary',d:[],c:'#7F77DD',b:'#EEEDFE',cat:'personal',recur:'yearly'}],
+  '2026-07-04':[{t:"HY's Birthday",d:[],c:'#7F77DD',b:'#EEEDFE',cat:'personal',recur:'yearly'}],
+  '2026-08-22':[{t:"CS's Birthday",d:[],c:'#7F77DD',b:'#EEEDFE',cat:'personal',recur:'yearly'}],
+  '2026-09-15':[{t:"Fred's Birthday",d:[],c:'#7F77DD',b:'#EEEDFE',cat:'personal',recur:'yearly'}],
   '2026-09-16':[
-    {t:"Rene's Birthday",d:[],c:'#7F77DD',b:'#EEEDFE',cat:'personal'},
-    {t:"Papu's Birthday",d:[],c:'#7F77DD',b:'#EEEDFE',cat:'personal'}
+    {t:"Rene's Birthday",d:[],c:'#7F77DD',b:'#EEEDFE',cat:'personal',recur:'yearly'},
+    {t:"Papu's Birthday",d:[],c:'#7F77DD',b:'#EEEDFE',cat:'personal',recur:'yearly'}
   ],
-  '2026-11-29':[
-    {t:"LW's Birthday",d:[],c:'#7F77DD',b:'#EEEDFE',cat:'personal'}
-  ],
-  '2027-06-01':[
-    {t:'Anniversary',d:[],c:'#7F77DD',b:'#EEEDFE',cat:'personal'}
-  ],
-  '2027-07-04':[
-    {t:"HY's Birthday",d:[],c:'#7F77DD',b:'#EEEDFE',cat:'personal'}
-  ],
-  '2027-08-22':[
-    {t:"CS's Birthday",d:[],c:'#7F77DD',b:'#EEEDFE',cat:'personal'}
-  ],
-  '2027-09-15':[
-    {t:"Fred's Birthday",d:[],c:'#7F77DD',b:'#EEEDFE',cat:'personal'}
-  ],
-  '2027-09-16':[
-    {t:"Rene's Birthday",d:[],c:'#7F77DD',b:'#EEEDFE',cat:'personal'},
-    {t:"Papu's Birthday",d:[],c:'#7F77DD',b:'#EEEDFE',cat:'personal'}
-  ],
-  '2027-11-29':[
-    {t:"LW's Birthday",d:[],c:'#7F77DD',b:'#EEEDFE',cat:'personal'}
-  ]
+  '2026-11-29':[{t:"LW's Birthday",d:[],c:'#7F77DD',b:'#EEEDFE',cat:'personal',recur:'yearly'}]
 };
 
+// Recurrence engine — build MM-DD lookup for yearly events
+const recurByMMDD={};
+Object.entries(FE).forEach(([date,evs])=>{
+  evs.forEach(ev=>{
+    if(ev.recur==='yearly'){
+      const mmdd=date.slice(5);
+      if(!recurByMMDD[mmdd])recurByMMDD[mmdd]=[];
+      recurByMMDD[mmdd].push(ev);
+    }
+  });
+});
+// Get all events for a date — direct non-recurring + yearly recurring matches
+function getEvs(s){
+  const direct=(FE[s]||[]).filter(ev=>!ev.recur);
+  const recurring=recurByMMDD[s.slice(5)]||[];
+  return[...direct,...recurring];
+}
 let sc='blue',ad=null,zi=0;
 const td=new Date();
 const ts=`${td.getFullYear()}-${p2(td.getMonth()+1)}-${p2(td.getDate())}`;
@@ -449,7 +437,7 @@ function mr(g,row,y,m){
       if(w==='X'||w==='XY'){const bx=document.createElement('div');bx.className='wb x';bx.textContent='DCTC Work (AM)';wb.appendChild(bx);}
       if(w==='Y'||w==='XY'){const by=document.createElement('div');by.className='wb y';by.textContent='DCTC Work (PM)';wb.appendChild(by);}
       c.appendChild(wb);}
-    (FE[s]||[]).forEach(ev=>{const b=document.createElement('div');b.className='eb';b.dataset.cat=ev.cat;b.style.background=ev.b;b.style.color=ev.c;b.textContent=ev.t;c.appendChild(b);});
+    getEvs(s).forEach(ev=>{const b=document.createElement('div');b.className='eb';b.dataset.cat=ev.cat;b.style.background=ev.b;b.style.color=ev.c;b.textContent=ev.t;c.appendChild(b);});
     c.onclick=(e)=>{e.stopPropagation();om(s,y,m,d);};g.appendChild(c);
   });
 }
@@ -485,7 +473,7 @@ function zr(g,row,y,m){
       if(w==='X'||w==='XY'){const bx=document.createElement('div');bx.className='zwb x';bx.textContent='DCTC Work (AM)';c.appendChild(bx);}
       if(w==='Y'||w==='XY'){const by=document.createElement('div');by.className='zwb y';by.textContent='DCTC Work (PM)';c.appendChild(by);}
     }
-    (FE[s]||[]).forEach(ev=>{const b=document.createElement('div');b.className='zeb';b.dataset.cat=ev.cat;b.style.background=ev.b;b.style.color=ev.c;b.textContent=ev.t;c.appendChild(b);});
+    getEvs(s).forEach(ev=>{const b=document.createElement('div');b.className='zeb';b.dataset.cat=ev.cat;b.style.background=ev.b;b.style.color=ev.c;b.textContent=ev.t;c.appendChild(b);});
     c.onclick=(e)=>{e.stopPropagation();om(s,y,m,d);};g.appendChild(c);
   });
 }
@@ -508,7 +496,7 @@ function om(s,y,m,d){
     if(w==='Y'||w==='XY'){const c=document.createElement('div');c.className='wc y';c.innerHTML=`<div class="wct">DCTC Work (PM)</div><div class="wch">${pmT(s)}</div>`;wel.appendChild(c);}
   }
   const fel=document.getElementById('mfe');fel.innerHTML='';
-  const evs=FE[s]||[];
+  const evs=getEvs(s);
   const personal=evs.filter(e=>e.cat==='personal');
   const events=evs.filter(e=>e.cat==='event');
   const otg=evs.filter(e=>e.cat==='otg');
@@ -610,7 +598,11 @@ function doSearch(q){
     evs.forEach(ev=>{
       const inTitle=ev.t.toLowerCase().includes(term);
       const inDetails=(ev.d||[]).some(d=>d.l.toLowerCase().includes(term)||d.v.toLowerCase().includes(term));
-      if(inTitle||inDetails)matchDates.add(date);
+      if(inTitle||inDetails){
+        matchDates.add(date);
+        // Also add recurring occurrences in other years
+        if(ev.recur==='yearly'){for(let y=2026;y<=2027;y++)matchDates.add(`${y}-${date.slice(5)}`);}
+      }
     });
   });
   // Also search holidays
@@ -661,6 +653,10 @@ function buildAgenda(){
   Object.keys(FE).forEach(d=>allDates.add(d));
   Object.keys(H).forEach(d=>allDates.add(d));
   Object.keys(W).forEach(d=>allDates.add(d));
+  // Add recurring event dates for all years in range
+  Object.keys(recurByMMDD).forEach(mmdd=>{
+    for(let y=2026;y<=2027;y++){allDates.add(`${y}-${mmdd}`);}
+  });
   // Sort dates — only today and future
   const sorted=[...allDates].filter(d=>d>=ts).sort();
   // Group by month
@@ -697,7 +693,7 @@ function buildAgenda(){
         if(w==='Y'||w==='XY'){const e=document.createElement('div');e.className='ag-ev';e.style.background='#EAF3DE';e.innerHTML=`<div class="ag-et" style="color:#3B6D11">DCTC Work (PM)</div><div class="ag-ed" style="color:#3B6D11">${pmT(date)}</div>`;ec.appendChild(e);}
       }
       // FE events
-      (FE[date]||[]).forEach(ev=>{
+      getEvs(date).forEach(ev=>{
         const e=document.createElement('div');e.className='ag-ev';
         e.style.background=ev.b;
         let details='';
@@ -771,7 +767,7 @@ async function sendChat(){
   if(!msg||!chatKey)return;input.value='';
   document.getElementById('chatSend').disabled=true;
   addMsg('user',msg);addMsg('ai','Thinking...');
-  const sysPrompt='You are a calendar data assistant. Respond ONLY with a valid JSON object — the complete updated FE object. No explanation, no markdown, no backticks. FE date keys use YYYY-MM-DD format. Each key maps to an array of event objects with: t (title string), d (array of {l,v} detail pairs), c (text color hex), b (background color hex), cat (personal/otg/event). Color schemes: personal c:#7F77DD b:#EEEDFE — otg c:#7C5A00 b:#FEFCE8 — event c:#BA7517 b:#FAEEDA. For recurring annual events add to both 2026 and 2027 unless specified.';
+  const sysPrompt='You are a calendar data assistant. Respond ONLY with a valid JSON object — the complete updated FE object. No explanation, no markdown, no backticks. FE date keys use YYYY-MM-DD format. Each key maps to an array of event objects with: t (title string), d (array of {l,v} detail pairs), c (text color hex), b (background color hex), cat (personal/otg/event), recur (optional: "yearly" for annual recurring events). Color schemes: personal c:#7F77DD b:#EEEDFE — otg c:#7C5A00 b:#FEFCE8 — event c:#BA7517 b:#FAEEDA. For recurring annual events (birthdays, anniversaries), store ONLY on the 2026 date with recur:"yearly" — do NOT duplicate for 2027. For one-time events, omit recur.';
   chatHistory.push({role:'user',content:'Current FE data: '+JSON.stringify(FE)+'\n\nUser request: '+msg});
   try{
     const res=await fetch('https://api.anthropic.com/v1/messages',{
