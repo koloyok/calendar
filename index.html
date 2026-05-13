@@ -367,6 +367,9 @@ function zr(g,row,y,m){
     getEvs(s).forEach(ev=>{const b=document.createElement('div');b.className='zeb';b.dataset.cat=ev.cat;b.style.background=ev.b;b.style.color=ev.c;b.textContent=ev.t;c.appendChild(b);});
     c.onclick=(e)=>{e.stopPropagation();om(s,y,m,d);};g.appendChild(c);
   });
+  // Re-apply active search highlights to expanded view cells
+  const q=document.getElementById('srchInput')?.value.trim();
+  if(q)doSearch(q);
 }
 
 function makeCard(ev){
@@ -456,8 +459,7 @@ function closeSearch(){
   clearSearch();
 }
 function clearSearch(){
-  document.querySelectorAll('.mc.srch-match').forEach(el=>el.classList.remove('srch-match'));
-  document.querySelectorAll('.dc.srch-match').forEach(el=>el.classList.remove('srch-match'));
+  document.querySelectorAll('.mc.srch-match,.dc.srch-match,.zc.srch-match').forEach(el=>el.classList.remove('srch-match'));
 }
 function doSearch(q){
   clearSearch();
