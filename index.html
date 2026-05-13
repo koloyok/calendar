@@ -15,7 +15,6 @@
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:system-ui,sans-serif;background:#f5f5f3;color:#1a1a1a;padding:1rem}
 .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;flex-wrap:wrap;gap:8px}
-.top h2{font-size:18px;font-weight:500}
 .leg{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
 .li{display:flex;align-items:center;gap:5px;font-size:11px;color:#555}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
@@ -85,7 +84,6 @@ body{font-family:system-ui,sans-serif;background:#f5f5f3;color:#1a1a1a;padding:1
 .zc.srch-match{background:#DBEAFE!important;border-color:#378ADD!important}
 .zc.srch-match .zn{color:#1e40af!important}
 .mc.srch-match{box-shadow:0 0 0 2.5px #378ADD,0 0 10px rgba(55,138,221,.3)!important;border-color:#378ADD!important}
-@keyframes glow{from{box-shadow:0 0 0 2.5px #378ADD,0 0 6px rgba(55,138,221,.2)}to{box-shadow:0 0 0 2.5px #378ADD,0 0 14px rgba(55,138,221,.5)}}
 .agenda-btn{background:none;border:0.5px solid #ccc;border-radius:20px;padding:4px 12px;font-size:12px;cursor:pointer;color:#555;transition:all .2s}
 .agenda-btn:hover{background:#f0f0ee}
 .agenda-btn.active{background:#E6F1FB;border-color:#185FA5;color:#0C447C}
@@ -282,7 +280,7 @@ function getEvs(s){
   const recurring=recurByMMDD[s.slice(5)]||[];
   return[...direct,...recurring];
 }
-let ad=null,zi=0;
+let zi=0;
 const td=new Date();
 let viewYear=td.getFullYear()<2026?2026:td.getFullYear()>2027?2027:td.getFullYear();
 
@@ -351,6 +349,8 @@ function rz(){
   for(let i=0;i<off;i++)row.push(null);
   for(let d=1;d<=dim;d++){row.push(d);if(row.length===7){zr(g,row,y,m);row=[];}}
   if(row.length){while(row.length<7)row.push(null);zr(g,row,y,m);}
+  const q=document.getElementById('srchInput')?.value.trim();
+  if(q)doSearch(q);
 }
 
 function zr(g,row,y,m){
@@ -367,9 +367,6 @@ function zr(g,row,y,m){
     getEvs(s).forEach(ev=>{const b=document.createElement('div');b.className='zeb';b.dataset.cat=ev.cat;b.style.background=ev.b;b.style.color=ev.c;b.textContent=ev.t;c.appendChild(b);});
     c.onclick=(e)=>{e.stopPropagation();om(s,y,m,d);};g.appendChild(c);
   });
-  // Re-apply active search highlights to expanded view cells
-  const q=document.getElementById('srchInput')?.value.trim();
-  if(q)doSearch(q);
 }
 
 function makeCard(ev){
@@ -380,7 +377,7 @@ function makeCard(ev){
 }
 
 function om(s,y,m,d){
-  ad=s;document.getElementById('mt').textContent=`${d} ${MN[m-1]} ${y}`;
+  document.getElementById('mt').textContent=`${d} ${MN[m-1]} ${y}`;
   const hel=document.getElementById('mh');
   if(H[s]){hel.textContent=H[s];hel.style.display='block';}else hel.style.display='none';
   const fel=document.getElementById('mfe');fel.innerHTML='';
@@ -404,7 +401,7 @@ function om(s,y,m,d){
   setTimeout(()=>document.getElementById('mbg').focus(),100);
 }
 
-function cm(){document.getElementById('mbg').classList.remove('open');ad=null;}
+function cm(){document.getElementById('mbg').classList.remove('open');}
 document.getElementById('zbg').addEventListener('click',e=>{if(e.target===document.getElementById('zbg'))cz();});
 
 // Swipe gestures for expanded month view
@@ -484,13 +481,11 @@ function doSearch(q){
     if(name.toLowerCase().includes(term))matchDates.add(date);
   });
   // Highlight matching month cards and day cells
+  const cards=document.querySelectorAll('.mc');
   matchDates.forEach(date=>{
-    // Highlight the day cell
     document.querySelectorAll('.dc[data-date="'+date+'"], .zc[data-date="'+date+'"]').forEach(el=>el.classList.add('srch-match'));
-    // Highlight the month card
     const[y,m]=date.split('-').map(Number);
     const idx=(y-2026)*12+(m-1);
-    const cards=document.querySelectorAll('.mc');
     if(cards[idx])cards[idx].classList.add('srch-match');
     matchCount++;
   });
