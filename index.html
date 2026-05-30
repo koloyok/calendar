@@ -13,6 +13,19 @@
 <link rel="apple-touch-icon" href="icon-192.png"/>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --crimson-text:#A32D2D;--crimson-bg:#FCEBEB;
+  --tangerine-text:#8A4500;--tangerine-bg:#FAEEDA;
+  --amber-text:#7C5A00;--amber-bg:#FEFCE8;
+  --sand-text:#7A5C2E;--sand-bg:#FAF3E8;
+  --emerald-text:#1E5C2E;--emerald-bg:#E3F2E8;
+  --lagoon-text:#0A6B7A;--lagoon-bg:#E3F5F7;
+  --sky-text:#1A7FBF;--sky-bg:#EAF4FC;
+  --cerulean-text:#0C447C;--cerulean-bg:#E6F1FB;
+  --violet-text:#5B52C4;--violet-bg:#EEEDFE;
+  --plum-text:#6B3680;--plum-bg:#F4EAF9;
+  --orchid-text:#9C3B6B;--orchid-bg:#FDEEF6;
+}
 body{font-family:system-ui,sans-serif;background:#f5f5f3;color:#1a1a1a;padding:1rem}
 .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;flex-wrap:wrap;gap:8px}
 .leg{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
@@ -131,11 +144,11 @@ body{font-family:system-ui,sans-serif;background:#f5f5f3;color:#1a1a1a;padding:1
   </div>
   <div class="leg">
     <div class="li"><div style="width:9px;height:9px;border-radius:50%;background:#E24B4A;flex-shrink:0"></div>Holiday/Sun</div>
-    <div class="li"><div style="width:22px;height:9px;border-radius:2px;background:#E3F2E8;border:0.5px solid #1E5C2E;flex-shrink:0"></div>DCTC (AM)</div>
-    <div class="li"><div style="width:22px;height:9px;border-radius:2px;background:#E6F1FB;border:0.5px solid #185FA5;flex-shrink:0"></div>DCTC (PM)</div>
-    <div class="li"><div style="width:22px;height:9px;border-radius:2px;background:#FAEEDA;border:0.5px solid #8A4500;flex-shrink:0"></div>Event</div>
-    <div class="li"><div style="width:22px;height:9px;border-radius:2px;background:#FEFCE8;border:0.5px solid #C9A800;flex-shrink:0"></div>OTG</div>
-    <div class="li"><div style="width:22px;height:9px;border-radius:2px;background:#EEEDFE;border:0.5px solid #5B52C4;flex-shrink:0"></div>Personal</div>
+    <div class="li"><div style="width:22px;height:9px;border-radius:2px;background:var(--emerald-bg);border:0.5px solid var(--emerald-text);flex-shrink:0"></div>DCTC (AM)</div>
+    <div class="li"><div style="width:22px;height:9px;border-radius:2px;background:var(--cerulean-bg);border:0.5px solid var(--cerulean-text);flex-shrink:0"></div>DCTC (PM)</div>
+    <div class="li"><div style="width:22px;height:9px;border-radius:2px;background:var(--tangerine-bg);border:0.5px solid var(--tangerine-text);flex-shrink:0"></div>Event</div>
+    <div class="li"><div style="width:22px;height:9px;border-radius:2px;background:var(--amber-bg);border:0.5px solid var(--amber-text);flex-shrink:0"></div>OTG</div>
+    <div class="li"><div style="width:22px;height:9px;border-radius:2px;background:var(--violet-bg);border:0.5px solid var(--violet-text);flex-shrink:0"></div>Personal</div>
   </div>
 </div>
 <div class="grid" id="grid"></div>
@@ -187,95 +200,108 @@ const H={
   '2027-10-29':'Deepavali*',
   '2027-12-25':'Christmas Day'
 };
+const COLORS={
+  crimson:   {c:'#A32D2D',b:'#FCEBEB'},
+  tangerine: {c:'#8A4500',b:'#FAEEDA'},
+  amber:     {c:'#7C5A00',b:'#FEFCE8'},
+  sand:      {c:'#7A5C2E',b:'#FAF3E8'},
+  emerald:   {c:'#1E5C2E',b:'#E3F2E8'},
+  lagoon:    {c:'#0A6B7A',b:'#E3F5F7'},
+  sky:       {c:'#1A7FBF',b:'#EAF4FC'},
+  cerulean:  {c:'#0C447C',b:'#E6F1FB'},
+  violet:    {c:'#5B52C4',b:'#EEEDFE'},
+  plum:      {c:'#6B3680',b:'#F4EAF9'},
+  orchid:    {c:'#9C3B6B',b:'#FDEEF6'}
+};
 const FE={
-  '2026-04-09':[{t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],c:'#1E5C2E',b:'#E3F2E8',cat:'event'}],
-  '2026-04-10':[{t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],c:'#1E5C2E',b:'#E3F2E8',cat:'event'}],
-  '2026-04-11':[{t:'Tomb-sweeping',d:[],c:'#5B52C4',b:'#EEEDFE',cat:'personal'}],
-  '2026-04-12':[{t:'Furniture moving',d:[],c:'#5B52C4',b:'#EEEDFE',cat:'personal'}],
+  '2026-04-09':[{t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'}],
+  '2026-04-10':[{t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'}],
+  '2026-04-11':[{t:'Tomb-sweeping',d:[],...COLORS.violet,cat:'personal'}],
+  '2026-04-12':[{t:'Furniture moving',d:[],...COLORS.violet,cat:'personal'}],
   '2026-04-14':[
-    {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],c:'#1E5C2E',b:'#E3F2E8',cat:'event'},
-    {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1630'}],c:'#0C447C',b:'#E6F1FB',cat:'event'}
+    {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'},
+    {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1630'}],...COLORS.cerulean,cat:'event'}
   ],
-  '2026-04-15':[{t:'DCTC (PM)',d:[{l:'Time',v:'1300–1630'}],c:'#0C447C',b:'#E6F1FB',cat:'event'}],
+  '2026-04-15':[{t:'DCTC (PM)',d:[{l:'Time',v:'1300–1630'}],...COLORS.cerulean,cat:'event'}],
   '2026-04-16':[
-    {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],c:'#1E5C2E',b:'#E3F2E8',cat:'event'},
-    {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1715'}],c:'#0C447C',b:'#E6F1FB',cat:'event'}
+    {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'},
+    {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1715'}],...COLORS.cerulean,cat:'event'}
   ],
-  '2026-04-21':[{t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],c:'#1E5C2E',b:'#E3F2E8',cat:'event'}],
+  '2026-04-21':[{t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'}],
   '2026-04-22':[
-    {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],c:'#1E5C2E',b:'#E3F2E8',cat:'event'},
-    {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1630'}],c:'#0C447C',b:'#E6F1FB',cat:'event'}
+    {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'},
+    {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1630'}],...COLORS.cerulean,cat:'event'}
   ],
-  '2026-04-23':[{t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],c:'#1E5C2E',b:'#E3F2E8',cat:'event'}],
-  '2026-04-24':[{t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],c:'#1E5C2E',b:'#E3F2E8',cat:'event'}],
-  '2026-04-27':[{t:'OTG Meeting (AdminLess)',d:[{l:'Time',v:'1600–1700'},{l:'Venue',v:'Online'}],c:'#7C5A00',b:'#FEFCE8',cat:'otg'}],
-  '2026-04-28':[{t:'TCM',d:[{l:'Time',v:'1345'},{l:'Venue',v:'The TCM Folks'}],c:'#5B52C4',b:'#EEEDFE',cat:'personal'}],
-  '2026-04-29':[{t:'Physiotherapy',d:[{l:'Time',v:'1400'},{l:'Venue',v:'Pioneer Polyclinic'}],c:'#5B52C4',b:'#EEEDFE',cat:'personal'}],
-  '2026-05-04':[{t:'DCTC (PM)',d:[{l:'Time',v:'1300–1630'}],c:'#0C447C',b:'#E6F1FB',cat:'event'}],
-  '2026-05-07':[{t:'TCM',d:[{l:'Time',v:'1400'},{l:'Venue',v:'The TCM Folks'}],c:'#5B52C4',b:'#EEEDFE',cat:'personal'}],
+  '2026-04-23':[{t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'}],
+  '2026-04-24':[{t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'}],
+  '2026-04-27':[{t:'OTG Meeting (AdminLess)',d:[{l:'Time',v:'1600–1700'},{l:'Venue',v:'Online'}],...COLORS.amber,cat:'otg'}],
+  '2026-04-28':[{t:'TCM',d:[{l:'Time',v:'1345'},{l:'Venue',v:'The TCM Folks'}],...COLORS.violet,cat:'personal'}],
+  '2026-04-29':[{t:'Physiotherapy',d:[{l:'Time',v:'1400'},{l:'Venue',v:'Pioneer Polyclinic'}],...COLORS.violet,cat:'personal'}],
+  '2026-05-04':[{t:'DCTC (PM)',d:[{l:'Time',v:'1300–1630'}],...COLORS.cerulean,cat:'event'}],
+  '2026-05-07':[{t:'TCM',d:[{l:'Time',v:'1400'},{l:'Venue',v:'The TCM Folks'}],...COLORS.violet,cat:'personal'}],
   '2026-05-08':[
-    {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],c:'#1E5C2E',b:'#E3F2E8',cat:'event'},
-    {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1630'}],c:'#0C447C',b:'#E6F1FB',cat:'event'}
+    {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'},
+    {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1630'}],...COLORS.cerulean,cat:'event'}
   ],
   '2026-05-11':[
-    {t:'OTG Meeting (Team)',d:[{l:'Time',v:'1000–1100'},{l:'Venue',v:'Online'}],c:'#7C5A00',b:'#FEFCE8',cat:'otg'},
-    {t:'OTG Meeting (SLL HR Portal review)',d:[{l:'Time',v:'1430–1600'},{l:'Venue',v:'Online'}],c:'#7C5A00',b:'#FEFCE8',cat:'otg'}
+    {t:'OTG Meeting (Team)',d:[{l:'Time',v:'1000–1100'},{l:'Venue',v:'Online'}],...COLORS.amber,cat:'otg'},
+    {t:'OTG Meeting (SLL HR Portal review)',d:[{l:'Time',v:'1430–1600'},{l:'Venue',v:'Online'}],...COLORS.amber,cat:'otg'}
   ],
   '2026-05-14':[
-    {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],c:'#1E5C2E',b:'#E3F2E8',cat:'event'},
-    {t:'AI x You! Build Night',d:[{l:'Time',v:'1800–2100'},{l:'Venue',v:'The Trampoline by Access Singapore'}],c:'#7C5A00',b:'#FEFCE8',cat:'otg'}
+    {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'},
+    {t:'AI x You! Build Night',d:[{l:'Time',v:'1800–2100'},{l:'Venue',v:'The Trampoline by Access Singapore'}],...COLORS.amber,cat:'otg'}
   ],
-  '2026-05-15':[{t:'ICT Preparation Seminar',d:[{l:'Time',v:'1300–1700'},{l:'Venue',v:'Changi Naval Base'},{l:'Attire',v:'No.4 Dress with Head Dress'}],c:'#8A4500',b:'#FAEEDA',cat:'event'}],
+  '2026-05-15':[{t:'ICT Preparation Seminar',d:[{l:'Time',v:'1300–1700'},{l:'Venue',v:'Changi Naval Base'},{l:'Attire',v:'No.4 Dress with Head Dress'}],...COLORS.tangerine,cat:'event'}],
   '2026-05-19':[
-    {t:'OTG Meeting (MOE, Aperture Edtech)',d:[{l:'Time',v:'1500–1600'},{l:'Venue',v:'Online'}],c:'#7C5A00',b:'#FEFCE8',cat:'otg'},
-    {t:'OTG Meeting (Team)',d:[{l:'Time',v:'1600–1700'},{l:'Venue',v:'Online'}],c:'#7C5A00',b:'#FEFCE8',cat:'otg'}
+    {t:'OTG Meeting (MOE, Aperture Edtech)',d:[{l:'Time',v:'1500–1600'},{l:'Venue',v:'Online'}],...COLORS.amber,cat:'otg'},
+    {t:'OTG Meeting (Team)',d:[{l:'Time',v:'1600–1700'},{l:'Venue',v:'Online'}],...COLORS.amber,cat:'otg'}
   ],
   '2026-05-20':[
-    {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],c:'#1E5C2E',b:'#E3F2E8',cat:'event'},
-    {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1715'}],c:'#0C447C',b:'#E6F1FB',cat:'event'}
+    {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'},
+    {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1715'}],...COLORS.cerulean,cat:'event'}
   ],
-  '2026-05-26':[{t:'OTG Meeting (Content)',d:[{l:'Time',v:'1900–2030'},{l:'Venue',v:'Online'}],c:'#7C5A00',b:'#FEFCE8',cat:'otg'}],
-  '2026-05-28':[{t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],c:'#1E5C2E',b:'#E3F2E8',cat:'event'}],
+  '2026-05-26':[{t:'OTG Meeting (Content)',d:[{l:'Time',v:'1900–2030'},{l:'Venue',v:'Online'}],...COLORS.amber,cat:'otg'}],
+  '2026-05-28':[{t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'}],
   '2026-05-29':[
-    {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],c:'#1E5C2E',b:'#E3F2E8',cat:'event'},
-    {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1630'}],c:'#0C447C',b:'#E6F1FB',cat:'event'}
+    {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'},
+    {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1630'}],...COLORS.cerulean,cat:'event'}
   ],
-  '2026-06-01':[{t:'Anniversary',d:[],c:'#5B52C4',b:'#EEEDFE',cat:'personal',recur:'yearly'},{t:'OTG Meeting (Content)',d:[{l:'Time',v:'1900–2030'},{l:'Venue',v:'Online'}],c:'#7C5A00',b:'#FEFCE8',cat:'otg'}],
-  '2026-06-02':[{t:'OTG Meeting (Content)',d:[{l:'Time',v:'1900–2030'},{l:'Venue',v:'Online'}],c:'#7C5A00',b:'#FEFCE8',cat:'otg'}],
-  '2026-06-03':[{t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],c:'#1E5C2E',b:'#E3F2E8',cat:'event'}],
+  '2026-06-01':[{t:'Anniversary',d:[],...COLORS.violet,cat:'personal',recur:'yearly'},{t:'OTG Meeting (Content)',d:[{l:'Time',v:'1900–2030'},{l:'Venue',v:'Online'}],...COLORS.amber,cat:'otg'}],
+  '2026-06-02':[{t:'OTG Meeting (Content)',d:[{l:'Time',v:'1900–2030'},{l:'Venue',v:'Online'}],...COLORS.amber,cat:'otg'}],
+  '2026-06-03':[{t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'}],
   '2026-06-04':[
-    {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],c:'#1E5C2E',b:'#E3F2E8',cat:'event'},
-    {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1715'}],c:'#0C447C',b:'#E6F1FB',cat:'event'}
+    {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'},
+    {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1715'}],...COLORS.cerulean,cat:'event'}
   ],
-  '2026-06-08':[{t:'OTG Meeting (Content)',d:[{l:'Time',v:'1900–2030'},{l:'Venue',v:'Online'}],c:'#7C5A00',b:'#FEFCE8',cat:'otg'}],
-  '2026-06-09':[{t:'DCTC (PM)',d:[{l:'Time',v:'1300–1715'}],c:'#0C447C',b:'#E6F1FB',cat:'event'},{t:'OTG Meeting (Content)',d:[{l:'Time',v:'1900–2030'},{l:'Venue',v:'Online'}],c:'#7C5A00',b:'#FEFCE8',cat:'otg'}],
+  '2026-06-08':[{t:'OTG Meeting (Content)',d:[{l:'Time',v:'1900–2030'},{l:'Venue',v:'Online'}],...COLORS.amber,cat:'otg'}],
+  '2026-06-09':[{t:'DCTC (PM)',d:[{l:'Time',v:'1300–1715'}],...COLORS.cerulean,cat:'event'},{t:'OTG Meeting (Content)',d:[{l:'Time',v:'1900–2030'},{l:'Venue',v:'Online'}],...COLORS.amber,cat:'otg'}],
   '2026-06-10':[
-    {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],c:'#1E5C2E',b:'#E3F2E8',cat:'event'},
-    {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1715'}],c:'#0C447C',b:'#E6F1FB',cat:'event'}
+    {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'},
+    {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1715'}],...COLORS.cerulean,cat:'event'}
   ],
   '2026-06-11':[
-    {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],c:'#1E5C2E',b:'#E3F2E8',cat:'event'},
-    {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1715'}],c:'#0C447C',b:'#E6F1FB',cat:'event'}
+    {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'},
+    {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1715'}],...COLORS.cerulean,cat:'event'}
   ],
-  '2026-06-15':[{t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],c:'#1E5C2E',b:'#E3F2E8',cat:'event'},{t:'OTG Meeting (Content)',d:[{l:'Time',v:'1900–2030'},{l:'Venue',v:'Online'}],c:'#7C5A00',b:'#FEFCE8',cat:'otg'}],
-  '2026-06-16':[{t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],c:'#1E5C2E',b:'#E3F2E8',cat:'event'},{t:'DCTC (PM)',d:[{l:'Time',v:'1300–1630'}],c:'#0C447C',b:'#E6F1FB',cat:'event'},{t:'OTG Meeting (Content)',d:[{l:'Time',v:'1900–2030'},{l:'Venue',v:'Online'}],c:'#7C5A00',b:'#FEFCE8',cat:'otg'}],
+  '2026-06-15':[{t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'},{t:'OTG Meeting (Content)',d:[{l:'Time',v:'1900–2030'},{l:'Venue',v:'Online'}],...COLORS.amber,cat:'otg'}],
+  '2026-06-16':[{t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'},{t:'DCTC (PM)',d:[{l:'Time',v:'1300–1630'}],...COLORS.cerulean,cat:'event'},{t:'OTG Meeting (Content)',d:[{l:'Time',v:'1900–2030'},{l:'Venue',v:'Online'}],...COLORS.amber,cat:'otg'}],
   '2026-06-17':[
-    {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],c:'#1E5C2E',b:'#E3F2E8',cat:'event'},
-    {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1630'}],c:'#0C447C',b:'#E6F1FB',cat:'event'}
+    {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'},
+    {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1630'}],...COLORS.cerulean,cat:'event'}
   ],
-  '2026-06-18':[{t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],c:'#1E5C2E',b:'#E3F2E8',cat:'event'}],
-  '2026-06-22':[{t:'OTG Meeting (Content)',d:[{l:'Time',v:'1900–2030'},{l:'Venue',v:'Online'}],c:'#7C5A00',b:'#FEFCE8',cat:'otg'}],
-  '2026-06-23':[{t:'OTG Meeting (Content)',d:[{l:'Time',v:'1900–2030'},{l:'Venue',v:'Online'}],c:'#7C5A00',b:'#FEFCE8',cat:'otg'}],
-  '2026-06-29':[{t:'OTG Meeting (Content)',d:[{l:'Time',v:'1900–2030'},{l:'Venue',v:'Online'}],c:'#7C5A00',b:'#FEFCE8',cat:'otg'}],
-  '2026-06-30':[{t:'OTG Meeting (Content)',d:[{l:'Time',v:'1900–2030'},{l:'Venue',v:'Online'}],c:'#7C5A00',b:'#FEFCE8',cat:'otg'}],
-  '2026-07-04':[{t:"HY's Birthday",d:[],c:'#5B52C4',b:'#EEEDFE',cat:'personal',recur:'yearly'}],
-  '2026-08-22':[{t:"CS's Birthday",d:[],c:'#5B52C4',b:'#EEEDFE',cat:'personal',recur:'yearly'}],
-  '2026-09-15':[{t:"Fred's Birthday",d:[],c:'#5B52C4',b:'#EEEDFE',cat:'personal',recur:'yearly'}],
+  '2026-06-18':[{t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'}],
+  '2026-06-22':[{t:'OTG Meeting (Content)',d:[{l:'Time',v:'1900–2030'},{l:'Venue',v:'Online'}],...COLORS.amber,cat:'otg'}],
+  '2026-06-23':[{t:'OTG Meeting (Content)',d:[{l:'Time',v:'1900–2030'},{l:'Venue',v:'Online'}],...COLORS.amber,cat:'otg'}],
+  '2026-06-29':[{t:'OTG Meeting (Content)',d:[{l:'Time',v:'1900–2030'},{l:'Venue',v:'Online'}],...COLORS.amber,cat:'otg'}],
+  '2026-06-30':[{t:'OTG Meeting (Content)',d:[{l:'Time',v:'1900–2030'},{l:'Venue',v:'Online'}],...COLORS.amber,cat:'otg'}],
+  '2026-07-04':[{t:"HY's Birthday",d:[],...COLORS.violet,cat:'personal',recur:'yearly'}],
+  '2026-08-22':[{t:"CS's Birthday",d:[],...COLORS.violet,cat:'personal',recur:'yearly'}],
+  '2026-09-15':[{t:"Fred's Birthday",d:[],...COLORS.violet,cat:'personal',recur:'yearly'}],
   '2026-09-16':[
-    {t:"Rene's Birthday",d:[],c:'#5B52C4',b:'#EEEDFE',cat:'personal',recur:'yearly'},
-    {t:"Papu's Birthday",d:[],c:'#5B52C4',b:'#EEEDFE',cat:'personal',recur:'yearly'}
+    {t:"Rene's Birthday",d:[],...COLORS.violet,cat:'personal',recur:'yearly'},
+    {t:"Papu's Birthday",d:[],...COLORS.violet,cat:'personal',recur:'yearly'}
   ],
-  '2026-11-29':[{t:"LW's Birthday",d:[],c:'#5B52C4',b:'#EEEDFE',cat:'personal',recur:'yearly'}]
+  '2026-11-29':[{t:"LW's Birthday",d:[],...COLORS.violet,cat:'personal',recur:'yearly'}]
 };
 
 // Recurrence engine — build MM-DD lookup for yearly events
