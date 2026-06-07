@@ -350,10 +350,10 @@ function ra(){
   }
   if(window.innerWidth<=600){const cm=document.getElementById('current-month');if(cm)setTimeout(()=>cm.scrollIntoView({behavior:'smooth',block:'start'}),100);}
 }
-const ts=`${td.getFullYear()}-${p2(td.getMonth()+1)}-${p2(td.getDate())}`;
 const MN=['January','February','March','April','May','June','July','August','September','October','November','December'];
 
 function p2(n){return String(n).padStart(2,'0')}
+const ts=`${td.getFullYear()}-${p2(td.getMonth()+1)}-${p2(td.getDate())}`;
 function ds(y,m,d){return`${y}-${p2(m)}-${p2(d)}`}
 function wkn(d){const x=new Date(d);x.setHours(0,0,0,0);x.setDate(x.getDate()+3-(x.getDay()+6)%7);const w=new Date(x.getFullYear(),0,4);return 1+Math.round(((x-w)/86400000-3+(w.getDay()+6)%7)/7);}
 function mm(y,m,idx){
@@ -387,7 +387,7 @@ function mr(g,row,y,m){
 }
 
 function oz(i){zi=Math.max(0,Math.min(23,i));rz();zbgEl.classList.add('open');zbgEl.scrollTop=0;document.body.style.overflow='hidden';}
-function cz(){zbgEl.classList.remove('open');document.body.style.overflow='';}
+function cz(){zbgEl.classList.remove('open');if(!mbgEl.classList.contains('open'))document.body.style.overflow='';}
 function sz(dir){zi=Math.max(0,Math.min(23,zi+dir));rz();zbgEl.scrollTop=0;}
 
 function rz(){
@@ -457,13 +457,13 @@ function om(s,y,m,d){
   setTimeout(()=>mbgEl.focus(),100);
 }
 
-function closeModal(){mbgEl.classList.remove('open');document.body.style.overflow='';}
+function closeModal(){mbgEl.classList.remove('open');if(!zbgEl.classList.contains('open'))document.body.style.overflow='';}
 function sm(dir){
   if(!md)return;
   const dt=new Date(md+'T00:00:00');
   dt.setDate(dt.getDate()+dir);
   const y=dt.getFullYear(),mo=dt.getMonth()+1,d=dt.getDate();
-  const s=y+'-'+String(mo).padStart(2,'0')+'-'+String(d).padStart(2,'0');
+  const s=ds(y,mo,d);
   om(s,y,mo,d);
   document.querySelector('.modal').scrollTop=0;
 }
@@ -553,7 +553,6 @@ function doSearch(q){
   clearSearch();
   if(!q.trim()){document.getElementById('srchCount').textContent='';return;}
   const term=q.toLowerCase().trim();
-  let matchCount=0;
   // Find all matching dates
   const matchDates=new Set();
   Object.entries(FE).forEach(([date,evs])=>{
@@ -577,8 +576,8 @@ function doSearch(q){
     const[y,m]=date.split('-').map(Number);
     const idx=(y-2026)*12+(m-1);
     if(cards[idx])cards[idx].classList.add('srch-match');
-    matchCount++;
   });
+  const matchCount=matchDates.size;
   document.getElementById('srchCount').textContent=matchCount?`${matchCount} match${matchCount>1?'es':''}`:'no matches';
 }
 
@@ -667,7 +666,7 @@ if('serviceWorker' in navigator){
   window.addEventListener('load',()=>{
     navigator.serviceWorker.register('./sw.js')
       .then(reg=>console.log('SW registered'))
-      .catch(err=>console.log('SW error:',err));
+      .catch(err=>console.error('SW error:',err));
   });
 }
 
