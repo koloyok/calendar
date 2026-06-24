@@ -1,4 +1,4 @@
-const CACHE = 'calendar-v1';
+const CACHE = 'calendar';
 const FILES = [
   './index.html',
   './manifest.json',
@@ -27,8 +27,20 @@ self.addEventListener('fetch', e => {
     caches.match(e.request).then(cached => {
       const network = fetch(e.request).then(res => {
         caches.open(CACHE).then(cache => cache.put(e.request, res.clone()));
+        // If index.html updated, notify the client to reload
+        if (e.request.url.includes('index.html') && cached) {
+          cached.text().then(oldText => {
+            res.clone().text().then(newText => {
+              if (oldText !== newText) {
+                self.clients.matchAll().then(clients =>
+                  clients.forEach(client => client.postMessage('reload'))
+                );
+              }
+            });
+          });
+        }
         return res;
-      });
+      }).catch(() => cached);
       return cached || network;
     })
   );
