@@ -8,7 +8,9 @@ const FILES = [
 
 self.addEventListener('install', e => {
   e.waitUntil(
-    caches.open(CACHE).then(cache => cache.addAll(FILES))
+    caches.open(CACHE).then(cache =>
+      Promise.all(FILES.map(url => fetch(url, { cache: 'reload' }).then(res => cache.put(url, res))))
+    )
   );
   self.skipWaiting();
 });
@@ -27,18 +29,6 @@ self.addEventListener('fetch', e => {
     caches.match(e.request).then(cached => {
       const network = fetch(e.request).then(res => {
         caches.open(CACHE).then(cache => cache.put(e.request, res.clone()));
-        // If index.html updated, notify the client to reload
-        if (e.request.url.includes('index.html') && cached) {
-          cached.text().then(oldText => {
-            res.clone().text().then(newText => {
-              if (oldText !== newText) {
-                self.clients.matchAll().then(clients =>
-                  clients.forEach(client => client.postMessage('reload'))
-                );
-              }
-            });
-          });
-        }
         return res;
       }).catch(() => cached);
       return cached || network;
