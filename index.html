@@ -40,15 +40,13 @@ body{font-family:system-ui,sans-serif;background:#f5f5f3;color:#1a1a1a;padding:1
 .mc:hover{border-color:#aaa}
 .mh{font-size:13px;font-weight:500;padding:8px 12px;background:#f9f9f7;display:flex;justify-content:space-between;align-items:center}
 .zh{font-size:10px;color:#aaa;font-weight:400}
-.cg{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));padding:6px 8px 8px}
+.cg{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));padding:6px 8px 8px}
 .dl{font-size:10px;color:#aaa;text-align:center;padding:2px 0 4px}
-.wl{font-size:9px;color:#aaa;text-align:center;padding:2px 0 4px}
 .dc{font-size:11px;text-align:center;padding:2px 1px;cursor:pointer;border-radius:4px;line-height:1.5;color:#1a1a1a;transition:background .1s;min-height:22px}
 .dc:hover{background:#f0f0ee}
 .dc.today{font-weight:500;background:var(--cerulean-bg);color:var(--cerulean-text)}
 .dc.sun{color:var(--coral)}
 .dc.hol{color:var(--coral);font-weight:500}
-.wn{font-size:9px;color:#aaa;text-align:center;padding:2px 0;line-height:1.5}
 .hb{font-size:9px;padding:1px 4px;border-radius:3px;background:var(--crimson-bg);color:var(--crimson-text);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;line-height:1.4}
 .eb{font-size:8px;padding:1px 4px;border-radius:2px;line-height:1.4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;margin-top:1px}
 .zbg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;align-items:flex-start;justify-content:center;padding:20px;overflow-y:auto}
@@ -61,10 +59,8 @@ body{font-family:system-ui,sans-serif;background:#f5f5f3;color:#1a1a1a;padding:1
 .znav button:hover{background:#f0f0ee}
 .zx{background:none;border:none;font-size:20px;cursor:pointer;color:#aaa;padding:0 0 0 8px}
 .zx:hover{color:#333}
-.zg{display:grid;grid-template-columns:repeat(8,1fr);padding:14px 16px 18px;gap:3px}
+.zg{display:grid;grid-template-columns:repeat(7,1fr);padding:14px 16px 18px;gap:3px}
 .zdl{font-size:11px;color:#aaa;text-align:center;padding:4px 0 10px;font-weight:500}
-.zwl{font-size:10px;color:#aaa;text-align:center;padding:4px 0 10px;font-weight:500}
-.zwn{font-size:10px;color:#aaa;text-align:center;padding:8px 2px 4px}
 .zc{border-radius:6px;padding:6px 4px 7px;cursor:pointer;text-align:center;transition:background .1s;border:0.5px solid transparent}
 .zc:hover{background:#f0f0ee;border-color:#ddd}
 .zc.today{background:var(--cerulean-bg);border-color:var(--brand-border)}
@@ -129,8 +125,7 @@ body{font-family:system-ui,sans-serif;background:#f5f5f3;color:#1a1a1a;padding:1
   .zg{padding:8px 6px 10px;gap:2px}
   .zc{padding:4px 2px 5px}
   .zn{font-size:12px}
-  .zdl,.zwl{font-size:9px;padding:3px 0 6px}
-  .zwn{font-size:9px}
+  .zdl{font-size:9px;padding:3px 0 6px}
   .zeb,.zhb{font-size:7px;padding:1px 3px}
 }
 .top-left{display:flex;gap:8px;align-items:center}
@@ -339,8 +334,6 @@ const FE={
     {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'},
     {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1630'}],...COLORS.cerulean,cat:'event'}
   ],
-  '2026-07-27':[{t:'DCTC (PM)',d:[{l:'Time',v:'1345–1715'}],...COLORS.cerulean,cat:'event'}],
-  '2026-07-28':[{t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'}],
   '2026-07-29':[
     {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'},
     {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1630'}],...COLORS.cerulean,cat:'event'}
@@ -403,7 +396,6 @@ const MN=['January','February','March','April','May','June','July','August','Sep
 function p2(n){return String(n).padStart(2,'0')}
 const ts=`${td.getFullYear()}-${p2(td.getMonth()+1)}-${p2(td.getDate())}`;
 function ds(y,m,d){return`${y}-${p2(m)}-${p2(d)}`}
-function wkn(d){const x=new Date(d);x.setHours(0,0,0,0);x.setDate(x.getDate()+3-(x.getDay()+6)%7);const w=new Date(x.getFullYear(),0,4);return 1+Math.round(((x-w)/86400000-3+(w.getDay()+6)%7)/7);}
 function mm(y,m,idx){
   const card=document.createElement('div');card.className='mc';card.onclick=()=>oz(idx);
   const fd=new Date(y,m-1,1).getDay(),dim=new Date(y,m,0).getDate();
@@ -411,7 +403,7 @@ function mm(y,m,idx){
   th.innerHTML=`<span>${MN[m-1]}</span><span style="display:flex;align-items:center;gap:8px"><span class="zh">click to expand</span><span>${y}</span></span>`;
   card.appendChild(th);
   const g=document.createElement('div');g.className='cg';
-  ['Wk','Mo','Tu','We','Th','Fr','Sa','Su'].forEach(l=>{const e=document.createElement('div');e.className=l==='Wk'?'wl':'dl';e.textContent=l;g.appendChild(e);});
+  ['Mo','Tu','We','Th','Fr','Sa','Su'].forEach(l=>{const e=document.createElement('div');e.className='dl';e.textContent=l;g.appendChild(e);});
   const off=(fd===0)?6:fd-1;let row=[];
   for(let i=0;i<off;i++)row.push(null);
   for(let d=1;d<=dim;d++){row.push(d);if(row.length===7){mr(g,row,y,m);row=[];}}
@@ -420,8 +412,6 @@ function mm(y,m,idx){
 }
 
 function mr(g,row,y,m){
-  const fv=row.find(d=>d!==null);
-  const wn=document.createElement('div');wn.className='wn';if(fv)wn.textContent=wkn(new Date(y,m-1,fv));g.appendChild(wn);
   row.forEach(d=>{
     const c=document.createElement('div');
     if(!d){c.className='dc';c.style.visibility='hidden';g.appendChild(c);return;}
@@ -442,7 +432,7 @@ function rz(){
   const y=2026+Math.floor(zi/12),m=(zi%12)+1;document.getElementById('zt').textContent=`${MN[m-1]} ${y}`;
   const g=document.getElementById('zg');g.innerHTML='';
   const fd=new Date(y,m-1,1).getDay(),dim=new Date(y,m,0).getDate();
-  ['Wk','Mo','Tu','We','Th','Fr','Sa','Su'].forEach(l=>{const e=document.createElement('div');e.className=l==='Wk'?'zwl':'zdl';e.textContent=l;g.appendChild(e);});
+  ['Mo','Tu','We','Th','Fr','Sa','Su'].forEach(l=>{const e=document.createElement('div');e.className='zdl';e.textContent=l;g.appendChild(e);});
   const off=(fd===0)?6:fd-1;let row=[];
   for(let i=0;i<off;i++)row.push(null);
   for(let d=1;d<=dim;d++){row.push(d);if(row.length===7){zr(g,row,y,m);row=[];}}
@@ -452,8 +442,6 @@ function rz(){
 }
 
 function zr(g,row,y,m){
-  const fv=row.find(d=>d!==null);
-  const wn=document.createElement('div');wn.className='zwn';if(fv)wn.textContent=wkn(new Date(y,m-1,fv));g.appendChild(wn);
   row.forEach(d=>{
     const c=document.createElement('div');
     if(!d){c.className='zc';c.style.visibility='hidden';g.appendChild(c);return;}
