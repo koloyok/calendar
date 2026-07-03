@@ -1,6 +1,5 @@
 const CACHE = 'calendar';
-const FILES = [
-  './index.html',
+const ASSETS = [
   './manifest.json',
   './icon-192.png',
   './icon-512.png'
@@ -8,9 +7,7 @@ const FILES = [
 
 self.addEventListener('install', e => {
   e.waitUntil(
-    caches.open(CACHE).then(cache =>
-      Promise.all(FILES.map(url => fetch(url, { cache: 'reload' }).then(res => cache.put(url, res))))
-    )
+    caches.open(CACHE).then(cache => cache.addAll(ASSETS))
   );
   self.skipWaiting();
 });
@@ -25,13 +22,25 @@ self.addEventListener('activate', e => {
 });
 
 self.addEventListener('fetch', e => {
+  // Network-first for index.html — always get latest, fall back to cache offline
+  if(e.request.mode === 'navigate'){
+    e.respondWith(
+      fetch(e.request)
+        .then(res => {
+          caches.open(CACHE).then(cache => cache.put(e.request, res.clone()));
+          return res;
+        })
+        .catch(() => caches.match(e.request))
+    );
+    return;
+  }
+  // Cache-first for all other assets
   e.respondWith(
     caches.match(e.request).then(cached => {
-      const network = fetch(e.request).then(res => {
+      return cached || fetch(e.request).then(res => {
         caches.open(CACHE).then(cache => cache.put(e.request, res.clone()));
         return res;
-      }).catch(() => cached);
-      return cached || network;
+      });
     })
   );
 });
