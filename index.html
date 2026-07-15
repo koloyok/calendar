@@ -37,6 +37,7 @@ body{font-family:system-ui,sans-serif;background:#f5f5f3;color:#1a1a1a;padding:1
 .li{display:flex;align-items:center;gap:5px;font-size:11px;color:#555}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
 .mc{background:#fff;border:0.5px solid #ddd;border-radius:12px;overflow:hidden;cursor:pointer;transition:border-color .15s}
+.cur-month{border-left:3px solid var(--brand)}
 .mc:hover{border-color:#aaa}
 .mh{font-size:13px;font-weight:500;padding:8px 12px;background:#f9f9f7;display:flex;justify-content:space-between;align-items:center}
 .zh{font-size:10px;color:#aaa;font-weight:400}
@@ -316,14 +317,8 @@ const FE={
     {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'},
     {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1630'}],...COLORS.cerulean,cat:'event'}
   ],
-  '2026-07-15':[
-    {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'},
-    {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1715'}],...COLORS.cerulean,cat:'event'}
-  ],
-  '2026-07-16':[
-    {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'},
-    {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1715'}],...COLORS.cerulean,cat:'event'}
-  ],
+  '2026-07-15':[{t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'}],
+  '2026-07-16':[{t:'OTG Claude AI Event: Working with Claude by OTG',d:[{l:'Time',v:'1300–1800'},{l:'Venue',v:'MIT Space, 111 North Bridge Rd #09-01'}],...COLORS.sand,cat:'invited'}],
   '2026-07-17':[{t:'DCTC (PM)',d:[{l:'Time',v:'1300–1345'}],...COLORS.cerulean,cat:'event'}],
   '2026-07-21':[{t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'}],
   '2026-07-22':[
@@ -393,12 +388,14 @@ function ra(){
   if(window.innerWidth<=600){const cm=document.getElementById('current-month');if(cm)setTimeout(()=>cm.scrollIntoView({behavior:'smooth',block:'start'}),100);}
 }
 const MN=['January','February','March','April','May','June','July','August','September','October','November','December'];
+const DOW=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
 
 function p2(n){return String(n).padStart(2,'0')}
 const ts=`${td.getFullYear()}-${p2(td.getMonth()+1)}-${p2(td.getDate())}`;
 function ds(y,m,d){return`${y}-${p2(m)}-${p2(d)}`}
 function mm(y,m,idx){
   const card=document.createElement('div');card.className='mc';card.onclick=()=>oz(idx);
+  if(y===td.getFullYear()&&m===td.getMonth()+1)card.classList.add('cur-month');
   const fd=new Date(y,m-1,1).getDay(),dim=new Date(y,m,0).getDate();
   const th=document.createElement('div');th.className='mh';
   th.innerHTML=`<span>${MN[m-1]}</span><span style="display:flex;align-items:center;gap:8px"><span class="zh">click to expand</span><span>${y}</span></span>`;
@@ -465,7 +462,8 @@ function makeCard(ev){
 
 function om(s,y,m,d){
   md=s;
-  document.getElementById('mt').textContent=`${d} ${MN[m-1]} ${y}`;
+  const dw=DOW[new Date(s+'T00:00:00').getDay()];
+  document.getElementById('mt').textContent=`${d} ${MN[m-1]} ${y} (${dw})`;
   const hel=document.getElementById('mh');
   if(H[s]){hel.textContent=H[s];hel.style.display='block';}else hel.style.display='none';
   const fel=document.getElementById('mfe');fel.innerHTML='';
@@ -599,7 +597,6 @@ window.addEventListener('scroll',()=>{
 function buildAgenda(){
   const ag=document.getElementById('agenda');
   ag.innerHTML='';
-  const DOW=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
   // Collect all dates with events
   const allDates=new Set();
   Object.keys(FE).forEach(d=>allDates.add(d));
