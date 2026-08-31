@@ -416,8 +416,8 @@ const FE={
   ],
   '2026-09-15':[{t:"Fred's Birthday",d:[],...COLORS.violet,cat:'personal',recur:'yearly'}],
   '2026-09-16':[
-    {t:"Rene's Birthday",d:[],...COLORS.violet,cat:'personal',recur:'yearly'},
-    {t:"Papu's Birthday",d:[],...COLORS.violet,cat:'personal',recur:'yearly'}
+    {t:"Papu's Birthday",d:[],...COLORS.violet,cat:'personal',recur:'yearly'},
+    {t:"Rene's Birthday",d:[],...COLORS.violet,cat:'personal',recur:'yearly'}
   ],
   '2026-09-22':[
     {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'},
@@ -446,6 +446,7 @@ Object.entries(FE).forEach(([date,evs])=>{
 });
 // Get all events for a date — direct non-recurring + yearly recurring matches
 function getStartTime(ev){
+  if(ev.cat==='personal')return -1;
   const t=ev.d&&ev.d.find(x=>x.l==='Time');
   if(!t)return 9999;
   return parseInt(t.v.split('–')[0].replace(':',''),10)||9999;
