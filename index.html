@@ -146,11 +146,11 @@ body{font-family:system-ui,sans-serif;background:#f5f5f3;color:#1a1a1a;padding:1
   <div class="leg">
     <div class="li"><div style="width:9px;height:9px;border-radius:50%;background:var(--coral);flex-shrink:0"></div>Holiday/Sun</div>
     <div class="li"><div style="width:22px;height:9px;border-radius:2px;background:var(--violet-bg);border:0.5px solid var(--violet-text);flex-shrink:0"></div>Personal</div>
+    <div class="li"><div style="width:22px;height:9px;border-radius:2px;background:var(--orchid-bg);border:0.5px solid var(--orchid-text);flex-shrink:0"></div>8 Volts</div>
     <div class="li"><div style="width:22px;height:9px;border-radius:2px;background:var(--tangerine-bg);border:0.5px solid var(--tangerine-text);flex-shrink:0"></div>Event</div>
     <div class="li"><div style="width:22px;height:9px;border-radius:2px;background:var(--emerald-bg);border:0.5px solid var(--emerald-text);flex-shrink:0"></div>DCTC (AM)</div>
     <div class="li"><div style="width:22px;height:9px;border-radius:2px;background:var(--cerulean-bg);border:0.5px solid var(--cerulean-text);flex-shrink:0"></div>DCTC (PM)</div>
-    <div class="li"><div style="width:22px;height:9px;border-radius:2px;background:var(--amber-bg);border:0.5px solid var(--amber-text);flex-shrink:0"></div>OTG</div>
-    <div class="li"><div style="width:22px;height:9px;border-radius:2px;background:var(--sand-bg);border:0.5px solid var(--sand-text);flex-shrink:0"></div>Invited</div>
+    <div class="li"><div style="width:22px;height:9px;border-radius:2px;background:var(--amber-bg);border:0.5px solid var(--amber-text);flex-shrink:0"></div>Archive</div>
   </div>
 </div>
 <div class="grid" id="grid"></div>
@@ -218,8 +218,8 @@ const COLORS={
 const FE={
   '2026-04-09':[{t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'}],
   '2026-04-10':[{t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'}],
-  '2026-04-11':[{t:'Tomb-sweeping',d:[],...COLORS.violet,cat:'personal'}],
-  '2026-04-12':[{t:'Furniture moving',d:[],...COLORS.violet,cat:'personal'}],
+  '2026-04-11':[{t:'Tomb-sweeping',d:[],...COLORS.tangerine,cat:'event'}],
+  '2026-04-12':[{t:'Furniture moving',d:[],...COLORS.tangerine,cat:'event'}],
   '2026-04-14':[
     {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'},
     {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1630'}],...COLORS.cerulean,cat:'event'}
@@ -236,50 +236,51 @@ const FE={
   ],
   '2026-04-23':[{t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'}],
   '2026-04-24':[{t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'}],
-  '2026-04-27':[{t:'OTG Meeting (AdminLess)',d:[{l:'Time',v:'1600–1700'},{l:'Venue',v:'Online'}],...COLORS.amber,cat:'otg'}],
-  '2026-04-28':[{t:'TCM',d:[{l:'Time',v:'1345'},{l:'Venue',v:'The TCM Folks'}],...COLORS.violet,cat:'personal'}],
-  '2026-04-29':[{t:'Physiotherapy',d:[{l:'Time',v:'1400'},{l:'Venue',v:'Pioneer Polyclinic'}],...COLORS.violet,cat:'personal'}],
+  '2026-04-27':[{t:'OTG Meeting (AdminLess)',d:[{l:'Time',v:'1600–1700'},{l:'Venue',v:'Online'}],...COLORS.amber,cat:'archive'}],
+  '2026-04-28':[{t:'TCM',d:[{l:'Time',v:'1345'},{l:'Venue',v:'The TCM Folks'}],...COLORS.tangerine,cat:'event'}],
+  '2026-04-29':[{t:'Physiotherapy',d:[{l:'Time',v:'1400'},{l:'Venue',v:'Pioneer Polyclinic'}],...COLORS.tangerine,cat:'event'}],
   '2026-05-04':[{t:'DCTC (PM)',d:[{l:'Time',v:'1300–1630'}],...COLORS.cerulean,cat:'event'}],
-  '2026-05-07':[{t:'TCM',d:[{l:'Time',v:'1400'},{l:'Venue',v:'The TCM Folks'}],...COLORS.violet,cat:'personal'}],
+  '2026-05-07':[{t:'TCM',d:[{l:'Time',v:'1400'},{l:'Venue',v:'The TCM Folks'}],...COLORS.tangerine,cat:'event'}],
   '2026-05-08':[
     {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'},
     {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1630'}],...COLORS.cerulean,cat:'event'}
   ],
   '2026-05-11':[
-    {t:'OTG Meeting (Team)',d:[{l:'Time',v:'1000–1100'},{l:'Venue',v:'Online'}],...COLORS.amber,cat:'otg'},
-    {t:'OTG Meeting (SLL HR Portal review)',d:[{l:'Time',v:'1430–1600'},{l:'Venue',v:'Online'}],...COLORS.amber,cat:'otg'}
+    {t:'OTG Meeting (Team)',d:[{l:'Time',v:'1000–1100'},{l:'Venue',v:'Online'}],...COLORS.amber,cat:'archive'},
+    {t:'OTG Meeting (SLL HR Portal review)',d:[{l:'Time',v:'1430–1600'},{l:'Venue',v:'Online'}],...COLORS.amber,cat:'archive'}
   ],
   '2026-05-14':[
     {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'},
-    {t:'AI x You! Build Night',d:[{l:'Time',v:'1800–2100'},{l:'Venue',v:'The Trampoline by Access Singapore'}],...COLORS.amber,cat:'otg'}
+    {t:'AI x You! Build Night',d:[{l:'Time',v:'1800–2100'},{l:'Venue',v:'The Trampoline by Access Singapore'}],...COLORS.amber,cat:'archive'}
   ],
   '2026-05-15':[{t:'ICT Preparation Seminar',d:[{l:'Time',v:'1300–1700'},{l:'Venue',v:'Changi Naval Base'},{l:'Attire',v:'No.4 Dress with Head Dress'}],...COLORS.tangerine,cat:'event'}],
   '2026-05-19':[
-    {t:'OTG Meeting (MOE, Aperture Edtech)',d:[{l:'Time',v:'1500–1600'},{l:'Venue',v:'Online'}],...COLORS.amber,cat:'otg'},
-    {t:'OTG Meeting (Team)',d:[{l:'Time',v:'1600–1700'},{l:'Venue',v:'Online'}],...COLORS.amber,cat:'otg'}
+    {t:'OTG Meeting (MOE, Aperture Edtech)',d:[{l:'Time',v:'1500–1600'},{l:'Venue',v:'Online'}],...COLORS.amber,cat:'archive'},
+    {t:'OTG Meeting (Team)',d:[{l:'Time',v:'1600–1700'},{l:'Venue',v:'Online'}],...COLORS.amber,cat:'archive'}
   ],
   '2026-05-20':[
     {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'},
     {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1715'}],...COLORS.cerulean,cat:'event'}
   ],
-  '2026-05-21':[{t:'OTG Meeting (KCTW)',d:[{l:'Time',v:'1400–1500'},{l:'Venue',v:'Online'}],...COLORS.sand,cat:'invited'}],
-  '2026-05-25':[{t:'OTG Meeting (KCTW)',d:[{l:'Time',v:'1300–1400'},{l:'Venue',v:'Online'}],...COLORS.sand,cat:'invited'}],
-  '2026-05-26':[{t:'OTG Meeting (Content)',d:[{l:'Time',v:'1900–2030'},{l:'Venue',v:'Online'}],...COLORS.amber,cat:'otg'}],
+  '2026-05-21':[{t:'OTG Meeting (KCTW)',d:[{l:'Time',v:'1400–1500'},{l:'Venue',v:'Online'}],...COLORS.amber,cat:'archive'}],
+  '2026-05-25':[{t:'OTG Meeting (KCTW)',d:[{l:'Time',v:'1300–1400'},{l:'Venue',v:'Online'}],...COLORS.amber,cat:'archive'}],
+  '2026-05-26':[{t:'OTG Meeting (Content)',d:[{l:'Time',v:'1900–2030'},{l:'Venue',v:'Online'}],...COLORS.amber,cat:'archive'}],
   '2026-05-28':[{t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'}],
   '2026-05-29':[
     {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'},
     {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1630'}],...COLORS.cerulean,cat:'event'}
   ],
-  '2026-06-01':[{t:'Anniversary',d:[],...COLORS.violet,cat:'personal',recur:'yearly'},{t:'OTG Meeting (Content)',d:[{l:'Time',v:'2000–2100'},{l:'Venue',v:'Online'}],...COLORS.amber,cat:'otg'}],
-  '2026-06-02':[{t:'OTG Meeting (Content)',d:[{l:'Time',v:'2000–2100'},{l:'Venue',v:'Online'}],...COLORS.amber,cat:'otg'}],
+  '2026-05-31':[{t:"Own Birthday",d:[],...COLORS.violet,cat:'personal',recur:'yearly'}],
+  '2026-06-01':[{t:'Anniversary',d:[],...COLORS.violet,cat:'personal',recur:'yearly'},{t:'OTG Meeting (Content)',d:[{l:'Time',v:'2000–2100'},{l:'Venue',v:'Online'}],...COLORS.amber,cat:'archive'}],
+  '2026-06-02':[{t:'OTG Meeting (Content)',d:[{l:'Time',v:'2000–2100'},{l:'Venue',v:'Online'}],...COLORS.amber,cat:'archive'}],
   '2026-06-03':[{t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'}],
   '2026-06-04':[
     {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'},
     {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1715'}],...COLORS.cerulean,cat:'event'}
   ],
   '2026-06-06':[{t:'Mercury Fest',d:[{l:'Time',v:'1130–2030'},{l:'Venue',v:'Suntec Singapore & Exhibition Centre'}],...COLORS.tangerine,cat:'event'}],
-  '2026-06-08':[{t:'OTG Meeting (KCTW)',d:[{l:'Time',v:'1600–1700'},{l:'Venue',v:'Online'}],...COLORS.sand,cat:'invited'}],
-  '2026-06-09':[{t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'},{t:'OTG Meeting (Content)',d:[{l:'Time',v:'2000–2100'},{l:'Venue',v:'Online'}],...COLORS.amber,cat:'otg'}],
+  '2026-06-08':[{t:'OTG Meeting (KCTW)',d:[{l:'Time',v:'1600–1700'},{l:'Venue',v:'Online'}],...COLORS.amber,cat:'archive'}],
+  '2026-06-09':[{t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'},{t:'OTG Meeting (Content)',d:[{l:'Time',v:'2000–2100'},{l:'Venue',v:'Online'}],...COLORS.amber,cat:'archive'}],
   '2026-06-10':[
     {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'},
     {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1715'}],...COLORS.cerulean,cat:'event'}
@@ -297,16 +298,16 @@ const FE={
     {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1630'}],...COLORS.cerulean,cat:'event'}
   ],
   '2026-06-18':[{t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'}],
-  '2026-06-22':[{t:'LMV Training Development',d:[{l:'Time',v:'0900–1730'},{l:'Venue',v:'ST Engineering Training & Simulation Systems Pte Ltd'}],...COLORS.tangerine,cat:'event'}],
-  '2026-06-23':[{t:'Orthopedics',d:[{l:'Time',v:'0900'},{l:'Venue',v:'Ng Teng Fong General Hospital'}],...COLORS.violet,cat:'personal'}],
-  '2026-06-25':[{t:'LMV Training Development',d:[{l:'Time',v:'0900–1730'},{l:'Venue',v:'ST Engineering Training & Simulation Systems Pte Ltd'}],...COLORS.tangerine,cat:'event'}],
+  '2026-06-22':[{t:'LMV Training Development',d:[{l:'Time',v:'0900–1730'},{l:'Venue',v:'ST Engineering Training & Simulation Systems Pte Ltd'}],...COLORS.amber,cat:'archive'}],
+  '2026-06-23':[{t:'Orthopedics',d:[{l:'Time',v:'0900'},{l:'Venue',v:'Ng Teng Fong General Hospital'}],...COLORS.tangerine,cat:'event'}],
+  '2026-06-25':[{t:'LMV Training Development',d:[{l:'Time',v:'0900–1730'},{l:'Venue',v:'ST Engineering Training & Simulation Systems Pte Ltd'}],...COLORS.amber,cat:'archive'}],
   '2026-07-02':[
     {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'},
     {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1630'}],...COLORS.cerulean,cat:'event'}
   ],
   '2026-07-04':[{t:"HY's Birthday",d:[],...COLORS.violet,cat:'personal',recur:'yearly'}],
   '2026-07-07':[{t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'}],
-  '2026-07-08':[{t:'Training with Lawrence',d:[{l:'Time',v:'0500–2000'},{l:'Venue',v:'Johor Bahru'}],...COLORS.sand,cat:'invited'}],
+  '2026-07-08':[{t:'Training with Lawrence',d:[{l:'Time',v:'0500–2000'},{l:'Venue',v:'Johor Bahru'}],...COLORS.amber,cat:'archive'}],
   '2026-07-09':[
     {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'},
     {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1630'}],...COLORS.cerulean,cat:'event'}
@@ -318,63 +319,117 @@ const FE={
     {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1630'}],...COLORS.cerulean,cat:'event'}
   ],
   '2026-07-15':[{t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'}],
-  '2026-07-16':[{t:'OTG Claude AI Event: Working with Claude by OTG',d:[{l:'Time',v:'1300–1800'},{l:'Venue',v:'MIT Space, 111 North Bridge Rd #09-01'}],...COLORS.sand,cat:'invited'}],
+  '2026-07-16':[{t:'OTG Claude AI Event: Working with Claude by OTG',d:[{l:'Time',v:'1300–1800'},{l:'Venue',v:'MIT Space, 111 North Bridge Rd #09-01'}],...COLORS.amber,cat:'archive'}],
   '2026-07-21':[{t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'}],
   '2026-07-22':[
     {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'},
     {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1630'}],...COLORS.cerulean,cat:'event'}
   ],
-  '2026-07-23':[{t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'},{t:'Interview',d:[{l:'Time',v:'1800–1900'},{l:'Venue',v:'8 Volts Tattoo'}],...COLORS.violet,cat:'personal'}],
+  '2026-07-23':[{t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'},{t:'Interview',d:[{l:'Time',v:'1800–1900'},{l:'Venue',v:'8 Volts Tattoo'}],...COLORS.tangerine,cat:'event'}],
   '2026-07-24':[{t:'DCTC (PM)',d:[{l:'Time',v:'1300–1630'}],...COLORS.cerulean,cat:'event'}],
-  '2026-07-27':[{t:'2nd Interview',d:[{l:'Time',v:'1130–1230'},{l:'Venue',v:'8 Volts Tattoo'}],...COLORS.violet,cat:'personal'}],
+  '2026-07-27':[{t:'2nd Interview',d:[{l:'Time',v:'1130–1230'},{l:'Venue',v:'8 Volts Tattoo'}],...COLORS.tangerine,cat:'event'}],
   '2026-07-28':[{t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'}],
   '2026-07-29':[
     {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'},
     {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1630'}],...COLORS.cerulean,cat:'event'},
-    {t:'Contract Signing',d:[{l:'Time',v:'1800'},{l:'Venue',v:'8 Volts Tattoo'}],...COLORS.violet,cat:'personal'}
+    {t:'Contract Signing',d:[{l:'Time',v:'1800'},{l:'Venue',v:'8 Volts Tattoo'}],...COLORS.tangerine,cat:'event'}
   ],
   '2026-07-30':[
     {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'},
     {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1630'}],...COLORS.cerulean,cat:'event'}
   ],
-  '2026-07-31':[{t:'Physiotherapy',d:[{l:'Time',v:'1030'},{l:'Venue',v:'Ng Teng Fong, Clinic A61/62'}],...COLORS.violet,cat:'personal'}],
+  '2026-07-31':[{t:'OTG Claude AI Event: Working with Claude by OTG',d:[{l:'Time',v:'1300–1800'},{l:'Venue',v:'MIT Space, 111 North Bridge Rd #09-01'}],...COLORS.amber,cat:'archive'},{t:'Physiotherapy',d:[{l:'Time',v:'1030'},{l:'Venue',v:'Ng Teng Fong, Clinic A61/62'}],...COLORS.tangerine,cat:'event'}],
+  '2026-08-01':[{t:'Apprenticeship',d:[{l:'Time',v:'1100–1900'},{l:'Venue',v:'8 Volts Tattoo'}],...COLORS.orchid,cat:'8volts'}],
+  '2026-08-02':[{t:'Apprenticeship',d:[{l:'Time',v:'1100–1900'},{l:'Venue',v:'8 Volts Tattoo'}],...COLORS.orchid,cat:'8volts'}],
   '2026-08-03':[{t:'DCTC (PM)',d:[{l:'Time',v:'1300–1630'}],...COLORS.cerulean,cat:'event'}],
   '2026-08-04':[
     {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'},
     {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1630'}],...COLORS.cerulean,cat:'event'}
   ],
+  '2026-08-05':[{t:'Apprenticeship',d:[{l:'Time',v:'1100–1900'},{l:'Venue',v:'8 Volts Tattoo'}],...COLORS.orchid,cat:'8volts'}],
+  '2026-08-06':[{t:'Apprenticeship',d:[{l:'Time',v:'1100–1900'},{l:'Venue',v:'8 Volts Tattoo'}],...COLORS.orchid,cat:'8volts'}],
   '2026-08-07':[
     {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'},
-    {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1630'}],...COLORS.cerulean,cat:'event'}
+    {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1630'}],...COLORS.cerulean,cat:'event'},
+    {t:'Kung Fu Soccer 功夫女足',d:[{l:'Time',v:'2020'},{l:'Venue',v:'Bugis+ Golden Village'}],...COLORS.tangerine,cat:'event'}
   ],
+  '2026-08-08':[{t:'Apprenticeship',d:[{l:'Time',v:'1100–1900'},{l:'Venue',v:'8 Volts Tattoo'}],...COLORS.orchid,cat:'8volts'}],
+  '2026-08-09':[{t:'Apprenticeship',d:[{l:'Time',v:'1100–1900'},{l:'Venue',v:'8 Volts Tattoo'}],...COLORS.orchid,cat:'8volts'}],
+  '2026-08-10':[{t:'Apprenticeship',d:[{l:'Time',v:'1100–1900'},{l:'Venue',v:'8 Volts Tattoo'}],...COLORS.orchid,cat:'8volts'}],
   '2026-08-11':[
     {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'},
     {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1630'}],...COLORS.cerulean,cat:'event'}
   ],
+  '2026-08-15':[{t:'Apprenticeship',d:[{l:'Time',v:'1100–1900'},{l:'Venue',v:'8 Volts Tattoo'}],...COLORS.orchid,cat:'8volts'}],
+  '2026-08-16':[{t:'Apprenticeship',d:[{l:'Time',v:'1100–1900'},{l:'Venue',v:'8 Volts Tattoo'}],...COLORS.orchid,cat:'8volts'}],
   '2026-08-17':[{t:'DCTC (PM)',d:[{l:'Time',v:'1345–1715'}],...COLORS.cerulean,cat:'event'}],
+  '2026-08-18':[{t:'Apprenticeship',d:[{l:'Time',v:'1100–1900'},{l:'Venue',v:'8 Volts Tattoo'}],...COLORS.orchid,cat:'8volts'}],
+  '2026-08-19':[{t:'Apprenticeship',d:[{l:'Time',v:'1100–1900'},{l:'Venue',v:'8 Volts Tattoo'}],...COLORS.orchid,cat:'8volts'}],
   '2026-08-20':[
     {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'},
     {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1715'}],...COLORS.cerulean,cat:'event'}
   ],
-  '2026-08-25':[
-    {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'},
-    {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1630'}],...COLORS.cerulean,cat:'event'}
-  ],
+  '2026-08-23':[{t:'Apprenticeship',d:[{l:'Time',v:'1100–1900'},{l:'Venue',v:'8 Volts Tattoo'}],...COLORS.orchid,cat:'8volts'}],
+  '2026-08-24':[{t:'Apprenticeship',d:[{l:'Time',v:'1100–1900'},{l:'Venue',v:'8 Volts Tattoo'}],...COLORS.orchid,cat:'8volts'}],
+  '2026-08-25':[{t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'}],
   '2026-08-26':[
     {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'},
     {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1630'}],...COLORS.cerulean,cat:'event'}
   ],
+  '2026-08-27':[{t:'Apprenticeship',d:[{l:'Time',v:'1100–1900'},{l:'Venue',v:'8 Volts Tattoo'}],...COLORS.orchid,cat:'8volts'}],
+  '2026-08-28':[{t:'Apprenticeship',d:[{l:'Time',v:'1100–1900'},{l:'Venue',v:'8 Volts Tattoo'}],...COLORS.orchid,cat:'8volts'}],
+  '2026-08-29':[{t:'Apprenticeship',d:[{l:'Time',v:'1100–1900'},{l:'Venue',v:'8 Volts Tattoo'}],...COLORS.orchid,cat:'8volts'}],
+  '2026-08-30':[{t:'Apprenticeship',d:[{l:'Time',v:'1100–1900'},{l:'Venue',v:'8 Volts Tattoo'}],...COLORS.orchid,cat:'8volts'}],
   '2026-08-31':[
     {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'},
     {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1630'}],...COLORS.cerulean,cat:'event'}
   ],
   '2026-08-21':[{t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'}],
-  '2026-08-22':[{t:"CS's Birthday",d:[],...COLORS.violet,cat:'personal',recur:'yearly'}],
+  '2026-08-22':[{t:'Apprenticeship',d:[{l:'Time',v:'1100–1900'},{l:'Venue',v:'8 Volts Tattoo'}],...COLORS.orchid,cat:'8volts'},{t:"CS's Birthday",d:[],...COLORS.violet,cat:'personal',recur:'yearly'}],
+  '2026-09-01':[{t:'Apprenticeship',d:[{l:'Time',v:'1100–1900'},{l:'Venue',v:'8 Volts Tattoo'}],...COLORS.orchid,cat:'8volts'}],
+  '2026-09-04':[{t:'Apprenticeship',d:[{l:'Time',v:'1100–1900'},{l:'Venue',v:'8 Volts Tattoo'}],...COLORS.orchid,cat:'8volts'}],
+  '2026-09-05':[{t:'Apprenticeship',d:[{l:'Time',v:'1100–1900'},{l:'Venue',v:'8 Volts Tattoo'}],...COLORS.orchid,cat:'8volts'}],
+  '2026-09-06':[{t:'Apprenticeship',d:[{l:'Time',v:'1100–1900'},{l:'Venue',v:'8 Volts Tattoo'}],...COLORS.orchid,cat:'8volts'}],
+  '2026-09-07':[{t:'Apprenticeship',d:[{l:'Time',v:'1100–1900'},{l:'Venue',v:'8 Volts Tattoo'}],...COLORS.orchid,cat:'8volts'}],
+  '2026-09-10':[{t:'Apprenticeship',d:[{l:'Time',v:'1100–1900'},{l:'Venue',v:'8 Volts Tattoo'}],...COLORS.orchid,cat:'8volts'}],
+  '2026-09-11':[{t:'Apprenticeship',d:[{l:'Time',v:'1100–1900'},{l:'Venue',v:'8 Volts Tattoo'}],...COLORS.orchid,cat:'8volts'}],
+  '2026-09-12':[{t:'Apprenticeship',d:[{l:'Time',v:'1100–1900'},{l:'Venue',v:'8 Volts Tattoo'}],...COLORS.orchid,cat:'8volts'}],
+  '2026-09-13':[{t:'Apprenticeship',d:[{l:'Time',v:'1100–1900'},{l:'Venue',v:'8 Volts Tattoo'}],...COLORS.orchid,cat:'8volts'}],
+  '2026-09-14':[{t:'Apprenticeship',d:[{l:'Time',v:'1100–1900'},{l:'Venue',v:'8 Volts Tattoo'}],...COLORS.orchid,cat:'8volts'}],
+  '2026-09-17':[{t:'Apprenticeship',d:[{l:'Time',v:'1100–1900'},{l:'Venue',v:'8 Volts Tattoo'}],...COLORS.orchid,cat:'8volts'}],
+  '2026-09-18':[{t:'Apprenticeship',d:[{l:'Time',v:'1100–1900'},{l:'Venue',v:'8 Volts Tattoo'}],...COLORS.orchid,cat:'8volts'}],
+  '2026-09-19':[{t:'Apprenticeship',d:[{l:'Time',v:'1100–1900'},{l:'Venue',v:'8 Volts Tattoo'}],...COLORS.orchid,cat:'8volts'}],
+  '2026-09-20':[{t:'Apprenticeship',d:[{l:'Time',v:'1100–1900'},{l:'Venue',v:'8 Volts Tattoo'}],...COLORS.orchid,cat:'8volts'}],
+  '2026-09-21':[{t:'Apprenticeship',d:[{l:'Time',v:'1100–1900'},{l:'Venue',v:'8 Volts Tattoo'}],...COLORS.orchid,cat:'8volts'}],
+  '2026-09-24':[{t:'Apprenticeship',d:[{l:'Time',v:'1100–1900'},{l:'Venue',v:'8 Volts Tattoo'}],...COLORS.orchid,cat:'8volts'}],
+  '2026-09-26':[{t:'Apprenticeship',d:[{l:'Time',v:'1100–1900'},{l:'Venue',v:'8 Volts Tattoo'}],...COLORS.orchid,cat:'8volts'}],
+  '2026-09-27':[{t:'Apprenticeship',d:[{l:'Time',v:'1100–1900'},{l:'Venue',v:'8 Volts Tattoo'}],...COLORS.orchid,cat:'8volts'}],
+  '2026-09-28':[{t:'Apprenticeship',d:[{l:'Time',v:'1100–1900'},{l:'Venue',v:'8 Volts Tattoo'}],...COLORS.orchid,cat:'8volts'}],
+  '2026-09-02':[{t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'}],
+  '2026-09-03':[
+    {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'},
+    {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1630'}],...COLORS.cerulean,cat:'event'}
+  ],
+  '2026-09-08':[
+    {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'},
+    {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1630'}],...COLORS.cerulean,cat:'event'}
+  ],
   '2026-09-15':[{t:"Fred's Birthday",d:[],...COLORS.violet,cat:'personal',recur:'yearly'}],
   '2026-09-16':[
     {t:"Rene's Birthday",d:[],...COLORS.violet,cat:'personal',recur:'yearly'},
     {t:"Papu's Birthday",d:[],...COLORS.violet,cat:'personal',recur:'yearly'}
   ],
+  '2026-09-22':[
+    {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'},
+    {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1715'}],...COLORS.cerulean,cat:'event'}
+  ],
+  '2026-09-23':[
+    {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'}],...COLORS.emerald,cat:'event'},
+    {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1715'}],...COLORS.cerulean,cat:'event'}
+  ],
+  '2026-09-25':[{t:'Apprenticeship',d:[{l:'Time',v:'1100–1900'},{l:'Venue',v:'8 Volts Tattoo'}],...COLORS.orchid,cat:'8volts'},{t:"Dad's Birthday",d:[],...COLORS.violet,cat:'personal',recur:'yearly'}],
+  '2026-09-30':[{t:"Mom's Birthday",d:[],...COLORS.violet,cat:'personal',recur:'yearly'}],
+  '2026-10-07':[{t:"Bro's Birthday",d:[],...COLORS.violet,cat:'personal',recur:'yearly'}],
   '2026-11-29':[{t:"LW's Birthday",d:[],...COLORS.violet,cat:'personal',recur:'yearly'}]
 };
 
@@ -390,10 +445,15 @@ Object.entries(FE).forEach(([date,evs])=>{
   });
 });
 // Get all events for a date — direct non-recurring + yearly recurring matches
+function getStartTime(ev){
+  const t=ev.d&&ev.d.find(x=>x.l==='Time');
+  if(!t)return 9999;
+  return parseInt(t.v.split('–')[0].replace(':',''),10)||9999;
+}
 function getEvs(s){
   const direct=(FE[s]||[]).filter(ev=>!ev.recur);
   const recurring=recurByMMDD[s.slice(5)]||[];
-  return[...direct,...recurring];
+  return[...direct,...recurring].sort((a,b)=>getStartTime(a)-getStartTime(b));
 }
 let zi=0;
 const td=new Date();
@@ -499,7 +559,17 @@ function om(s,y,m,d){
   if(H[s]){hel.textContent=H[s];hel.style.display='block';}else hel.style.display='none';
   const fel=document.getElementById('mfe');fel.innerHTML='';
   const evs=getEvs(s);
-  [['personal','Personal'],['event','Events'],['otg','OTG'],['invited','Invited']].forEach(([cat,label])=>{
+  const catOrder=[['personal','Personal'],['8volts','8 Volts'],['event','Events'],['archive','Archive']];
+  catOrder.sort((a,b)=>{
+    if(a[0]==='personal')return -1;
+    if(b[0]==='personal')return 1;
+    const aEvs=evs.filter(e=>e.cat===a[0]);
+    const bEvs=evs.filter(e=>e.cat===b[0]);
+    const aMin=aEvs.length?getStartTime(aEvs[0]):9999;
+    const bMin=bEvs.length?getStartTime(bEvs[0]):9999;
+    return aMin-bMin;
+  });
+  catOrder.forEach(([cat,label])=>{
     const filtered=evs.filter(e=>e.cat===cat);
     if(filtered.length){
       const lbl=document.createElement('div');lbl.className='cat-lbl';lbl.textContent=label;fel.appendChild(lbl);
