@@ -145,9 +145,9 @@ body{font-family:system-ui,sans-serif;background:#f5f5f3;color:#1a1a1a;padding:1
   </div>
   <div class="leg">
     <div class="li"><div style="width:9px;height:9px;border-radius:50%;background:var(--coral);flex-shrink:0"></div>Holiday/Sun</div>
-    <div class="li"><div style="width:22px;height:9px;border-radius:2px;background:var(--violet-bg);border:0.5px solid var(--violet-text);flex-shrink:0"></div>Personal</div>
+    <div class="li"><div style="width:22px;height:9px;border-radius:2px;background:var(--tangerine-bg);border:0.5px solid var(--tangerine-text);flex-shrink:0"></div>Personal</div>
     <div class="li"><div style="width:22px;height:9px;border-radius:2px;background:var(--orchid-bg);border:0.5px solid var(--orchid-text);flex-shrink:0"></div>8 Volts</div>
-    <div class="li"><div style="width:22px;height:9px;border-radius:2px;background:var(--tangerine-bg);border:0.5px solid var(--tangerine-text);flex-shrink:0"></div>Event</div>
+    <div class="li"><div style="width:22px;height:9px;border-radius:2px;background:var(--violet-bg);border:0.5px solid var(--violet-text);flex-shrink:0"></div>Event</div>
     <div class="li"><div style="width:22px;height:9px;border-radius:2px;background:var(--emerald-bg);border:0.5px solid var(--emerald-text);flex-shrink:0"></div>DCTC (AM)</div>
     <div class="li"><div style="width:22px;height:9px;border-radius:2px;background:var(--cerulean-bg);border:0.5px solid var(--cerulean-text);flex-shrink:0"></div>DCTC (PM)</div>
     <div class="li"><div style="width:22px;height:9px;border-radius:2px;background:var(--amber-bg);border:0.5px solid var(--amber-text);flex-shrink:0"></div>Archive</div>
@@ -218,8 +218,8 @@ const COLORS={
 const FE={
   '2026-04-09':[{t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'},{l:'Venue',v:'Changi Naval Base'}],...COLORS.emerald,cat:'event'}],
   '2026-04-10':[{t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'},{l:'Venue',v:'Changi Naval Base'}],...COLORS.emerald,cat:'event'}],
-  '2026-04-11':[{t:'Tomb-sweeping',d:[],...COLORS.tangerine,cat:'event'}],
-  '2026-04-12':[{t:'Furniture moving',d:[],...COLORS.tangerine,cat:'event'}],
+  '2026-04-11':[{t:'Tomb-sweeping',d:[],...COLORS.violet,cat:'event'}],
+  '2026-04-12':[{t:'Furniture moving',d:[],...COLORS.violet,cat:'event'}],
   '2026-04-14':[
     {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'},{l:'Venue',v:'Changi Naval Base'}],...COLORS.emerald,cat:'event'},
     {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1630'},{l:'Venue',v:'Changi Naval Base'}],...COLORS.cerulean,cat:'event'}
@@ -237,10 +237,10 @@ const FE={
   '2026-04-23':[{t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'},{l:'Venue',v:'Changi Naval Base'}],...COLORS.emerald,cat:'event'}],
   '2026-04-24':[{t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'},{l:'Venue',v:'Changi Naval Base'}],...COLORS.emerald,cat:'event'}],
   '2026-04-27':[{t:'OTG Meeting (AdminLess)',d:[{l:'Time',v:'1600–1700'},{l:'Venue',v:'Online'}],...COLORS.amber,cat:'archive'}],
-  '2026-04-28':[{t:'TCM',d:[{l:'Time',v:'1345'},{l:'Venue',v:'The TCM Folks'}],...COLORS.tangerine,cat:'event'}],
-  '2026-04-29':[{t:'Physiotherapy',d:[{l:'Time',v:'1400'},{l:'Venue',v:'Pioneer Polyclinic'}],...COLORS.tangerine,cat:'event'}],
+  '2026-04-28':[{t:'TCM',d:[{l:'Time',v:'1345'},{l:'Venue',v:'The TCM Folks'}],...COLORS.violet,cat:'event'}],
+  '2026-04-29':[{t:'Physiotherapy',d:[{l:'Time',v:'1400'},{l:'Venue',v:'Pioneer Polyclinic'}],...COLORS.violet,cat:'event'}],
   '2026-05-04':[{t:'DCTC (PM)',d:[{l:'Time',v:'1300–1630'},{l:'Venue',v:'Changi Naval Base'}],...COLORS.cerulean,cat:'event'}],
-  '2026-05-07':[{t:'TCM',d:[{l:'Time',v:'1400'},{l:'Venue',v:'The TCM Folks'}],...COLORS.tangerine,cat:'event'}],
+  '2026-05-07':[{t:'TCM',d:[{l:'Time',v:'1400'},{l:'Venue',v:'The TCM Folks'}],...COLORS.violet,cat:'event'}],
   '2026-05-08':[
     {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'},{l:'Venue',v:'Changi Naval Base'}],...COLORS.emerald,cat:'event'},
     {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1630'},{l:'Venue',v:'Changi Naval Base'}],...COLORS.cerulean,cat:'event'}
@@ -253,7 +253,7 @@ const FE={
     {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'},{l:'Venue',v:'Changi Naval Base'}],...COLORS.emerald,cat:'event'},
     {t:'AI x You! Build Night',d:[{l:'Time',v:'1800–2100'},{l:'Venue',v:'The Trampoline by Access Singapore'}],...COLORS.amber,cat:'archive'}
   ],
-  '2026-05-15':[{t:'ICT Preparation Seminar',d:[{l:'Time',v:'1300–1700'},{l:'Venue',v:'Changi Naval Base'},{l:'Attire',v:'No.4 Dress with Head Dress'}],...COLORS.tangerine,cat:'event'}],
+  '2026-05-15':[{t:'ICT Preparation Seminar',d:[{l:'Time',v:'1300–1700'},{l:'Venue',v:'Changi Naval Base'},{l:'Attire',v:'No.4 Dress with Head Dress'}],...COLORS.violet,cat:'event'}],
   '2026-05-19':[
     {t:'OTG Meeting (MOE, Aperture Edtech)',d:[{l:'Time',v:'1500–1600'},{l:'Venue',v:'Online'}],...COLORS.amber,cat:'archive'},
     {t:'OTG Meeting (Team)',d:[{l:'Time',v:'1600–1700'},{l:'Venue',v:'Online'}],...COLORS.amber,cat:'archive'}
@@ -270,15 +270,15 @@ const FE={
     {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'},{l:'Venue',v:'Changi Naval Base'}],...COLORS.emerald,cat:'event'},
     {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1630'},{l:'Venue',v:'Changi Naval Base'}],...COLORS.cerulean,cat:'event'}
   ],
-  '2026-05-31':[{t:"Own Birthday",d:[],...COLORS.violet,cat:'personal',recur:'yearly'}],
-  '2026-06-01':[{t:'Anniversary',d:[],...COLORS.violet,cat:'personal',recur:'yearly'},{t:'OTG Meeting (Content)',d:[{l:'Time',v:'2000–2100'},{l:'Venue',v:'Online'}],...COLORS.amber,cat:'archive'}],
+  '2026-05-31':[{t:"Own Birthday",d:[],...COLORS.tangerine,cat:'personal',recur:'yearly'}],
+  '2026-06-01':[{t:'Anniversary',d:[],...COLORS.tangerine,cat:'personal',recur:'yearly'},{t:'OTG Meeting (Content)',d:[{l:'Time',v:'2000–2100'},{l:'Venue',v:'Online'}],...COLORS.amber,cat:'archive'}],
   '2026-06-02':[{t:'OTG Meeting (Content)',d:[{l:'Time',v:'2000–2100'},{l:'Venue',v:'Online'}],...COLORS.amber,cat:'archive'}],
   '2026-06-03':[{t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'},{l:'Venue',v:'Changi Naval Base'}],...COLORS.emerald,cat:'event'}],
   '2026-06-04':[
     {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'},{l:'Venue',v:'Changi Naval Base'}],...COLORS.emerald,cat:'event'},
     {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1715'},{l:'Venue',v:'Changi Naval Base'}],...COLORS.cerulean,cat:'event'}
   ],
-  '2026-06-06':[{t:'Mercury Fest',d:[{l:'Time',v:'1130–2030'},{l:'Venue',v:'Suntec Singapore & Exhibition Centre'}],...COLORS.tangerine,cat:'event'}],
+  '2026-06-06':[{t:'Mercury Fest',d:[{l:'Time',v:'1130–2030'},{l:'Venue',v:'Suntec Singapore & Exhibition Centre'}],...COLORS.violet,cat:'event'}],
   '2026-06-08':[{t:'OTG Meeting (KCTW)',d:[{l:'Time',v:'1600–1700'},{l:'Venue',v:'Online'}],...COLORS.amber,cat:'archive'}],
   '2026-06-09':[{t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'},{l:'Venue',v:'Changi Naval Base'}],...COLORS.emerald,cat:'event'},{t:'OTG Meeting (Content)',d:[{l:'Time',v:'2000–2100'},{l:'Venue',v:'Online'}],...COLORS.amber,cat:'archive'}],
   '2026-06-10':[
@@ -290,7 +290,7 @@ const FE={
     {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1715'},{l:'Venue',v:'Changi Naval Base'}],...COLORS.cerulean,cat:'event'}
   ],
   '2026-06-12':[{t:'DCTC (PM)',d:[{l:'Time',v:'1345–1715'},{l:'Venue',v:'Changi Naval Base'}],...COLORS.cerulean,cat:'event'}],
-  '2026-06-13':[{t:'UNI Fam Sail',d:[{l:'Time',v:'1500–2100'},{l:'Venue',v:'Tuas Naval Base'}],...COLORS.tangerine,cat:'event'}],
+  '2026-06-13':[{t:'UNI Fam Sail',d:[{l:'Time',v:'1500–2100'},{l:'Venue',v:'Tuas Naval Base'}],...COLORS.violet,cat:'event'}],
   '2026-06-15':[{t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'},{l:'Venue',v:'Changi Naval Base'}],...COLORS.emerald,cat:'event'}],
   '2026-06-16':[{t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'},{l:'Venue',v:'Changi Naval Base'}],...COLORS.emerald,cat:'event'},{t:'DCTC (PM)',d:[{l:'Time',v:'1300–1630'},{l:'Venue',v:'Changi Naval Base'}],...COLORS.cerulean,cat:'event'}],
   '2026-06-17':[
@@ -299,13 +299,13 @@ const FE={
   ],
   '2026-06-18':[{t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'},{l:'Venue',v:'Changi Naval Base'}],...COLORS.emerald,cat:'event'}],
   '2026-06-22':[{t:'LMV Training Development',d:[{l:'Time',v:'0900–1730'},{l:'Venue',v:'ST Engineering Training & Simulation Systems Pte Ltd'}],...COLORS.amber,cat:'archive'}],
-  '2026-06-23':[{t:'Orthopedics',d:[{l:'Time',v:'0900'},{l:'Venue',v:'Ng Teng Fong General Hospital'}],...COLORS.tangerine,cat:'event'}],
+  '2026-06-23':[{t:'Orthopedics',d:[{l:'Time',v:'0900'},{l:'Venue',v:'Ng Teng Fong General Hospital'}],...COLORS.violet,cat:'event'}],
   '2026-06-25':[{t:'LMV Training Development',d:[{l:'Time',v:'0900–1730'},{l:'Venue',v:'ST Engineering Training & Simulation Systems Pte Ltd'}],...COLORS.amber,cat:'archive'}],
   '2026-07-02':[
     {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'},{l:'Venue',v:'Changi Naval Base'}],...COLORS.emerald,cat:'event'},
     {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1630'},{l:'Venue',v:'Changi Naval Base'}],...COLORS.cerulean,cat:'event'}
   ],
-  '2026-07-04':[{t:"HY's Birthday",d:[],...COLORS.violet,cat:'personal',recur:'yearly'}],
+  '2026-07-04':[{t:"HY's Birthday",d:[],...COLORS.tangerine,cat:'personal',recur:'yearly'}],
   '2026-07-07':[{t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'},{l:'Venue',v:'Changi Naval Base'}],...COLORS.emerald,cat:'event'}],
   '2026-07-08':[{t:'Training with Lawrence',d:[{l:'Time',v:'0500–2000'},{l:'Venue',v:'Johor Bahru'}],...COLORS.amber,cat:'archive'}],
   '2026-07-09':[
@@ -338,7 +338,7 @@ const FE={
     {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'},{l:'Venue',v:'Changi Naval Base'}],...COLORS.emerald,cat:'event'},
     {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1630'},{l:'Venue',v:'Changi Naval Base'}],...COLORS.cerulean,cat:'event'}
   ],
-  '2026-07-31':[{t:'OTG Claude AI Event: Working with Claude by OTG',d:[{l:'Time',v:'1300–1800'},{l:'Venue',v:'MIT Space, 111 North Bridge Rd #09-01'}],...COLORS.amber,cat:'archive'},{t:'Physiotherapy',d:[{l:'Time',v:'1030'},{l:'Venue',v:'Ng Teng Fong, Clinic A61/62'}],...COLORS.tangerine,cat:'event'}],
+  '2026-07-31':[{t:'OTG Claude AI Event: Working with Claude by OTG',d:[{l:'Time',v:'1300–1800'},{l:'Venue',v:'MIT Space, 111 North Bridge Rd #09-01'}],...COLORS.amber,cat:'archive'},{t:'Physiotherapy',d:[{l:'Time',v:'1030'},{l:'Venue',v:'Ng Teng Fong, Clinic A61/62'}],...COLORS.violet,cat:'event'}],
   '2026-08-01':[{t:'Apprenticeship',d:[{l:'Time',v:'1100–1900'},{l:'Venue',v:'8 Volts Tattoo'}],...COLORS.orchid,cat:'8volts'}],
   '2026-08-02':[{t:'Apprenticeship',d:[{l:'Time',v:'1100–1900'},{l:'Venue',v:'8 Volts Tattoo'}],...COLORS.orchid,cat:'8volts'}],
   '2026-08-03':[{t:'DCTC (PM)',d:[{l:'Time',v:'1300–1630'},{l:'Venue',v:'Changi Naval Base'}],...COLORS.cerulean,cat:'event'}],
@@ -351,7 +351,7 @@ const FE={
   '2026-08-07':[
     {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'},{l:'Venue',v:'Changi Naval Base'}],...COLORS.emerald,cat:'event'},
     {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1630'},{l:'Venue',v:'Changi Naval Base'}],...COLORS.cerulean,cat:'event'},
-    {t:'Kung Fu Soccer 功夫女足',d:[{l:'Time',v:'2020'},{l:'Venue',v:'Bugis+ Golden Village'}],...COLORS.tangerine,cat:'event'}
+    {t:'Kung Fu Soccer 功夫女足',d:[{l:'Time',v:'2020'},{l:'Venue',v:'Bugis+ Golden Village'}],...COLORS.violet,cat:'event'}
   ],
   '2026-08-08':[{t:'Apprenticeship',d:[{l:'Time',v:'1100–1900'},{l:'Venue',v:'8 Volts Tattoo'}],...COLORS.orchid,cat:'8volts'}],
   '2026-08-09':[{t:'Apprenticeship',d:[{l:'Time',v:'1100–1900'},{l:'Venue',v:'8 Volts Tattoo'}],...COLORS.orchid,cat:'8volts'}],
@@ -385,7 +385,7 @@ const FE={
     {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1630'},{l:'Venue',v:'Changi Naval Base'}],...COLORS.cerulean,cat:'event'}
   ],
   '2026-08-21':[{t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'},{l:'Venue',v:'Changi Naval Base'}],...COLORS.emerald,cat:'event'}],
-  '2026-08-22':[{t:'Apprenticeship',d:[{l:'Time',v:'1100–1900'},{l:'Venue',v:'8 Volts Tattoo'}],...COLORS.orchid,cat:'8volts'},{t:"CS's Birthday",d:[],...COLORS.violet,cat:'personal',recur:'yearly'}],
+  '2026-08-22':[{t:'Apprenticeship',d:[{l:'Time',v:'1100–1900'},{l:'Venue',v:'8 Volts Tattoo'}],...COLORS.orchid,cat:'8volts'},{t:"CS's Birthday",d:[],...COLORS.tangerine,cat:'personal',recur:'yearly'}],
   '2026-09-01':[{t:'Apprenticeship',d:[{l:'Time',v:'1100–1900'},{l:'Venue',v:'8 Volts Tattoo'}],...COLORS.orchid,cat:'8volts'}],
   '2026-09-04':[{t:'Apprenticeship',d:[{l:'Time',v:'1100–1900'},{l:'Venue',v:'8 Volts Tattoo'}],...COLORS.orchid,cat:'8volts'}],
   '2026-09-05':[{t:'Apprenticeship',d:[{l:'Time',v:'1100–1900'},{l:'Venue',v:'8 Volts Tattoo'}],...COLORS.orchid,cat:'8volts'}],
@@ -414,10 +414,10 @@ const FE={
     {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'},{l:'Venue',v:'Changi Naval Base'}],...COLORS.emerald,cat:'event'},
     {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1630'},{l:'Venue',v:'Changi Naval Base'}],...COLORS.cerulean,cat:'event'}
   ],
-  '2026-09-15':[{t:"Fred's Birthday",d:[],...COLORS.violet,cat:'personal',recur:'yearly'}],
+  '2026-09-15':[{t:"Fred's Birthday",d:[],...COLORS.tangerine,cat:'personal',recur:'yearly'}],
   '2026-09-16':[
-    {t:"Papu's Birthday",d:[],...COLORS.violet,cat:'personal',recur:'yearly'},
-    {t:"Rene's Birthday",d:[],...COLORS.violet,cat:'personal',recur:'yearly'}
+    {t:"Papu's Birthday",d:[],...COLORS.tangerine,cat:'personal',recur:'yearly'},
+    {t:"Rene's Birthday",d:[],...COLORS.tangerine,cat:'personal',recur:'yearly'}
   ],
   '2026-09-22':[
     {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'},{l:'Venue',v:'Changi Naval Base'}],...COLORS.emerald,cat:'event'},
@@ -427,10 +427,10 @@ const FE={
     {t:'DCTC (AM)',d:[{l:'Time',v:'0830–1200'},{l:'Venue',v:'Changi Naval Base'}],...COLORS.emerald,cat:'event'},
     {t:'DCTC (PM)',d:[{l:'Time',v:'1300–1715'},{l:'Venue',v:'Changi Naval Base'}],...COLORS.cerulean,cat:'event'}
   ],
-  '2026-09-25':[{t:'Apprenticeship',d:[{l:'Time',v:'1100–1900'},{l:'Venue',v:'8 Volts Tattoo'}],...COLORS.orchid,cat:'8volts'},{t:"Dad's Birthday",d:[],...COLORS.violet,cat:'personal',recur:'yearly'}],
-  '2026-09-30':[{t:"Mom's Birthday",d:[],...COLORS.violet,cat:'personal',recur:'yearly'}],
-  '2026-10-07':[{t:"Bro's Birthday",d:[],...COLORS.violet,cat:'personal',recur:'yearly'}],
-  '2026-11-29':[{t:"LW's Birthday",d:[],...COLORS.violet,cat:'personal',recur:'yearly'}]
+  '2026-09-25':[{t:'Apprenticeship',d:[{l:'Time',v:'1100–1900'},{l:'Venue',v:'8 Volts Tattoo'}],...COLORS.orchid,cat:'8volts'},{t:"Dad's Birthday",d:[],...COLORS.tangerine,cat:'personal',recur:'yearly'}],
+  '2026-09-30':[{t:"Mom's Birthday",d:[],...COLORS.tangerine,cat:'personal',recur:'yearly'}],
+  '2026-10-07':[{t:"Bro's Birthday",d:[],...COLORS.tangerine,cat:'personal',recur:'yearly'}],
+  '2026-11-29':[{t:"LW's Birthday",d:[],...COLORS.tangerine,cat:'personal',recur:'yearly'}]
 };
 
 // Recurrence engine — build MM-DD lookup for yearly events
